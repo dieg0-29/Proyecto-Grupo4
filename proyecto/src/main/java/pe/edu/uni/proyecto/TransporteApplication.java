@@ -1,13 +1,13 @@
-package pe.edu.uni.ProyectoTransporte;
+package pe.edu.uni.proyecto;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ProyectoTransporteApplication {
+public class TransporteApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ProyectoTransporteApplication.class, args);
+		SpringApplication.run(TransporteApplication.class, args);
 	}
 
 }

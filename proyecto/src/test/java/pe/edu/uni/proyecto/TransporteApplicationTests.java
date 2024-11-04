@@ -1,10 +1,10 @@
-package pe.edu.uni.ProyectoTransporte;
+package pe.edu.uni.proyecto;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ProyectoTransporteApplicationTests {
+class TransporteApplicationTests {
 
 	@Test
 	void contextLoads() {
