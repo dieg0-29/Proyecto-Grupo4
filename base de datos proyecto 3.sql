@@ -2,9 +2,15 @@ use master;
 CREATE DATABASE gestion_flotas;
 USE gestion_flotas;
 
+--Tabla de Estado
+CREATE TABLE estado (
+	id_estado INT IDENTITY PRIMARY KEY,
+	descripcion TEXT
+);
 -- Tabla de Vehículos
 CREATE TABLE vehiculos (
     id_vehiculo INT IDENTITY PRIMARY KEY,
+	id_estado INT FOREIGN KEY REFERENCES estado(id_estado),
     placa VARCHAR(15) NOT NULL UNIQUE,
     marca VARCHAR(50),
     modelo VARCHAR(50),
@@ -17,9 +23,10 @@ CREATE TABLE vehiculos (
 CREATE TABLE conductores (
     id_conductor INT IDENTITY PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
+	apellido VARCHAR(100) NOT NULL,
     licencia VARCHAR(20) UNIQUE NOT NULL,
-    fecha_nacimiento DATE,
-    direccion VARCHAR(150),
+    dni VARCHAR(20),
+    correo VARCHAR(150),
     telefono VARCHAR(20)
 );
 
@@ -41,20 +48,40 @@ CREATE TABLE talleres (
     rating DECIMAL(3,2)
 );
 
--- Tabla de Incidentes
-CREATE TABLE incidentes (
-    id_incidente INT IDENTITY PRIMARY KEY,
+-- Tabla tipo-incidente
+CREATE TABLE tipo_incidente(
+	id_tipo INT IDENTITY PRIMARY KEY,
+	descripcion TEXT
+);
+-- Tabla de Historial de Asignación
+CREATE TABLE historial_asignacion (
+    id_asignacion INT IDENTITY PRIMARY KEY,
     id_vehiculo INT FOREIGN KEY REFERENCES vehiculos(id_vehiculo),
     id_conductor INT FOREIGN KEY REFERENCES conductores(id_conductor),
     id_ruta INT FOREIGN KEY REFERENCES rutas(id_ruta),
-    fecha_incidente DATE,
+    fecha_asignacion DATE,
+    fecha_fin DATE
+);
+-- Tabla de Incidentes
+CREATE TABLE incidentes (
+    id_incidente INT IDENTITY PRIMARY KEY,
+    id_asignacion INT FOREIGN KEY REFERENCES historial_asignacion(id_asignacion),
+    id_tipo INT FOREIGN KEY REFERENCES  tipo_incidente(id_tipo),
+	fecha_incidente DATE,
     tipo_incidente VARCHAR(50),
     descripcion TEXT
+);
+
+--Tabla de estado_mantenimiento
+CREATE TABLE est_mantenimiento (
+    id_est INT IDENTITY PRIMARY KEY,
+	descripcion TEXT
 );
 
 -- Tabla de Mantenimientos
 CREATE TABLE mantenimientos (
     id_mantenimiento INT IDENTITY PRIMARY KEY,
+	id_est INT FOREIGN KEY REFERENCES est_mantenimiento(id_est),
     id_vehiculo INT FOREIGN KEY REFERENCES vehiculos(id_vehiculo),
     fecha_mantenimiento DATE,
     tipo_mantenimiento VARCHAR(50),
@@ -69,18 +96,11 @@ CREATE TABLE reparaciones (
     id_taller INT FOREIGN KEY REFERENCES talleres(id_taller),
     fecha_reparacion DATE,
     descripcion TEXT,
+	calificacion INT,
     costo DECIMAL(10,2)
 );
 
--- Tabla de Historial de Asignación
-CREATE TABLE historial_asignacion (
-    id_asignacion INT IDENTITY PRIMARY KEY,
-    id_vehiculo INT FOREIGN KEY REFERENCES vehiculos(id_vehiculo),
-    id_conductor INT FOREIGN KEY REFERENCES conductores(id_conductor),
-    id_ruta INT FOREIGN KEY REFERENCES rutas(id_ruta),
-    fecha_asignacion DATE,
-    fecha_fin DATE
-);
+
 
 -- Insertar datos en Vehículos
 INSERT INTO vehiculos (placa, marca, modelo, año, capacidad, estado) VALUES
