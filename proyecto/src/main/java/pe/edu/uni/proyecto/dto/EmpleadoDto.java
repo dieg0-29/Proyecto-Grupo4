@@ -5,8 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @AllArgsConstructor @NoArgsConstructor
-public class ConductorDto {
-	private int id_cond;
+public class EmpleadoDto {
+	private int id_empleado;
 	private String nombre;
 	private String apellido;
 	private int dni;
