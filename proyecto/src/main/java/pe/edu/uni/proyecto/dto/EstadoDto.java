@@ -5,10 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @AllArgsConstructor @NoArgsConstructor
-public class RutaDto {
-	private int idRuta;
-	private String nombreRuta;
-	private String origen;
-	private String destino;
-	private double distanciaKm;
+public class EstadoDto {
+	private int idEstado;
+	private String descripcion;
 }

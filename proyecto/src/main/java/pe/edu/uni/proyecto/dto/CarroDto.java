@@ -3,12 +3,12 @@ package pe.edu.uni.proyecto.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.time.LocalDate;
 
 @Data @AllArgsConstructor @NoArgsConstructor
 public class CarroDto {
-	private int id_carro;
-	private int id_estado;
+	private int idCarro;
+	private int idEstado;
 	private String placa;
-	private String proz_mant;
-
+	private LocalDate proxMantenimiento;
 }

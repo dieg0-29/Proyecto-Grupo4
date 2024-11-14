@@ -6,13 +6,11 @@ import lombok.NoArgsConstructor;
 
 @Data @AllArgsConstructor @NoArgsConstructor
 public class ConductorDto {
-
-	private int id_cond;
+	private int idConductor;
 	private String nombre;
 	private String apellido;
-	private int dni;
+	private int dni; 
 	private String correo;
-	private int telefono;
+	private int telefono; 
 	private double salario;
-
 }
