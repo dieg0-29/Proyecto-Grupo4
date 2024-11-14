@@ -1,5 +1,15 @@
 package pe.edu.uni.proyecto.dto;
 
-public class ConductorDto {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data @AllArgsConstructor @NoArgsConstructor
+public class ConductorDto {
+	private String idConductor;
+	private String nombre;
+	private String apellido;
+	private String dni;
+	private String correo;
+	private String salario;
 }
