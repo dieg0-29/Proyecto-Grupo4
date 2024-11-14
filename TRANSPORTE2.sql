@@ -89,6 +89,7 @@ CREATE TABLE MANTENIMIENTO (
 	id_taller INT FOREIGN KEY REFERENCES taller(id_taller),
 	id_est_mant INT FOREIGN KEY REFERENCES est_mantenimiento(id_est_mant),
     id_carro INT FOREIGN KEY REFERENCES carro(id_carro),
+	calificacion INT NOT NULL,
     fecha_inicio DATE NOT NULL,
 	fecha_salida_programada DATE NOT NULL,
 	fecha_salida_real DATE NOT NULL,

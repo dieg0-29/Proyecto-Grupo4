@@ -48,12 +48,12 @@ INSERT INTO TALLER (nombre_taller, direccion, telefono) VALUES
 ('Taller Mecánico D', 'Av. Cuarta 321', '987654334'),
 ('Taller Mecánico E', 'Calle Quinta 654', '987654335');
 go
-INSERT INTO MANTENIMIENTO (id_taller, id_empleado , id_est_mant, id_carro, fecha_inicio, fecha_salida_programada, fecha_salida_real, costo) VALUES 
-(1, 1 , 1, 1, '2024-01-10', '2024-01-15', '2024-01-14', 500.00),
-(2, 2 , 2, 2, '2024-02-01', '2024-02-20', '2024-02-19', 600.00),
-(3, 3, 1, 3, '2024-03-01', '2024-03-10', '2024-03-09', 450.00),
-(4, 4, 3, 4, '2024-04-01', '2024-04-05', '2024-04-04', 700.00),
-(5, 5, 2, 5, '2024-05-01', '2024-05-30', '2024-05-29', 550.00);
+INSERT INTO MANTENIMIENTO (id_taller, id_empleado , id_est_mant, id_carro, calificacion, fecha_inicio, fecha_salida_programada, fecha_salida_real, costo) VALUES 
+(1, 1, 1, 1, 2, '2024-01-10', '2024-01-15', '2024-01-14', 500.00),
+(2, 2, 2, 2, 3,'2024-02-01', '2024-02-20', '2024-02-19', 600.00),
+(3, 3, 1, 3, 4,'2024-03-01', '2024-03-10', '2024-03-09', 450.00),
+(4, 4, 3, 4, 5,'2024-04-01', '2024-04-05', '2024-04-04', 700.00),
+(5, 5, 2, 5, 1,'2024-05-01', '2024-05-30', '2024-05-29', 550.00);
 go
 INSERT INTO TIPO_INCIDENTE (descripcion) VALUES 
 ('Accidente'),
