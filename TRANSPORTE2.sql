@@ -119,7 +119,7 @@ go
 CREATE TABLE INCIDENTE (
     id_incidente INT IDENTITY PRIMARY KEY,
     id_programacion INT FOREIGN KEY REFERENCES programacion(id_programacion),
-    id_tipo INT FOREIGN KEY REFERENCES  tipo_incidente(id_tipo) NOT NULL,
+    id_tipo INT FOREIGN KEY REFERENCES  tipo_incidente(id_tipo),
 	fecha_incidente DATE NOT NULL
 );
 go
