@@ -5,9 +5,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @AllArgsConstructor @NoArgsConstructor
-public class TallerDto {
-	private int id_taller;
-	private String nom_taller;
-	private String direccion;
-	private int telef;
+public class RutaDto {
+	private int id_ruta;
+	private String nombre_ruta;
+	private String origen;
+	private String destino;
+	private double dist_km;
 }
