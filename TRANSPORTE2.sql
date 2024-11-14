@@ -25,7 +25,7 @@ go
 --Tabla de Estado
 CREATE TABLE ESTADO(
 	id_estado INT IDENTITY PRIMARY KEY,
-	descripcion Varchar(50)
+	descripcion Varchar(50) NOT NULL
 );
 go
 -- Tabla de Carro
@@ -85,9 +85,11 @@ go
 -- Tabla de Mantenimientos
 CREATE TABLE MANTENIMIENTO (
     id_mantenimiento INT IDENTITY PRIMARY KEY,
+	id_empleado INT FOREIGN KEY REFERENCES empleado(id_empleado),
 	id_taller INT FOREIGN KEY REFERENCES taller(id_taller),
 	id_est_mant INT FOREIGN KEY REFERENCES est_mantenimiento(id_est_mant),
     id_carro INT FOREIGN KEY REFERENCES carro(id_carro),
+	calificacion INT NOT NULL,
     fecha_inicio DATE NOT NULL,
 	fecha_salida_programada DATE NOT NULL,
 	fecha_salida_real DATE NOT NULL,
@@ -117,13 +119,14 @@ go
 CREATE TABLE INCIDENTE (
     id_incidente INT IDENTITY PRIMARY KEY,
     id_programacion INT FOREIGN KEY REFERENCES programacion(id_programacion),
-    id_tipo INT FOREIGN KEY REFERENCES  tipo_incidente(id_tipo),
+    id_tipo INT FOREIGN KEY REFERENCES  tipo_incidente(id_tipo) NOT NULL,
 	fecha_incidente DATE NOT NULL
 );
 go
 -- Tabla de Reparaciones
 CREATE TABLE REPARACION (
     id_reparacion INT IDENTITY PRIMARY KEY,
+	id_empleado INT FOREIGN KEY REFERENCES empleado(id_empleado),
     id_incidente INT FOREIGN KEY REFERENCES incidente(id_incidente),
     id_taller INT FOREIGN KEY REFERENCES taller(id_taller),
     fecha_reparacion DATE NOT NULL,

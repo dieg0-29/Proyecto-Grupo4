@@ -1,3 +1,4 @@
+
 INSERT INTO ESTADO (descripcion) VALUES 
 ('Disponible'),
 ('En Mantenimiento'),
@@ -47,12 +48,12 @@ INSERT INTO TALLER (nombre_taller, direccion, telefono) VALUES
 ('Taller Mecánico D', 'Av. Cuarta 321', '987654334'),
 ('Taller Mecánico E', 'Calle Quinta 654', '987654335');
 go
-INSERT INTO MANTENIMIENTO (id_taller, id_est_mant, id_carro, fecha_inicio, fecha_salida_programada, fecha_salida_real, costo) VALUES 
-(1, 1, 1, '2024-01-10', '2024-01-15', '2024-01-14', 500.00),
-(2, 2, 2, '2024-02-01', '2024-02-20', '2024-02-19', 600.00),
-(3, 1, 3, '2024-03-01', '2024-03-10', '2024-03-09', 450.00),
-(4, 3, 4, '2024-04-01', '2024-04-05', '2024-04-04', 700.00),
-(5, 2, 5, '2024-05-01', '2024-05-30', '2024-05-29', 550.00);
+INSERT INTO MANTENIMIENTO (id_taller, id_empleado , id_est_mant, id_carro, calificacion, fecha_inicio, fecha_salida_programada, fecha_salida_real, costo) VALUES 
+(1, 1, 1, 1, 2, '2024-01-10', '2024-01-15', '2024-01-14', 500.00),
+(2, 2, 2, 2, 3,'2024-02-01', '2024-02-20', '2024-02-19', 600.00),
+(3, 3, 1, 3, 4,'2024-03-01', '2024-03-10', '2024-03-09', 450.00),
+(4, 4, 3, 4, 5,'2024-04-01', '2024-04-05', '2024-04-04', 700.00),
+(5, 5, 2, 5, 1,'2024-05-01', '2024-05-30', '2024-05-29', 550.00);
 go
 INSERT INTO TIPO_INCIDENTE (descripcion) VALUES 
 ('Accidente'),
@@ -74,12 +75,12 @@ INSERT INTO INCIDENTE (id_programacion, id_tipo, fecha_incidente) VALUES
 (3, 3, '2024-03-05'),
 (4, 4, '2024-04-03'),
 (5, 5, '2024-05-25');
-INSERT INTO REPARACION (id_incidente, id_taller, fecha_reparacion, calificacion, costo) VALUES 
-(1, 1, '2024-01-13', 4, 200.00),
-(2, 2, '2024-02-16', 5, 300.00),
-(3, 3, '2024-03-06', 3, 250.00),
-(4, 4, '2024-04-04', 4, 400.00),
-(5, 5, '2024-05-26', 2, 350.00);
+INSERT INTO REPARACION (id_incidente, id_empleado, id_taller, fecha_reparacion, calificacion, costo) VALUES 
+(1, 1, 1, '2024-01-13', 4, 200.00),
+(2, 2, 2, '2024-02-16', 5, 300.00),
+(3, 3, 3, '2024-03-06', 3, 250.00),
+(4, 4, 4, '2024-04-04', 4, 400.00),
+(5, 5, 5, '2024-05-26', 2, 350.00);
 go
 select * From CARRO;
 select * From CONDUCTOR;
@@ -93,3 +94,4 @@ select * from INCIDENTE;
 select * From TIPO_INCIDENTE;
 select * From ESTADO;
 select * From TALLER;
+go
