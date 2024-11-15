@@ -78,7 +78,7 @@ CREATE TABLE TALLER (
     nombre_taller VARCHAR(50) NOT NULL,
     direccion VARCHAR(50) NOT NULL,
     telefono VARCHAR(20) NOT NULL,
-	calificacion DECIMAL(1,1) NOT NULL
+	calificacion DECIMAL(5,1) NOT NULL
 );
 go
 -- Tabla de Mantenimientos
@@ -88,7 +88,7 @@ CREATE TABLE MANTENIMIENTO (
 	id_taller INT NOT NULL FOREIGN KEY REFERENCES taller(id_taller),
 	id_est_mant INT NOT NULL FOREIGN KEY REFERENCES est_mantenimiento(id_est_mant),
     id_carro INT NOT NULL FOREIGN KEY REFERENCES carro(id_carro),
-	calificacion DECIMAL(1,1) NOT NULL,
+	calificacion DECIMAL(5,1) NOT NULL,
     fecha_inicio DATE NOT NULL,
 	fecha_salida_programada DATE NOT NULL,
 	fecha_salida_real DATE,
@@ -132,7 +132,7 @@ CREATE TABLE REPARACION (
     id_incidente INT FOREIGN KEY REFERENCES incidente(id_incidente),
     id_taller INT FOREIGN KEY REFERENCES taller(id_taller),
     fecha_reparacion DATE NOT NULL,
-	calificacion DECIMAL(1,1) NOT NULL,
+	calificacion DECIMAL(5,1) NOT NULL,
     costo DECIMAL(10,2) NOT NULL,
 	detalle VARCHAR(2000) NOT NULL
 );
