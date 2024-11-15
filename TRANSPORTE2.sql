@@ -1,5 +1,5 @@
 -- =============================================
--- Creación de la Base de Datos
+-- CreaciÃ³n de la Base de Datos
 -- =============================================
 
 USE master;
@@ -103,7 +103,7 @@ CREATE TABLE TIPO_INCIDENTE(
 	descripcion VARCHAR(50) NOT NULL
 );
 go
--- Tabla de Historial de Asignación
+-- Tabla de Historial de AsignaciÃ³n
 CREATE TABLE PROGRAMACION(
     id_programacion INT IDENTITY PRIMARY KEY,
     id_carro INT NOT NULL FOREIGN KEY REFERENCES carro(id_carro),
@@ -132,7 +132,7 @@ CREATE TABLE REPARACION (
     id_incidente INT FOREIGN KEY REFERENCES incidente(id_incidente),
     id_taller INT FOREIGN KEY REFERENCES taller(id_taller),
     fecha_reparacion DATE NOT NULL,
-	calificacion DECIMAL(5,1) NOT NULL,
+	calificacion DECIMAL(1,1) NOT NULL,
     costo DECIMAL(10,2) NOT NULL,
 	detalle VARCHAR(2000) NOT NULL
 );
