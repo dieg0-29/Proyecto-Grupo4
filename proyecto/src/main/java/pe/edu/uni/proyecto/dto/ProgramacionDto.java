@@ -13,7 +13,7 @@ public class ProgramacionDto {
 	private int idEmpleado;
 	private int idConductor;
 	private int idRuta;
-	private LocalDate fechaAsignacion;
-	private LocalDate fechaFinProgramada;
-	private LocalDate fechaFinReal;
+	private String fechaAsignacion;
+	private String fechaFinProgramada;
+	private String fechaFinReal;
 }
