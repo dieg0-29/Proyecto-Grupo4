@@ -31,7 +31,7 @@ go
 -- Tabla de Carro
 CREATE TABLE CARRO(
     id_carro INT IDENTITY PRIMARY KEY,
-	id_estado INT FOREIGN KEY REFERENCES estado(id_estado),
+	id_estado INT NOT NULL FOREIGN KEY REFERENCES estado(id_estado),
     placa VARCHAR(6) NOT NULL UNIQUE,
 	prox_mant DATE NOT NULL
 );
@@ -51,7 +51,6 @@ CREATE TABLE CONDUCTOR (
     dni VARCHAR(8) NOT NULL,
     correo VARCHAR(150) NOT NULL,
     telefono VARCHAR(20) NOT NULL,
-	salario DECIMAL(10,2) NOT NULL
 );
 go
 -- Tabla de Empleado
@@ -62,7 +61,6 @@ CREATE TABLE EMPLEADO (
     dni VARCHAR(8) NOT NULL,
     correo VARCHAR(150) NOT NULL,
     telefono VARCHAR(20) NOT NULL,
-	salario DECIMAL(10,2) NOT NULL
 );
 go
 -- Tabla de Rutas
@@ -79,21 +77,23 @@ CREATE TABLE TALLER (
     id_taller INT IDENTITY PRIMARY KEY,
     nombre_taller VARCHAR(50) NOT NULL,
     direccion VARCHAR(50) NOT NULL,
-    telefono VARCHAR(20) NOT NULL
+    telefono VARCHAR(20) NOT NULL,
+	calificacion DECIMAL(5,1) NOT NULL
 );
 go
 -- Tabla de Mantenimientos
 CREATE TABLE MANTENIMIENTO (
     id_mantenimiento INT IDENTITY PRIMARY KEY,
-	id_empleado INT FOREIGN KEY REFERENCES empleado(id_empleado),
-	id_taller INT FOREIGN KEY REFERENCES taller(id_taller),
-	id_est_mant INT FOREIGN KEY REFERENCES est_mantenimiento(id_est_mant),
-    id_carro INT FOREIGN KEY REFERENCES carro(id_carro),
-	calificacion INT NOT NULL,
+	id_empleado INT NOT NULL FOREIGN KEY REFERENCES empleado(id_empleado),
+	id_taller INT NOT NULL FOREIGN KEY REFERENCES taller(id_taller),
+	id_est_mant INT NOT NULL FOREIGN KEY REFERENCES est_mantenimiento(id_est_mant),
+    id_carro INT NOT NULL FOREIGN KEY REFERENCES carro(id_carro),
+	calificacion DECIMAL(5,1) NOT NULL,
     fecha_inicio DATE NOT NULL,
 	fecha_salida_programada DATE NOT NULL,
-	fecha_salida_real DATE NOT NULL,
-    costo DECIMAL(10,2) NOT NULL
+	fecha_salida_real DATE,
+    costo DECIMAL(10,2) NOT NULL,
+	detalle VARCHAR(2000) NOT NULL
 );
 go
 
@@ -106,21 +106,23 @@ go
 -- Tabla de Historial de Asignación
 CREATE TABLE PROGRAMACION(
     id_programacion INT IDENTITY PRIMARY KEY,
-    id_carro INT FOREIGN KEY REFERENCES carro(id_carro),
-	id_empleado INT FOREIGN KEY REFERENCES empleado(id_empleado),
-    id_conductor INT FOREIGN KEY REFERENCES conductor(id_conductor),
-    id_ruta INT FOREIGN KEY REFERENCES ruta(id_ruta),
+    id_carro INT NOT NULL FOREIGN KEY REFERENCES carro(id_carro),
+	id_empleado INT NOT NULL FOREIGN KEY REFERENCES empleado(id_empleado),
+    id_conductor INT NOT NULL FOREIGN KEY REFERENCES conductor(id_conductor),
+    id_ruta INT NOT NULL FOREIGN KEY REFERENCES ruta(id_ruta),
     fecha_asignacion DATE NOT NULL,
     fecha_fin_programada DATE NOT NULL,
-	fecha_fin_real DATE NOT NULL
+	fecha_fin_real DATE
 );
 go
 -- Tabla de Incidentes
 CREATE TABLE INCIDENTE (
     id_incidente INT IDENTITY PRIMARY KEY,
-    id_programacion INT FOREIGN KEY REFERENCES programacion(id_programacion),
-    id_tipo INT FOREIGN KEY REFERENCES  tipo_incidente(id_tipo),
-	fecha_incidente DATE NOT NULL
+	id_empleado INT NOT NULL FOREIGN KEY REFERENCES empleado(id_empleado),
+    id_programacion INT NOT NULL FOREIGN KEY REFERENCES programacion(id_programacion),
+    id_tipo INT NOT NULL FOREIGN KEY REFERENCES  tipo_incidente(id_tipo),
+	fecha_incidente DATE NOT NULL,
+	detalle VARCHAR(2000) NOT NULL
 );
 go
 -- Tabla de Reparaciones
@@ -130,7 +132,8 @@ CREATE TABLE REPARACION (
     id_incidente INT FOREIGN KEY REFERENCES incidente(id_incidente),
     id_taller INT FOREIGN KEY REFERENCES taller(id_taller),
     fecha_reparacion DATE NOT NULL,
-	calificacion INT NOT NULL,
-    costo DECIMAL(10,2) NOT NULL
+	calificacion DECIMAL(5,1) NOT NULL,
+    costo DECIMAL(10,2) NOT NULL,
+	detalle VARCHAR(2000) NOT NULL
 );
 go
