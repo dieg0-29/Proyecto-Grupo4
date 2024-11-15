@@ -6,8 +6,9 @@ import lombok.NoArgsConstructor;
 
 @Data @AllArgsConstructor @NoArgsConstructor
 public class TallerDto {
+	
 	private int idTaller;
 	private String nombreTaller;
 	private String direccion;
-	private int telefono; 
+	private String telefono; 
 }
