@@ -20,6 +20,8 @@ public class ConsultaConductorFrecService {
 	@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
 	public ConductorFrecuenteDto frecuenciaIncidenteconductor(ConductorFrecuenteDto bean ) {
 		validarConductor(bean.getIdConductor());
+		bean.setFechaInicio(convertirFecha(bean.getFechaInicio()));
+		bean.setFechaFinal(convertirFecha(bean.getFechaFinal()));
 		validarFechas(bean.getFechaInicio(),bean.getFechaFinal());
 		String sql = """
 				select nombre from Conductor where id_conductor = ?;
@@ -57,7 +59,7 @@ public class ConsultaConductorFrecService {
             }
 
         } catch (DateTimeParseException e) {
-        	 throw new RuntimeException("Formato de fecha inválido. Asegúrese de usar el formato yyyy-MM-dd.");
+        	 throw new RuntimeException("Formato de fecha inválido. Asegúrese de usar el formato dd/MM/yyyy");
         } catch (NullPointerException e) {
         	 throw new RuntimeException("Las fechas no pueden ser nulas.");
         }
@@ -79,5 +81,21 @@ public class ConsultaConductorFrecService {
 	        // Manejo de excepciones relacionadas con la base de datos
 	        throw new RuntimeException("Error al acceder a la base de datos: " + e.getMessage(), e);
 	    }
+	}
+	
+	public String convertirFecha(String fecha) {
+		try {
+			// Definir los formatos: de entrada (dd/MM/yyyy) y de salida (yyyy-MM-dd)
+		    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		    DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+		    // Parsear la fecha de entrada y formatearla al nuevo formato
+		    LocalDate date = LocalDate.parse(fecha, inputFormatter);
+		    return date.format(outputFormatter);
+		} catch (DateTimeParseException e) {
+			throw new RuntimeException("Formato de fecha inválido. Asegúrese de usar el formato dd/MM/yyyy");
+		} catch (NullPointerException e) {
+       	 throw new RuntimeException("Las fechas no pueden ser nulas.");
+       }
 	}
 }

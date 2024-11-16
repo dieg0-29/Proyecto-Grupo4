@@ -1,4 +1,7 @@
 package pe.edu.uni.proyecto.service;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -23,10 +26,8 @@ public class ReparacionService {
 		validarEstadoAuto(bean.getIdincidente());
 		validarEmpleado(bean.getIdempleado());
 		validarTaller(bean.getIdtaller());
+		bean.setFechareparacion(convertirFecha(bean.getFechareparacion()));
 		validarIngresoFecha(bean.getIdincidente(), bean.getFechareparacion());
-		
-
-
 		// registro
 		registrarReparacion(bean.getIdempleado(), bean.getIdincidente(), bean.getIdtaller(), bean.getFechareparacion(),
 				bean.getCalificacion(), bean.getCosto(), bean.getDetalle());
@@ -152,4 +153,14 @@ public class ReparacionService {
 
 	}
 
+	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
+	public String convertirFecha(String fecha) {
+	    // Definir los formatos: de entrada (dd/MM/yyyy) y de salida (yyyy-MM-dd)
+	    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	    DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+	    // Parsear la fecha de entrada y formatearla al nuevo formato
+	    LocalDate date = LocalDate.parse(fecha, inputFormatter);
+	    return date.format(outputFormatter);
+	}
 }

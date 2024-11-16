@@ -10,13 +10,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 import pe.edu.uni.proyecto.dto.TallerDto;
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> bd4250111447cc7f287439f8c8f29a8589965b9b
 @Service
 public class TallerService {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
 	public TallerDto registrarTaller(TallerDto bean) {
-		ValidarNumero(bean.getTelefono());
+		validarNumero(bean.getTelefono());
 		
 		//Registrar taller
 		String sql="""
@@ -30,9 +34,9 @@ public class TallerService {
 	}
 	
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
-	private void ValidarNumero(String numero) {
-		 if (!Pattern.matches("\\d+", numero)) {
-	            throw new IllegalArgumentException("El telefono solo debe contener valores numéricos.");
-	        }
-	}
+	private void validarNumero(String telefono) {
+        if (!Pattern.matches("^[9][0-9]{8}$", telefono)) {
+            throw new IllegalArgumentException("El teléfono debe empezar por 9 y tener 9 dígitos numéricos.");
+        }
+    }
 }

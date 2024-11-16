@@ -80,7 +80,6 @@ public class MantenimientoService {
 	
 	private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	private void validarFechas(String fechaInicio, String fechaFinal) {
-		try {
             // Parsear las fechas desde el String
             LocalDate fechaInicio1 = LocalDate.parse(fechaInicio, DATE_FORMATTER);
             LocalDate fechaFinal1 = LocalDate.parse(fechaFinal, DATE_FORMATTER);
@@ -89,11 +88,22 @@ public class MantenimientoService {
             if (fechaInicio1.isAfter(fechaFinal1)) {
             	 throw new RuntimeException("La fecha de inicio debe ser anterior a la fecha de fin.");
             }
+	}
+	
+	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
+	public String convertirFecha(String fecha) {
+		try {
+			// Definir los formatos: de entrada (dd/MM/yyyy) y de salida (yyyy-MM-dd)
+		    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		    DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-        } catch (DateTimeParseException e) {
-        	 throw new RuntimeException("Formato de fecha inválido. Asegúrese de usar el formato yyyy-MM-dd.");
-        } catch (NullPointerException e) {
-        	 throw new RuntimeException("Las fechas no pueden ser nulas.");
-        }
+		    // Parsear la fecha de entrada y formatearla al nuevo formato
+		    LocalDate date = LocalDate.parse(fecha, inputFormatter);
+		    return date.format(outputFormatter);
+		} catch (DateTimeParseException e) {
+			throw new RuntimeException("Formato de fecha inválido. Asegúrese de usar el formato dd/MM/yyyy");
+		} catch (NullPointerException e) {
+       	 throw new RuntimeException("Las fechas no pueden ser nulas.");
+       }
 	}
 }

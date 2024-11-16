@@ -53,4 +53,11 @@ public class IncidenteService {
 					+ "detalle) VALUES(?,?,?,CONVERT(DATETIME,?,105),?)";
 			jdbcTemplate.update(sql, empleado, programacion, tipo_incidente, fecha, detalle);
 		}
+		
+		@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
+		private void actualizarEstadoCarro(int programacion) {
+			String sql = "update carro set id_estado = 3 where id_carro "
+					+ "= (select id_carro from programacion where id_programacion = 4)";
+			jdbcTemplate.update(sql, programacion);
+		}
 }
