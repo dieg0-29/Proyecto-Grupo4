@@ -28,14 +28,13 @@ public class TallerService {
 
 	int calif = 0;
 	Object[] datos = {bean.getNombreTaller(), bean.getDireccion(), bean.getTelefono(), calif};
-	jdbcTemplate.update(sql,datos);
-	
+	jdbcTemplate.update(sql,datos);	
 	return bean;
 	}
 	
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
-	private void ValidarNumero(String nombre) {
-		 if (!Pattern.matches("\\d+", nombre)) {
+	private void ValidarNumero(String numero) {
+		 if (!Pattern.matches("\\d+", numero)) {
 	            throw new IllegalArgumentException("El telefono solo debe contener valores numéricos.");
 	        }
 	}
