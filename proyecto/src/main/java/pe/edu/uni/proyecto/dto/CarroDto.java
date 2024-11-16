@@ -7,8 +7,9 @@ import java.time.LocalDate;
 
 @Data @AllArgsConstructor @NoArgsConstructor
 public class CarroDto {
+	
 	private int idCarro;
-	private int idEstado;
-	private String placa;
-	private LocalDate proxMantenimiento;
+    private int id_estado; 
+    private String placa;
+    private String prox_mant; 
 }

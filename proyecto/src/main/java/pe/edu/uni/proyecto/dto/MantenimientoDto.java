@@ -18,4 +18,5 @@ public class MantenimientoDto {
 	private LocalDate fechaSalidaProgramada;
 	private LocalDate fechaSalidaReal;
 	private double costo;
+	private String detalle;
 }

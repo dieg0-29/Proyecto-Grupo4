@@ -11,4 +11,6 @@ public class TallerDto {
 	private String nombreTaller;
 	private String direccion;
 	private String telefono; 
+	private double calificacion;
+	
 }
