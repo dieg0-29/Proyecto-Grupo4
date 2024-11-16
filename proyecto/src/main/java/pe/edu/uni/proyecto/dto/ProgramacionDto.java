@@ -1,6 +1,5 @@
 package pe.edu.uni.proyecto.dto;
 
-import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

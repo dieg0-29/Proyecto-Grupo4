@@ -4,11 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data @AllArgsConstructor @NoArgsConstructor
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class RutaDto {
-	private int idRuta;
-	private String nombreRuta;
+	private String nombre;
 	private String origen;
 	private String destino;
-	private double distanciaKm;
+	private double distancia;
 }
