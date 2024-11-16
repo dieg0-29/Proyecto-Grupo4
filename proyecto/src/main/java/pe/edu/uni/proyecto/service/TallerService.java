@@ -8,10 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import pe.edu.uni.proyecto.dto.TallerDto;
-
-
 
 @Service
 public class TallerService {

@@ -6,11 +6,13 @@ import java.time.format.DateTimeParseException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import pe.edu.uni.proyecto.dto.CarroDto;
 
+@Service 
 public class CarroService {
 	@Autowired
     JdbcTemplate jdbcTemplate;
@@ -28,27 +30,27 @@ public class CarroService {
 	return bean;
 	}
 
-	private void Validarcarro(String placa) {
-		String sql ="""
-				select Count(*) from Carro where placa = ?
-				""";
-		int cont = jdbcTemplate.queryForObject(sql,Integer.class,placa);
-		if (cont != 1) {
-			throw new RuntimeException("El carro con la placa" + placa  + "existe.");
-		}
-	}
-	
-	private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-	 public void validarFecha(String fecha) {
-	        if (fecha == null) {
-	            throw new IllegalArgumentException("Las fechas no pueden ser nulas.");
-	        }
+    private void Validarcarro(String placa) {
+        String sql = """
+                select Count(*) from Carro where placa = ?
+                """;
+        int cont = jdbcTemplate.queryForObject(sql, Integer.class, placa);
+        if (cont > 0) { // Cambia esta condición
+            throw new RuntimeException("El carro con la placa " + placa + " ya existe.");
+        }
+    }
 
-	        // Intenta parsear la fecha desde el String
-	        try {
-	            LocalDate.parse(fecha, DATE_FORMATTER);
-	        } catch (DateTimeParseException e) {
-	            throw new IllegalArgumentException("Formato de fecha inválido. Asegúrese de usar el formato yyyy-MM-dd.");
-	        }
-	    }
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+    public void validarFecha(String fecha) {
+        if (fecha == null) {
+            throw new IllegalArgumentException("Las fechas no pueden ser nulas.");
+        }
+
+        try {
+            LocalDate.parse(fecha, DATE_FORMATTER);
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("Formato de fecha inválido. Asegúrese de usar el formato yyyy-MM-dd.");
+        }
+    }
 }

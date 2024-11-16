@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import pe.edu.uni.proyecto.dto.CarroDto;
 import pe.edu.uni.proyecto.service.CarroService;
 
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
 public class CarroRest {
-	@Autowired
+    @Autowired
     private CarroService carroService;
 
     @PostMapping("/registrar")
