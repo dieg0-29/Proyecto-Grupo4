@@ -9,8 +9,7 @@ public class ConductorDto {
 	private int idConductor;
 	private String nombre;
 	private String apellido;
-	private int dni; 
+	private String dni; 
 	private String correo;
-	private int telefono; 
-	private double salario;
+	private String telefono;
 }
