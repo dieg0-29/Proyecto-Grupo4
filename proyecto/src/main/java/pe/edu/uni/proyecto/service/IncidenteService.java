@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import pe.edu.uni.proyecto.dto.IncidenteDto;
 
-
 @Service
 public class IncidenteService {
 	

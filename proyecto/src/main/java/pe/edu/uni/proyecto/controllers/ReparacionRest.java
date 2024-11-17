@@ -29,7 +29,6 @@ public class ReparacionRest {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body("Error en el proceso: " + e.getMessage());
 		}		
-	}
-	
+	}	
 
 }
