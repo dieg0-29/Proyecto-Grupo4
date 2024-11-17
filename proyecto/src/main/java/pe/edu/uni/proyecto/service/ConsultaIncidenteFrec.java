@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import pe.edu.uni.proyecto.dto.IncidenteFrecuenteDto;
 
-
 @Service
 public class ConsultaIncidenteFrec {
 	@Autowired

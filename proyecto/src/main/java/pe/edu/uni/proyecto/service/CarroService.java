@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import pe.edu.uni.proyecto.dto.CarroDto;
 
-
 @Service 
 
 public class CarroService {
@@ -39,8 +38,8 @@ public class CarroService {
 				select Count(*) from Carro where placa = ?
 				""";
 		int cont = jdbcTemplate.queryForObject(sql,Integer.class,placa);
-		if (cont != 1) {
-			throw new RuntimeException("El carro con la placa" + placa  + "existe.");
+		if (cont > 0) {
+		    throw new RuntimeException("El carro con la placa " + placa + " ya existe.");
 		}
 	}
   
