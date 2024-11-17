@@ -38,7 +38,7 @@ public class CarroService {
 				select Count(*) from Carro where placa = ?
 				""";
 		int cont = jdbcTemplate.queryForObject(sql,Integer.class,placa);
-		if (cont > 0) {
+		if (cont == 1) {
 		    throw new RuntimeException("El carro con la placa " + placa + " ya existe.");
 		}
 	}
