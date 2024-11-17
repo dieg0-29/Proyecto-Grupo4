@@ -10,10 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import pe.edu.uni.proyecto.dto.TallerDto;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> bd4250111447cc7f287439f8c8f29a8589965b9b
 @Service
 public class TallerService {
 	@Autowired

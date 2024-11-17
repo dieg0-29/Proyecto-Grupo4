@@ -12,11 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import pe.edu.uni.proyecto.dto.CarroDto;
 
-<<<<<<< HEAD
-@Service
-=======
+
 @Service 
->>>>>>> bd4250111447cc7f287439f8c8f29a8589965b9b
+
 public class CarroService {
 	@Autowired
     JdbcTemplate jdbcTemplate;
@@ -34,7 +32,7 @@ public class CarroService {
 	return bean;
 	}
 
-<<<<<<< HEAD
+
     @Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
 	private void Validarcarro(String placa) {
 		String sql ="""
@@ -64,29 +62,4 @@ public class CarroService {
        	 throw new RuntimeException("Las fechas no pueden ser nulas.");
        }
 	}
-=======
-    private void Validarcarro(String placa) {
-        String sql = """
-                select Count(*) from Carro where placa = ?
-                """;
-        int cont = jdbcTemplate.queryForObject(sql, Integer.class, placa);
-        if (cont > 0) { // Cambia esta condición
-            throw new RuntimeException("El carro con la placa " + placa + " ya existe.");
-        }
-    }
-
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-    public void validarFecha(String fecha) {
-        if (fecha == null) {
-            throw new IllegalArgumentException("Las fechas no pueden ser nulas.");
-        }
-
-        try {
-            LocalDate.parse(fecha, DATE_FORMATTER);
-        } catch (DateTimeParseException e) {
-            throw new IllegalArgumentException("Formato de fecha inválido. Asegúrese de usar el formato yyyy-MM-dd.");
-        }
-    }
->>>>>>> bd4250111447cc7f287439f8c8f29a8589965b9b
 }
