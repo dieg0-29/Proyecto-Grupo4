@@ -43,8 +43,7 @@ public class CarroService {
 			throw new RuntimeException("El carro con la placa" + placa  + "existe.");
 		}
 	}
-    
-	private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+  
 	
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
 	public String convertirFecha(String fecha) {

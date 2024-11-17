@@ -28,6 +28,9 @@ public class MantenimientoService {
             String sql = "INSERT INTO MANTENIMIENTO (id_empleado, id_taller, id_est_mant, id_carro, calificacion, fecha_inicio, fecha_salida_programada, fecha_salida_real, costo, detalle) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
            
             jdbcTemplate.update(sql, bean.getId_empleado(), bean.getId_taller(),1, bean.getId_carro(), bean.getCalificacion(), bean.getFecha_inicio(), bean.getFecha_salida_programada(), "", bean.getCosto(), bean.getDetalle());
+           
+            double calificacionfinal = obtenerCalificacionTaller(bean.getId_taller());
+    		actualizarpromediotaller(bean.getId_taller(),calificacionfinal);
             return true;
         } catch (Exception err) {
             err.printStackTrace();
@@ -35,7 +38,29 @@ public class MantenimientoService {
         }
     }
     
-    private void carroMantenimiento(int id_carro) {
+    @Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
+    private void actualizarpromediotaller(int id_taller, double calificacionfinal) {
+    	String sql = """
+				UPDATE TALLER
+				SET calificacion = ?
+				WHERE id_taller = ? 
+				""";
+		jdbcTemplate.update(sql, calificacionfinal, id_taller);		
+	}
+
+	private double obtenerCalificacionTaller(int id_taller) {
+		String sql = """
+				SELECT CAST(AVG(totales.calificacion) AS DECIMAL(10, 1)) AS promedio
+				FROM (
+				    SELECT t1.calificacion FROM REPARACION t1 WHERE t1.id_taller = ? UNION ALL
+				    SELECT t2.calificacion FROM MANTENIMIENTO t2 WHERE t2.id_taller = ?
+				) AS totales;
+				""";
+		double calificacionfinal= jdbcTemplate.queryForObject(sql, double.class, id_taller , id_taller );
+		return calificacionfinal;
+	}
+
+	private void carroMantenimiento(int id_carro) {
 		String sql = """
 				UPDATE Carro
 				SET  id_estado= 2
