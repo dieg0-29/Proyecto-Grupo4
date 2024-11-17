@@ -50,7 +50,7 @@ CREATE TABLE CONDUCTOR (
 	apellido VARCHAR(100) NOT NULL,
     dni VARCHAR(8) NOT NULL,
     correo VARCHAR(150) NOT NULL,
-    telefono VARCHAR(20) NOT NULL,
+    telefono VARCHAR(20) NOT NULL
 );
 go
 -- Tabla de Empleado
@@ -60,7 +60,7 @@ CREATE TABLE EMPLEADO (
 	apellido VARCHAR(50) NOT NULL,
     dni VARCHAR(8) NOT NULL,
     correo VARCHAR(150) NOT NULL,
-    telefono VARCHAR(20) NOT NULL,
+    telefono VARCHAR(20) NOT NULL
 );
 go
 -- Tabla de Rutas
