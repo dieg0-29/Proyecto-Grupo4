@@ -1,6 +1,7 @@
 package pe.edu.uni.proyecto.service;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -24,6 +25,7 @@ public class ReparacionService {
 		validarEstadoAuto(bean.getIdincidente());
 		validarEmpleado(bean.getIdempleado());
 		validarTaller(bean.getIdtaller());
+		validarCalificacion(bean.getCalificacion());
 		bean.setFechareparacion(convertirFecha(bean.getFechareparacion()));
 		validarIngresoFecha(bean.getIdincidente(), bean.getFechareparacion());
 		// registro
@@ -150,15 +152,27 @@ public class ReparacionService {
 		}
 
 	}
+	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
+    private void validarCalificacion(double calificacion) {
+        if (calificacion < 0 || calificacion > 5) {
+            throw new IllegalArgumentException("La calificación debe estar entre 0 y 5.");
+        }
+    }
 
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
 	public String convertirFecha(String fecha) {
-	    // Definir los formatos: de entrada (dd/MM/yyyy) y de salida (yyyy-MM-dd)
-	    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-	    DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		try {
+			// Definir los formatos: de entrada (dd/MM/yyyy) y de salida (yyyy-MM-dd)
+		    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		    DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-	    // Parsear la fecha de entrada y formatearla al nuevo formato
-	    LocalDate date = LocalDate.parse(fecha, inputFormatter);
-	    return date.format(outputFormatter);
+		    // Parsear la fecha de entrada y formatearla al nuevo formato
+		    LocalDate date = LocalDate.parse(fecha, inputFormatter);
+		    return date.format(outputFormatter);
+		} catch (DateTimeParseException e) {
+			throw new RuntimeException("Formato de fecha inválido. Asegúrese de usar el formato dd/MM/yyyy");
+		} catch (NullPointerException e) {
+       	 throw new RuntimeException("Las fechas no pueden ser nulas.");
+       }
 	}
 }
