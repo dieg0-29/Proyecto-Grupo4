@@ -1,5 +1,9 @@
 package pe.edu.uni.proyecto.service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -19,6 +23,7 @@ public class IncidenteService {
 		// Validaciones
 		validarEmpleado(bean.getEmpleado());
 		validarProgramacion(bean.getProgramacion());
+		convertirFecha(bean.getFecha());
 		// Proceso
 		registrarIncidente(bean.getEmpleado(), bean.getProgramacion(), bean.getTipo_incidente(), bean.getFecha(), bean.getDetalle());
 		// Reporte final
@@ -52,7 +57,22 @@ public class IncidenteService {
 					+ "detalle) VALUES(?,?,?,CONVERT(DATETIME,?,105),?)";
 			jdbcTemplate.update(sql, empleado, programacion, tipo_incidente, fecha, detalle);
 		}
-		
+		@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
+		public String convertirFecha(String fecha) {
+			try {
+				// Definir los formatos: de entrada (dd/MM/yyyy) y de salida (yyyy-MM-dd)
+			    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			    DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+			    // Parsear la fecha de entrada y formatearla al nuevo formato
+			    LocalDate date = LocalDate.parse(fecha, inputFormatter);
+			    return date.format(outputFormatter);
+			} catch (DateTimeParseException e) {
+				throw new RuntimeException("Formato de fecha inválido. Asegúrese de usar el formato dd/MM/yyyy");
+			} catch (NullPointerException e) {
+	       	 throw new RuntimeException("Las fechas no pueden ser nulas.");
+	       }
+		}
 		@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
 		private void actualizarEstadoCarro(int programacion) {
 			String sql = "update carro set id_estado = 3 where id_carro "
