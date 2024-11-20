@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import pe.edu.uni.proyecto.dto.ProgramacionDto;
+import pe.edu.uni.proyecto.dto.FinalizarDto;
 
 @Service
 public class FinalizarService {
@@ -19,8 +19,10 @@ public class FinalizarService {
 	private JdbcTemplate jdbcTemplate;
 	
 	@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
-	public ProgramacionDto finalizarProgramacion(ProgramacionDto bean) {
+	public FinalizarDto finalizarProgramacion(FinalizarDto bean) {
 		validarProgramacion(bean.getIdProgramacion());
+		validarFechaReal(bean.getIdProgramacion(), bean.getFechaFinReal());
+		actualizarEstado(bean.getIdCarro(),bean.getIdConductor());
 		return bean;
 	}
 	
@@ -34,7 +36,7 @@ public class FinalizarService {
 	}
 	
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
-	public String convertirFecha(String fecha) {
+	private String convertirFecha(String fecha) {
 		try {
 			// Definir los formatos: de entrada (dd/MM/yyyy) y de salida (yyyy-MM-dd)
 		    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -51,7 +53,7 @@ public class FinalizarService {
 	}
 	
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
-	public void validarFechaReal(int idProg, String fecha) {
+	private void validarFechaReal(int idProg, String fecha) {
 		String sql = "select fecha_asignacion from PROGRAMACION where id_programacion = ?";
 		String fechaPartida = jdbcTemplate.queryForObject(sql, String.class, idProg);
 		fechaPartida = convertirFecha(fechaPartida);
@@ -71,4 +73,12 @@ public class FinalizarService {
 					+ " a tres días de la fecha programada");
 		}
 	}
-}
+	
+	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
+	private void actualizarEstado(int idCarro, int idConductor) {
+		String sql = "update carro set id_estado = 1 where id_carro = ?";
+		jdbcTemplate.update(sql,idCarro);
+		sql = "update conductor set id_estado = 1 where id_conductor = ?";
+		jdbcTemplate.update(sql,idConductor);
+	}
+}	

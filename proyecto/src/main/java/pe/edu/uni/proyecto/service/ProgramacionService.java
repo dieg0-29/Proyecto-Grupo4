@@ -136,6 +136,10 @@ public class ProgramacionService {
 		String sql = "insert into PROGRAMACION values(?,?,?,?,?,?,NULL)";
 		jdbcTemplate.update(sql,bean.getIdCarro(),bean.getIdEmpleado(),bean.getIdConductor(),
 				bean.getIdRuta(),bean.getFechaAsignacion(),bean.getFechaFinProgramada());
+		sql = "update carro set id_estado = 5 where id_carro = ?";
+		jdbcTemplate.update(sql,bean.getIdCarro());
+		sql = "update conductor set id_estado = 2 where id_conductor = ?";
+		jdbcTemplate.update(sql,bean.getIdConductor());
 	}
 	
 }
