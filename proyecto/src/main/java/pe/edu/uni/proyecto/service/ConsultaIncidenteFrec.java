@@ -48,5 +48,4 @@ public class ConsultaIncidenteFrec {
 	        throw new RuntimeException("Error al acceder a la base de datos: " + e.getMessage(), e);
 	    }
 	}
-	
 }

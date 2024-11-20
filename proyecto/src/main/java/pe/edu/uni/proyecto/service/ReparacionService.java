@@ -147,17 +147,20 @@ public class ReparacionService {
 				where t1.id_incidente = ?
 				   """;
 		int estado = jdbcTemplate.queryForObject(sql, Integer.class, idincidente);
-		if (estado != 3) {
-			throw new RuntimeException("El carro no se encuentra en reparacion.");
+		if (estado == 3) {
+			throw new RuntimeException("El carro se encuentra en reparacion.");
 		}
 
 	}
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
-    private void validarCalificacion(double calificacion) {
+    
+	
+	private void validarCalificacion(double calificacion) {
         if (calificacion < 0 || calificacion > 5) {
             throw new IllegalArgumentException("La calificación debe estar entre 0 y 5.");
         }
     }
+	
 
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
 	public String convertirFecha(String fecha) {
