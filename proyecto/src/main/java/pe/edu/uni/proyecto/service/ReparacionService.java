@@ -106,7 +106,7 @@ public class ReparacionService {
 				WHERE id_carro = (SELECT t2.id_carro FROM INCIDENTE t1
 				INNER JOIN PROGRAMACION t2 ON t1.id_programacion = t2.id_programacion
 				WHERE t1.id_incidente = ? )
-				""";
+		 		""";
 		jdbcTemplate.update(sql, idincidente);
 		
 

@@ -24,7 +24,7 @@ public class IncidenteService {
 		validarEmpleado(bean.getEmpleado());
 		validarProgramacion(bean.getProgramacion());
 		convertirFecha(bean.getFecha());
-		validarFecha(bean.getProgramacion(),bean.getFecha());
+		//validarFecha(bean.getProgramacion(),bean.getFecha());
 		
 		
 		// Proceso
@@ -60,25 +60,7 @@ public class IncidenteService {
 					+ "detalle) VALUES(?,?,?,CONVERT(DATETIME,?,105),?)";
 			jdbcTemplate.update(sql, empleado, programacion, tipo_incidente, fecha, detalle);
 		}
-		private void validarFecha(int idProg, String fecha) {
-			String sql = "select fecha_asignacion from PROGRAMACION where id_programacion = ?";
-			String fechaPartida = jdbcTemplate.queryForObject(sql, String.class, idProg);
-			fechaPartida = convertirFecha(fechaPartida);
-			fecha = convertirFecha(fecha);
-			sql = "select datediff(day,'" + fecha + "','" + fechaPartida + "')";
-			int cont = jdbcTemplate.queryForObject(sql, Integer.class);
-			if(cont<0) {
-				throw new RuntimeException("La fecha del incidente no puede ser menor a la fecha de asignacion");
-			}
-			sql = "select fecha_fin_programada from PROGRAMACION where id_programacion = ?";
-			String fechaFin = jdbcTemplate.queryForObject(sql, String.class, idProg);
-			fechaFin = convertirFecha(fechaFin);
-			sql = "select datediff(day,'" + fecha + "','" + fechaFin + "')";
-			cont = jdbcTemplate.queryForObject(sql, Integer.class);
-			if(cont>0) {
-				throw new RuntimeException("La fecha final programada no puede ser menor a la fecha del incidente");
-			}
-		}
+
 		@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
 		public String convertirFecha(String fecha) {
 			try {
@@ -98,7 +80,7 @@ public class IncidenteService {
 		@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
 		private void actualizarEstadoCarro(int programacion) {
 			String sql = "update carro set id_estado = 3 where id_carro "
-					+ "= (select id_carro from programacion where id_programacion = 4)";
+					+ "= (select id_carro from programacion where id_programacion = ?)";
 			jdbcTemplate.update(sql, programacion);
 		}
 }
