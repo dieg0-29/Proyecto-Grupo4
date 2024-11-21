@@ -23,7 +23,7 @@ public class IncidenteRest {
 			 if (registro) {
 	                return new ResponseEntity<>("Incidente registrado exitosamente.", HttpStatus.CREATED);
 	            } else {
-	                return new ResponseEntity<>("Error al carro.", HttpStatus.INTERNAL_SERVER_ERROR);
+	                return new ResponseEntity<>("Error al incidente.", HttpStatus.INTERNAL_SERVER_ERROR);
 	            }
 	        } catch (RuntimeException e) {
 	            return new ResponseEntity<>("Error: " + e.getMessage(), HttpStatus.BAD_REQUEST);

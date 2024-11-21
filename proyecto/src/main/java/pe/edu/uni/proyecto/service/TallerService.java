@@ -12,30 +12,30 @@ import pe.edu.uni.proyecto.dto.TallerDto;
 
 @Service
 public class TallerService {
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
-	@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
-	public boolean registrarTaller(TallerDto bean) {
-			try {
-			validarNumero(bean.getTelefono());
-			
-			//Registrar taller
-			String sql="""
-					insert into taller(nombre_taller,direccion,telefono,calificacion) values(?,?,?,?)
-					""";
-	
-		int calif = 0;
-		Object[] datos = {bean.getNombreTaller(), bean.getDireccion(), bean.getTelefono(), calif};
-		jdbcTemplate.update(sql,datos);	
-		return true;
-		} catch (Exception err){
-			err.printStackTrace();
-			return false;
-		}
-	}
-	
-	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
-	private void validarNumero(String telefono) {
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
+    public boolean registrarTaller(TallerDto bean) {
+        validarNumero(bean.getTelefono());
+
+        // Registrar taller
+        String sql = """
+                INSERT INTO taller(nombre_taller, direccion, telefono, calificacion) VALUES (?, ?, ?, ?)
+                """;
+
+        int calif = 0; 
+        Object[] datos = {bean.getNombreTaller(), bean.getDireccion(), bean.getTelefono(), calif};
+        int rowsAffected = jdbcTemplate.update(sql, datos);
+        
+        return rowsAffected > 0;
+    }
+
+    @Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
+    private void validarNumero(String telefono) {
+        if (telefono.length() > 9) {
+            throw new IllegalArgumentException("El número de teléfono no puede tener más de 9 dígitos.");
+        }
         if (!Pattern.matches("^[9][0-9]{8}$", telefono)) {
             throw new IllegalArgumentException("El teléfono debe empezar por 9 y tener 9 dígitos numéricos.");
         }

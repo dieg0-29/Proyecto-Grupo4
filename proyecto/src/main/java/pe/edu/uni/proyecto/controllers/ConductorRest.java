@@ -19,14 +19,16 @@ public class ConductorRest {
 	private ConductorService conductorService;
 	
 	@PostMapping()
-	public ResponseEntity<?> registrarCond(@RequestBody ConductorDto bean) {
+	public ResponseEntity<String> registrarCond(@RequestBody ConductorDto bean) {
 		try {
-			bean = conductorService.registrarCond(bean);
-			return ResponseEntity.status(HttpStatus.CREATED).body(bean);
-		} catch (Exception e) {
-			// Manejo de excepción y respuesta con error 500
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-					.body("Error al registrar el conductor: " + e.getMessage());
-		}
+			boolean registro = conductorService.registrarConductor(bean);
+			 if (registro) {
+	                return new ResponseEntity<>("Conductor registrado exitosamente.", HttpStatus.CREATED);
+	            } else {
+	                return new ResponseEntity<>("Error al registrar conductor.", HttpStatus.INTERNAL_SERVER_ERROR);
+	            }
+	        } catch (RuntimeException e) {
+	            return new ResponseEntity<>("Error: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+	        }
 	}
 }

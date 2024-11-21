@@ -15,8 +15,7 @@ public class RutaService {
 	private JdbcTemplate jdbcTemplate;
 	
 	@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
-	public boolean registrarRuta(RutaDto bean) {
-		try {
+	public void registrarRuta(RutaDto bean) {
 		//validaciones
 		validarExistenciaRuta(bean.getOrigen(),bean.getDestino());
 		validarNombreRuta(bean.getNombre());
@@ -36,11 +35,7 @@ public class RutaService {
 		
 		// Reporte final
 		System.out.println("Proceso ok.");
-		return true;
-	} catch (Exception err){
-		err.printStackTrace();
-		return false;
-	}
+
 }
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
 	private void registrarRuta(String nombre, String origen, String destino, double distancia) {

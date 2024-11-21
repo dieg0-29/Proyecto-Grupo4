@@ -18,8 +18,7 @@ public class CarroService {
 	@Autowired
     JdbcTemplate jdbcTemplate;
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
-	public boolean registrarCarro(CarroDto bean) {
-    	try {
+	public void registrarCarro(CarroDto bean) {
 		Validarcarro(bean.getPlaca());
 		bean.setProx_mant(convertirFecha(bean.getProx_mant()));
 		//Registrar carro
@@ -28,12 +27,8 @@ public class CarroService {
 				""";
 	int estado = 1;
 	Object[] datos = {estado, bean.getPlaca(), bean.getProx_mant()};
-	jdbcTemplate.update(sql,datos);	
-	return true;
-	} catch (Exception err){
-		err.printStackTrace();
-		return false;
-	}
+	jdbcTemplate.update(sql,datos);
+	System.out.print("Todo ok");
  }
 
 

@@ -16,8 +16,8 @@ import pe.edu.uni.proyecto.dto.MantenimientoDto;
 public class MantenimientoService {
     @Autowired
     JdbcTemplate jdbcTemplate;
-    public boolean registroMantenimiento(MantenimientoDto bean) {
-        try {
+    public void registroMantenimiento(MantenimientoDto bean) {
+    
         	validarEmpleado( bean.getId_empleado());
         	validarCarro( bean.getId_carro());
         	validarTaller(bean.getId_taller());
@@ -32,11 +32,8 @@ public class MantenimientoService {
            
             double calificacionfinal = obtenerCalificacionTaller(bean.getId_taller());
     		actualizarpromediotaller(bean.getId_taller(),calificacionfinal);
-            return true;
-        } catch (Exception err) {
-            err.printStackTrace();
-            return false;
-        }
+            
+    		System.out.println("registro ok");
     }
     
     @Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
@@ -72,8 +69,8 @@ public class MantenimientoService {
 
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
     private void validarCalificacion(double calificacion) {
-        if (calificacion < 0 || calificacion > 5) {
-            throw new IllegalArgumentException("La calificación debe estar entre 0 y 5.");
+        if (calificacion <= 0 || calificacion >= 5) {
+        	throw new RuntimeException("La calificación debe estar entre 0 y 5.");
         }
     }
     
@@ -100,7 +97,7 @@ public class MantenimientoService {
 		String sql = "select count(1) cont from CARRO where id_carro = ?";
 		int cont = jdbcTemplate.queryForObject(sql, Integer.class, idCarro);
 		if(cont != 1) {
-			throw new RuntimeException("Carro " + idCarro  + " no existe");
+			throw new IllegalArgumentException("Carro " + idCarro  + " no existe");
 		}
 	}
 	
@@ -112,7 +109,7 @@ public class MantenimientoService {
 
             // Verificar que la fecha de inicio sea anterior a la fecha de fin
             if (fechaInicio1.isAfter(fechaFinal1)) {
-            	 throw new RuntimeException("La fecha de inicio debe ser anterior a la fecha de fin.");
+            	throw new IllegalArgumentException("La fecha de inicio debe ser anterior a la fecha de fin.");
             }
 	}
 	
@@ -127,9 +124,9 @@ public class MantenimientoService {
 		    LocalDate date = LocalDate.parse(fecha, inputFormatter);
 		    return date.format(outputFormatter);
 		} catch (DateTimeParseException e) {
-			throw new RuntimeException("Formato de fecha inválido. Asegúrese de usar el formato dd/MM/yyyy");
+			throw new IllegalArgumentException("Formato de fecha inválido. Asegúrese de usar el formato dd/MM/yyyy");
 		} catch (NullPointerException e) {
-       	 throw new RuntimeException("Las fechas no pueden ser nulas.");
-       }
+			throw new IllegalArgumentException("Las fechas no pueden ser nulas.");
+        }
 	}
 }

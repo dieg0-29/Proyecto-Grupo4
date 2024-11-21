@@ -19,8 +19,8 @@ public class ProgramacionService {
 	private JdbcTemplate jdbcTemplate;
 	
 	@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
-	public boolean registrarProg(ProgramacionDto bean) {
-		try {
+	public void registrarProg(ProgramacionDto bean) {
+
 		validarEmpleado(bean.getIdEmpleado());
 		validarCarro(bean.getIdCarro());
 		validarEstadoCarro(bean.getIdCarro());
@@ -33,11 +33,7 @@ public class ProgramacionService {
 		validarFechaFin(bean.getFechaFinProgramada(), bean.getFechaAsignacion());
 		//Registrar Programacion
 		registrarProgamacion(bean);		
-		return true;
-		} catch (Exception err){
-			err.printStackTrace();
-			return false;
-		}
+		System.out.println("registro ok");
 	}
 	
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)

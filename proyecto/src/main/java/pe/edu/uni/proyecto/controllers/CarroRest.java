@@ -18,14 +18,14 @@ public class CarroRest {
     @PostMapping("/api/registrar/carro")
     public ResponseEntity<String> registrarCarro(@RequestBody CarroDto carroDto) {
         try {
-            boolean carroRegistrado = carroService.registrarCarro(carroDto);
-            if (carroRegistrado) {
-                return new ResponseEntity<>("Carro registrado exitosamente.", HttpStatus.CREATED);
-            } else {
-                return new ResponseEntity<>("Error al carro.", HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+            carroService.registrarCarro(carroDto);
+            return new ResponseEntity<>("Reparación registrada exitosamente.", HttpStatus.CREATED);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>("Error: " + e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (RuntimeException e) {
             return new ResponseEntity<>("Error: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error inesperado: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

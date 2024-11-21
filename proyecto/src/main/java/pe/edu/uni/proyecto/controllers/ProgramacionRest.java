@@ -21,14 +21,14 @@ public class ProgramacionRest {
 	@PostMapping()
 	public ResponseEntity<String> registrarCliente(@RequestBody ProgramacionDto bean) {
 		try {
-			boolean registro = programacionService.registrarProg(bean);
-			 if (registro) {
-	                return new ResponseEntity<>("Programacion registrado exitosamente.", HttpStatus.CREATED);
-	            } else {
-	                return new ResponseEntity<>("Error a la programacion.", HttpStatus.INTERNAL_SERVER_ERROR);
-	            }
-	        } catch (RuntimeException e) {
-	            return new ResponseEntity<>("Error: " + e.getMessage(), HttpStatus.BAD_REQUEST);
-	        }
-	}
+			programacionService.registrarProg(bean);
+            return new ResponseEntity<>("Reparación registrada exitosamente.", HttpStatus.CREATED);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>("Error: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>("Error: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error inesperado: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

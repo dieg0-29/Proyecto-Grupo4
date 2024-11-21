@@ -18,8 +18,7 @@ public class ReparacionService {
 	private JdbcTemplate jdbcTemplate;
 
 	@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
-	public boolean reparacion(ReparacionDto bean) {
-		try {
+	public void reparacion(ReparacionDto bean) {
 			// validaciones
 			validarIncidente(bean.getIdincidente());
 			validarEstadoAuto(bean.getIdincidente());
@@ -36,11 +35,7 @@ public class ReparacionService {
 			actualizarpromediotaller(bean.getIdtaller(),calificacionfinal);
 	
 			System.out.println("Proceso ok.");
-			return true;
-		} catch (Exception err){
-			err.printStackTrace();
-			return false;
-		}
+			
 	}
 	
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)

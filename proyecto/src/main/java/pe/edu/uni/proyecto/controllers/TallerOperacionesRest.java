@@ -13,7 +13,7 @@ import pe.edu.uni.proyecto.service.TallerOperacionesService;
 public class TallerOperacionesRest {
 
 	@Autowired
-    private TallerOperacionesService tallerService; // Inyección directa usando @Autowired
+    private TallerOperacionesService tallerService;
 
     // Endpoint para obtener el taller con más operaciones
     @GetMapping("/api/consulta/taller/operaciones")
