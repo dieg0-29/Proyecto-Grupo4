@@ -19,14 +19,16 @@ public class ProgramacionRest {
 	private ProgramacionService programacionService;
 
 	@PostMapping()
-	public ResponseEntity<?> registrarCliente(@RequestBody ProgramacionDto bean) {
+	public ResponseEntity<String> registrarCliente(@RequestBody ProgramacionDto bean) {
 		try {
-			bean = programacionService.registrarProg(bean);
-			return ResponseEntity.status(HttpStatus.CREATED).body(bean);
-		} catch (Exception e) {
-			// Manejo de excepción y respuesta con error 500
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-					.body("Error al registrar la programacion: " + e.getMessage());
-		}
+			boolean registro = programacionService.registrarProg(bean);
+			 if (registro) {
+	                return new ResponseEntity<>("Programacion registrado exitosamente.", HttpStatus.CREATED);
+	            } else {
+	                return new ResponseEntity<>("Error a la programacion.", HttpStatus.INTERNAL_SERVER_ERROR);
+	            }
+	        } catch (RuntimeException e) {
+	            return new ResponseEntity<>("Error: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+	        }
 	}
 }

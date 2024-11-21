@@ -37,12 +37,18 @@ public class ConductorService {
         }
     }
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
-	private void registrarConductor(String nombre, String apellido, String dni,
+	private boolean registrarConductor(String nombre, String apellido, String dni,
 			String correo, String telefono) {
+		try {
 		String sql = """
 			insert into CONDUCTOR
 			values(1,?,?,?,?,?)				
 		""";
 		jdbcTemplate.update(sql,nombre,apellido,dni,correo,telefono);
+		return true;
+		} catch (Exception err){
+			err.printStackTrace();
+			return false;
+		}
 	}
 }

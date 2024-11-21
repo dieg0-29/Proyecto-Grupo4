@@ -19,7 +19,8 @@ public class IncidenteService {
 	private JdbcTemplate jdbcTemplate;
 	
 	@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
-	public IncidenteDto reportarincidente(IncidenteDto bean) {
+	public boolean reportarincidente(IncidenteDto bean) {
+		try {
 		// Validaciones
 		validarEmpleado(bean.getEmpleado());
 		validarProgramacion(bean.getProgramacion());
@@ -31,7 +32,10 @@ public class IncidenteService {
 		registrarIncidente(bean.getEmpleado(), bean.getProgramacion(), bean.getTipo_incidente(), bean.getFecha(), bean.getDetalle());
 		// Reporte final
 		System.out.println("Proceso ok.");
-		return bean;
+		return true;
+		} catch (Exception err){
+			return false;
+		}
 	}
 	// Validaciones para registrar el incidente
 		// validar el empleado
@@ -77,25 +81,7 @@ public class IncidenteService {
 	       	 throw new RuntimeException("Las fechas no pueden ser nulas.");
 	       }
 		}
-		private void validarFecha(int idProg, String fecha) {
-			String sql = "select fecha_asignacion from PROGRAMACION where id_programacion = ?";
-			String fechaPartida = jdbcTemplate.queryForObject(sql, String.class, idProg);
-			fechaPartida = convertirFecha(fechaPartida);
-			fecha = convertirFecha(fecha);
-			sql = "select datediff(day,'" + fecha + "','" + fechaPartida + "')";
-			int cont = jdbcTemplate.queryForObject(sql, Integer.class);
-			if(cont<0) {
-				throw new RuntimeException("La fecha del incidente no puede ser menor a la fecha de asignacion");
-			}
-			sql = "select fecha_fin_programada from PROGRAMACION where id_programacion = ?";
-			String fechaFin = jdbcTemplate.queryForObject(sql, String.class, idProg);
-			fechaFin = convertirFecha(fechaFin);
-			sql = "select datediff(day,'" + fecha + "','" + fechaFin + "')";
-			cont = jdbcTemplate.queryForObject(sql, Integer.class);
-			if(cont>0) {
-				throw new RuntimeException("La fecha final programada no puede ser menor a la fecha del incidente");
-			}
-		}
+
 		@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
 		private void actualizarEstadoCarro(int programacion) {
 			String sql = "update carro set id_estado = 3 where id_carro "

@@ -15,18 +15,23 @@ public class TallerService {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
-	public TallerDto registrarTaller(TallerDto bean) {
-		validarNumero(bean.getTelefono());
-		
-		//Registrar taller
-		String sql="""
-				insert into taller(nombre_taller,direccion,telefono,calificacion) values(?,?,?,?)
-				""";
-
-	int calif = 0;
-	Object[] datos = {bean.getNombreTaller(), bean.getDireccion(), bean.getTelefono(), calif};
-	jdbcTemplate.update(sql,datos);	
-	return bean;
+	public boolean registrarTaller(TallerDto bean) {
+			try {
+			validarNumero(bean.getTelefono());
+			
+			//Registrar taller
+			String sql="""
+					insert into taller(nombre_taller,direccion,telefono,calificacion) values(?,?,?,?)
+					""";
+	
+		int calif = 0;
+		Object[] datos = {bean.getNombreTaller(), bean.getDireccion(), bean.getTelefono(), calif};
+		jdbcTemplate.update(sql,datos);	
+		return true;
+		} catch (Exception err){
+			err.printStackTrace();
+			return false;
+		}
 	}
 	
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)

@@ -12,18 +12,21 @@ import pe.edu.uni.proyecto.dto.IncidenteDto;
 import pe.edu.uni.proyecto.service.IncidenteService;
 
 @RestController
-@RequestMapping("/api/registrar/incidente")
+@RequestMapping("/api/registrar")
 public class IncidenteRest {
 	@Autowired
 	private IncidenteService incidenteService;
 	@PostMapping("/incidente")
-	public ResponseEntity<?> incidente(@RequestBody IncidenteDto bean) {
+	public ResponseEntity<String> incidente(@RequestBody IncidenteDto bean) {
 		try {
-			bean = incidenteService.reportarincidente(bean);
-			return ResponseEntity.status(HttpStatus.CREATED).body(bean);
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-					.body("Error en el proceso: " + e.getMessage());
-		}
+			boolean registro = incidenteService.reportarincidente(bean);
+			 if (registro) {
+	                return new ResponseEntity<>("Incidente registrado exitosamente.", HttpStatus.CREATED);
+	            } else {
+	                return new ResponseEntity<>("Error al carro.", HttpStatus.INTERNAL_SERVER_ERROR);
+	            }
+	        } catch (RuntimeException e) {
+	            return new ResponseEntity<>("Error: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+	        }
 	}
 }

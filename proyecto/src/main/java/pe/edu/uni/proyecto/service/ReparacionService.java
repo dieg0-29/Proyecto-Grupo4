@@ -18,25 +18,29 @@ public class ReparacionService {
 	private JdbcTemplate jdbcTemplate;
 
 	@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
-	public ReparacionDto reparacion(ReparacionDto bean) {
-
-		// validaciones
-		validarIncidente(bean.getIdincidente());
-		validarEstadoAuto(bean.getIdincidente());
-		validarEmpleado(bean.getIdempleado());
-		validarTaller(bean.getIdtaller());
-		validarCalificacion(bean.getCalificacion());
-		bean.setFechareparacion(convertirFecha(bean.getFechareparacion()));
-		validarIngresoFecha(bean.getIdincidente(), bean.getFechareparacion());
-		// registro
-		registrarReparacion(bean.getIdempleado(), bean.getIdincidente(), bean.getIdtaller(), bean.getFechareparacion(),
-				bean.getCalificacion(), bean.getCosto(), bean.getDetalle());
-		actualizarEstadoCarro(bean.getIdincidente());
-		double calificacionfinal = obtenerCalificacionTaller(bean.getIdtaller());
-		actualizarpromediotaller(bean.getIdtaller(),calificacionfinal);
-
-		System.out.println("Proceso ok.");
-		return bean;
+	public boolean reparacion(ReparacionDto bean) {
+		try {
+			// validaciones
+			validarIncidente(bean.getIdincidente());
+			validarEstadoAuto(bean.getIdincidente());
+			validarEmpleado(bean.getIdempleado());
+			validarTaller(bean.getIdtaller());
+			validarCalificacion(bean.getCalificacion());
+			bean.setFechareparacion(convertirFecha(bean.getFechareparacion()));
+			validarIngresoFecha(bean.getIdincidente(), bean.getFechareparacion());
+			// registro
+			registrarReparacion(bean.getIdempleado(), bean.getIdincidente(), bean.getIdtaller(), bean.getFechareparacion(),
+					bean.getCalificacion(), bean.getCosto(), bean.getDetalle());
+			actualizarEstadoCarro(bean.getIdincidente());
+			double calificacionfinal = obtenerCalificacionTaller(bean.getIdtaller());
+			actualizarpromediotaller(bean.getIdtaller(),calificacionfinal);
+	
+			System.out.println("Proceso ok.");
+			return true;
+		} catch (Exception err){
+			err.printStackTrace();
+			return false;
+		}
 	}
 	
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
