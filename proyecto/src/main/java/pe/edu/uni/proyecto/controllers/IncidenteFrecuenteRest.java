@@ -15,7 +15,7 @@ public class IncidenteFrecuenteRest {
 	@Autowired    
     private ConsultaIncidenteFrec consultaIncidenteFrec;
 
-    @GetMapping("/frecuencia/incidente/{id_tipo}")
+    @GetMapping("/api/frecuencia/incidente/{id_tipo}")
     public ResponseEntity<?> frecuenciaIncidente(@PathVariable int id_tipo) {
         try {
             // Llamar al servicio para obtener la frecuencia del incidente

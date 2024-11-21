@@ -12,7 +12,7 @@ import pe.edu.uni.proyecto.dto.ProgramacionDto;
 import pe.edu.uni.proyecto.service.ProgramacionService;
 
 @RestController
-@RequestMapping("/programar/ruta")
+@RequestMapping("/api/registrar/programar")
 public class ProgramacionRest {
 
 	@Autowired

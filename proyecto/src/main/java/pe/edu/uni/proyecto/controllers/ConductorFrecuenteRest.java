@@ -14,7 +14,7 @@ public class ConductorFrecuenteRest {
 	
 	@Autowired
     private ConsultaConductorFrecService consultaConductorFrecService;
-	@GetMapping("/conductor/{idConductor}/incidentes")
+	@GetMapping("/api/conductor/{idConductor}/incidentes")
     public ResponseEntity<?> obtenerFrecuenciaIncidente(
             @PathVariable int idConductor,
             @RequestParam String fechaInicio,

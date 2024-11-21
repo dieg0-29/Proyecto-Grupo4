@@ -16,7 +16,7 @@ public class TallerOperacionesRest {
     private TallerOperacionesService tallerService; // Inyección directa usando @Autowired
 
     // Endpoint para obtener el taller con más operaciones
-    @GetMapping("/taller-con-mas-operaciones")
+    @GetMapping("/api/consulta/taller/operaciones")
     public ResponseEntity<TallerreparacionDto> obtenerTallerConMasOperaciones() {
         try {
             TallerreparacionDto taller = tallerService.obtenerTallerConMasOperaciones();

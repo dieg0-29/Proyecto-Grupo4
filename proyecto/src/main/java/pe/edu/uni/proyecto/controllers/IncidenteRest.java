@@ -12,7 +12,7 @@ import pe.edu.uni.proyecto.dto.IncidenteDto;
 import pe.edu.uni.proyecto.service.IncidenteService;
 
 @RestController
-@RequestMapping("/transporte")
+@RequestMapping("/api/registrar/incidente")
 public class IncidenteRest {
 	@Autowired
 	private IncidenteService incidenteService;

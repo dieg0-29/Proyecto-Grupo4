@@ -12,7 +12,7 @@ import pe.edu.uni.proyecto.dto.RutaDto;
 import pe.edu.uni.proyecto.service.RutaService;
 
 @RestController
-@RequestMapping("api/ruta")
+@RequestMapping("api/registro/ruta")
 public class RutaRest {
 	@Autowired
 	private RutaService service;

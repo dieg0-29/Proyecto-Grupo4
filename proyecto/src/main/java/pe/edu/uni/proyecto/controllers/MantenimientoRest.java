@@ -12,7 +12,7 @@ import pe.edu.uni.proyecto.dto.MantenimientoDto;
 import pe.edu.uni.proyecto.service.MantenimientoService;
 
 @RestController
-@RequestMapping("/api/mantenimiento")
+@RequestMapping("/api/registrar/mantenimiento")
 public class MantenimientoRest {
 	
 	@Autowired

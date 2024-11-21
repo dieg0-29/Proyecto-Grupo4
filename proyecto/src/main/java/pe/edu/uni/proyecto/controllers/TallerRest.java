@@ -13,7 +13,7 @@ import pe.edu.uni.proyecto.service.TallerService;
 
 
 @RestController
-@RequestMapping("/api/talleres")
+@RequestMapping("/api/registrar/taller")
 public class TallerRest {
 	@Autowired
 	private TallerService tallerService;

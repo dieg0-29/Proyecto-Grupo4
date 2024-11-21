@@ -12,7 +12,7 @@ import pe.edu.uni.proyecto.dto.FinalizarDto;
 import pe.edu.uni.proyecto.service.FinalizarService;
 
 @RestController
-@RequestMapping("/finalizar")
+@RequestMapping("/api/finalizar/programacion")
 public class FinalizarRest {
 	
 	@Autowired

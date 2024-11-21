@@ -12,7 +12,7 @@ import pe.edu.uni.proyecto.dto.ConductorDto;
 import pe.edu.uni.proyecto.service.ConductorService;
 
 @RestController
-@RequestMapping("/conductor")
+@RequestMapping("/api/registrar/conductor")
 public class ConductorRest {
 
 	@Autowired

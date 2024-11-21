@@ -15,7 +15,7 @@ public class CarroRest {
     @Autowired
     private CarroService carroService;
 
-    @PostMapping("/registrarcarro")
+    @PostMapping("/api/registrar/carro")
     public ResponseEntity<Object> registrarCarro(@RequestBody CarroDto carroDto) {
         try {
             CarroDto carroRegistrado = carroService.registrarCarro(carroDto);

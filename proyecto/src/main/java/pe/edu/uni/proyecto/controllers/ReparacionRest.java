@@ -13,7 +13,7 @@ import pe.edu.uni.proyecto.service.ReparacionService;
 
 
 @RestController
-@RequestMapping("api/reparacion")
+@RequestMapping("api/registrar/reparacion")
 public class ReparacionRest {
 	
 	@Autowired

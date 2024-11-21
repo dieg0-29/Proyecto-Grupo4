@@ -12,7 +12,7 @@ import pe.edu.uni.proyecto.service.IncidenteRutaService;
 
 
 @RestController
-@RequestMapping("/rutas")
+@RequestMapping("/api/incidente/rutas")
 public class IncidenteRutaRest {
 	@Autowired
 	private IncidenteRutaService rutaService;
