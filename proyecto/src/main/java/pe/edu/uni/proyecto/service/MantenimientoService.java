@@ -26,9 +26,9 @@ public class MantenimientoService {
         	//actualizar estado carro
         	carroMantenimiento(bean.getId_carro());
         	validarCalificacion(bean.getCalificacion());
-            String sql = "INSERT INTO MANTENIMIENTO (id_empleado, id_taller, id_est_mant, id_carro, calificacion, fecha_inicio, fecha_salida_programada, fecha_salida_real, costo, detalle) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO MANTENIMIENTO (id_empleado, id_taller, id_est_mant, id_carro, calificacion, fecha_inicio, fecha_salida_programada, fecha_salida_real, costo, detalle) VALUES (?, ?, ?, ?, ?, ?, ?, NULL, ?, ?)";
            
-            jdbcTemplate.update(sql, bean.getId_empleado(), bean.getId_taller(),1, bean.getId_carro(), bean.getCalificacion(), bean.getFecha_inicio(), bean.getFecha_salida_programada(), "", bean.getCosto(), bean.getDetalle());
+            jdbcTemplate.update(sql, bean.getId_empleado(), bean.getId_taller(),1, bean.getId_carro(), bean.getCalificacion(), bean.getFecha_inicio(), bean.getFecha_salida_programada(), bean.getCosto(), bean.getDetalle());
            
             double calificacionfinal = obtenerCalificacionTaller(bean.getId_taller());
     		actualizarpromediotaller(bean.getId_taller(),calificacionfinal);
