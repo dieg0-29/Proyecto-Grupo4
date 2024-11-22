@@ -69,7 +69,7 @@ public class MantenimientoService {
 
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
     private void validarCalificacion(double calificacion) {
-        if (calificacion <= 0 || calificacion >= 5) {
+        if (calificacion < 0 || calificacion > 5) {
         	throw new RuntimeException("La calificación debe estar entre 0 y 5.");
         }
     }
