@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "b4f8c688-18c1-448f-8829-a07413646c36",
+		"_postman_id": "fcdc1b28-b7b2-4973-8485-5f6713f5497b",
 		"name": "PROYECTO - TRANSPORTE",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "39400249"
+		"_exporter_id": "34898503"
 	},
 	"item": [
 		{
@@ -905,7 +905,7 @@
 			]
 		},
 		{
-			"name": "REPARACION",
+			"name": "REGISTRAR REPARACION",
 			"item": [
 				{
 					"name": "iNCIDENTE INVALIDO",
@@ -1093,7 +1093,97 @@
 			"name": "REGISTRAR INCIDENTES",
 			"item": [
 				{
-					"name": "Insertar Incidente",
+					"name": "EMPLEADO NO EXISTE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"empleado\":8\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/registrar/incidente",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"registrar",
+								"incidente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PROGRAMACION NO EXISTE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"empleado\":3,\r\n    \"programacion\":8\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/registrar/incidente",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"registrar",
+								"incidente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "VALIDAR FECHA",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"empleado\":3,\r\n    \"programacion\":4,\r\n    \"fecha\":\"2024/01/26\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/registrar/incidente",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"registrar",
+								"incidente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "INSERTAR INCIDENTE",
 					"request": {
 						"method": "POST",
 						"header": [],

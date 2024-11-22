@@ -19,8 +19,7 @@ public class IncidenteService {
 	private JdbcTemplate jdbcTemplate;
 	
 	@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
-	public boolean reportarincidente(IncidenteDto bean) {
-		try {
+	public void reportarincidente(IncidenteDto bean) {
 		// Validaciones
 		validarEmpleado(bean.getEmpleado());
 		validarProgramacion(bean.getProgramacion());
@@ -30,12 +29,10 @@ public class IncidenteService {
 		
 		// Proceso
 		registrarIncidente(bean.getEmpleado(), bean.getProgramacion(), bean.getTipo_incidente(), bean.getFecha(), bean.getDetalle());
+		actualizarEstadoCarro(bean.getProgramacion());
 		// Reporte final
-		System.out.println("Proceso ok.");
-		return true;
-		} catch (Exception err){
-			return false;
-		}
+		System.out.println("Proceso ok.");		
+
 	}
 	// Validaciones para registrar el incidente
 		// validar el empleado

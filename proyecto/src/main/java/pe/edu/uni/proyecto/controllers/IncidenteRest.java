@@ -16,17 +16,19 @@ import pe.edu.uni.proyecto.service.IncidenteService;
 public class IncidenteRest {
 	@Autowired
 	private IncidenteService incidenteService;
+
 	@PostMapping("/incidente")
 	public ResponseEntity<String> incidente(@RequestBody IncidenteDto bean) {
 		try {
-			boolean registro = incidenteService.reportarincidente(bean);
-			 if (registro) {
-	                return new ResponseEntity<>("Incidente registrado exitosamente.", HttpStatus.CREATED);
-	            } else {
-	                return new ResponseEntity<>("Error al incidente.", HttpStatus.INTERNAL_SERVER_ERROR);
-	            }
-	        } catch (RuntimeException e) {
-	            return new ResponseEntity<>("Error: " + e.getMessage(), HttpStatus.BAD_REQUEST);
-	        }
+			incidenteService.reportarincidente(bean);
+			return new ResponseEntity<>("Incidente registrado exitosamente.", HttpStatus.CREATED);
+
+		} catch (IllegalArgumentException e) {
+			return new ResponseEntity<>("Error: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+		} catch (RuntimeException e) {
+			return new ResponseEntity<>("Error: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			return new ResponseEntity<>("Error inesperado: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 }
