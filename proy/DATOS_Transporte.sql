@@ -1,5 +1,5 @@
 
-INSERT INTO ESTADO (descripcion) VALUES 
+INSERT INTO EST_CARRO (descripcion) VALUES 
 ('Disponible'),
 ('En Mantenimiento'),
 ('En Reparación'),

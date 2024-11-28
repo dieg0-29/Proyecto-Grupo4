@@ -31,7 +31,7 @@ go
 -- Tabla de Carro
 CREATE TABLE CARRO(
     id_carro INT IDENTITY PRIMARY KEY,
-	id_estado INT NOT NULL FOREIGN KEY REFERENCES estado(id_estado),
+	id_estado INT NOT NULL FOREIGN KEY REFERENCES est_carro(id_estado),
     placa VARCHAR(6) NOT NULL UNIQUE,
 	prox_mant DATE NOT NULL
 );
