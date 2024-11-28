@@ -23,7 +23,7 @@ public class IncidenteService {
 		// Validaciones
 		validarEmpleado(bean.getEmpleado());
 		validarProgramacion(bean.getProgramacion());
-		convertirFecha(bean.getFecha());
+		//convertirFecha(bean.getFecha());
 		//validarFecha(bean.getProgramacion(),bean.getFecha());
 		
 		
@@ -40,7 +40,7 @@ public class IncidenteService {
 		private void validarEmpleado(int empleado) {
 			String sql = "SELECT COUNT(1) cont FROM EMPLEADO where id_empleado = ?";
 			int cont = jdbcTemplate.queryForObject(sql, Integer.class, empleado);
-			if (cont != 1) {
+			if (cont == 0) {
 				throw new RuntimeException("El empleado no existe.");
 			}
 		}
@@ -58,26 +58,11 @@ public class IncidenteService {
 		private void registrarIncidente(int empleado, int programacion, int tipo_incidente, String fecha, String detalle) {
 			String sql = "INSERT INTO INCIDENTE(id_empleado, "
 					+ "id_programacion,id_tipo,fecha_incidente, "
-					+ "detalle) VALUES(?,?,?,CONVERT(DATETIME,?,105),?)";
+					+ "detalle) VALUES(?,?,?,?,?)";
 			jdbcTemplate.update(sql, empleado, programacion, tipo_incidente, fecha, detalle);
 		}
 
-		@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
-		public String convertirFecha(String fecha) {
-			try {
-				// Definir los formatos: de entrada (dd/MM/yyyy) y de salida (yyyy-MM-dd)
-			    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-			    DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-			    // Parsear la fecha de entrada y formatearla al nuevo formato
-			    LocalDate date = LocalDate.parse(fecha, inputFormatter);
-			    return date.format(outputFormatter);
-			} catch (DateTimeParseException e) {
-				throw new RuntimeException("Formato de fecha inválido. Asegúrese de usar el formato dd/MM/yyyy");
-			} catch (NullPointerException e) {
-	       	 throw new RuntimeException("Las fechas no pueden ser nulas.");
-	       }
-		}
+		
 
 		@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
 		private void actualizarEstadoCarro(int programacion) {

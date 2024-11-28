@@ -9,14 +9,18 @@ import lombok.NoArgsConstructor;
 @Data @AllArgsConstructor @NoArgsConstructor
 public class IncidenteDto {
 	
-	@JsonProperty("id_empleado")
+	@JsonProperty("empleado")
 	private int empleado;
+	
 	@JsonProperty("programacion")
 	private int programacion;
+	
 	@JsonProperty("tipo_incidente")
 	private int tipo_incidente;
+	
 	@JsonProperty("fecha")
 	private String fecha;
+	
 	@JsonProperty("detalle")
 	private String detalle;
 	

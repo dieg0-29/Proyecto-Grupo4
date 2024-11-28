@@ -17,7 +17,7 @@ import pe.edu.uni.proyecto.dto.ResponseMessage;
 import pe.edu.uni.proyecto.service.ProgramacionService;
 
 @RestController
-@CrossOrigin("http://localhost:5500")
+@CrossOrigin(origins = {"http://localhost:5500", "http://127.0.0.1:5500"})
 @RequestMapping("/api/registrar/programar")
 public class ProgramacionRest {
 

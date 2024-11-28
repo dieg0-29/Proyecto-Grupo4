@@ -17,13 +17,13 @@ import pe.edu.uni.proyecto.dto.ResponseMessage;
 import pe.edu.uni.proyecto.service.IncidenteService;
 
 @RestController
-@CrossOrigin("http://localhost:5500")
-@RequestMapping("/api/registrar")
+@CrossOrigin(origins = {"http://localhost:5500", "http://127.0.0.1:5500"})
+@RequestMapping("/api/registrar/incidente")
 public class IncidenteRest {
 	@Autowired
 	private IncidenteService incidenteService;
 
-	@PostMapping("/incidente")
+	@PostMapping()
 	 public ResponseEntity<ResponseMessage> registrarReparacion(@RequestBody IncidenteDto bean) throws DateTimeParseException {
         try {
             incidenteService.reportarincidente(bean);

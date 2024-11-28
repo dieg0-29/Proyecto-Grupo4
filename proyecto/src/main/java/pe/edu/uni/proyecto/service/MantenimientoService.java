@@ -113,20 +113,5 @@ public class MantenimientoService {
             }
 	}
 	
-	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
-	public String convertirFecha(String fecha) {
-		try {
-			// Definir los formatos: de entrada (dd/MM/yyyy) y de salida (yyyy-MM-dd)
-		    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		    DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-		    // Parsear la fecha de entrada y formatearla al nuevo formato
-		    LocalDate date = LocalDate.parse(fecha, inputFormatter);
-		    return date.format(outputFormatter);
-		} catch (DateTimeParseException e) {
-			throw new IllegalArgumentException("Formato de fecha inválido. Asegúrese de usar el formato dd/MM/yyyy");
-		} catch (NullPointerException e) {
-			throw new IllegalArgumentException("Las fechas no pueden ser nulas.");
-        }
-	}
+	
 }
