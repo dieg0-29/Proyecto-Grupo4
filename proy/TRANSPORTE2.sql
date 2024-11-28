@@ -23,7 +23,7 @@ USE TRANSPORTE;
 go
 
 --Tabla de Estado
-CREATE TABLE ESTADO(
+CREATE TABLE EST_CARRO(
 	id_estado INT IDENTITY PRIMARY KEY,
 	descripcion Varchar(50) NOT NULL
 );
@@ -61,6 +61,12 @@ CREATE TABLE EMPLEADO (
     dni VARCHAR(8) NOT NULL,
     correo VARCHAR(150) NOT NULL,
     telefono VARCHAR(20) NOT NULL
+);
+go
+CREATE TABLE USUARIO(
+	id_empleado INT NOT NULL FOREIGN KEY REFERENCES empleado(id_empleado),
+	usuario Varchar(2000) NOT NULL,
+	clave Varchar(2000) NOT NULL
 );
 go
 -- Tabla de Rutas
