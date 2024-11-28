@@ -9,27 +9,27 @@ import lombok.NoArgsConstructor;
 @Data @AllArgsConstructor @NoArgsConstructor
 public class ProgramacionDto {
 	
-	@JsonProperty("id_programacion")
+	@JsonProperty("idProgramacion")
 	private int idProgramacion;
 	
-	@JsonProperty("id_carro")
+	@JsonProperty("idCarro")
 	private int idCarro;
 	
-	@JsonProperty("id_empleado")
+	@JsonProperty("idEmpleado")
 	private int idEmpleado;
 	
-	@JsonProperty("id_conductor")
+	@JsonProperty("idConductor")
 	private int idConductor;
 	
-	@JsonProperty("id_ruta")
+	@JsonProperty("idRuta")
 	private int idRuta;
 	
-	@JsonProperty("fecha_asig")
+	@JsonProperty("fechaAsig")
 	private String fechaAsignacion;
 	
-	@JsonProperty("fecha_fin")
+	@JsonProperty("fechaFin")
 	private String fechaFinProgramada;
 	
-	@JsonProperty("fecha_real")
+	@JsonProperty("fechaFinReal")
 	private String fechaFinReal;
 }
