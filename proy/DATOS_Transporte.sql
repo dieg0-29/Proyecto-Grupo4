@@ -1,10 +1,10 @@
 
-INSERT INTO ESTADO (descripcion) VALUES 
+INSERT INTO EST_CARRO (descripcion) VALUES 
 ('Disponible'),
 ('En Mantenimiento'),
 ('En Reparación'),
 ('Fuera de Servicio'),
-('Reservado');
+('En Ruta');
 go
 INSERT INTO CARRO (id_estado, placa, prox_mant) VALUES 
 (1, 'ABC123', '2024-11-15'),
@@ -33,6 +33,13 @@ INSERT INTO EMPLEADO (nombre, apellido, dni, correo, telefono) VALUES
 ('Jorge', 'Díaz', '89012345', 'jorge.diaz@example.com', '987654328'),
 ('Clara', 'Vásquez', '90123456', 'clara.vasquez@example.com', '987654329'),
 ('Fabian', 'Cruz', '01234567', 'diego.cruz@example.com', '987654330');
+go
+INSERT INTO USUARIO (id_empleado, usuario, clave) VALUES 
+(1, 'pramirez', 'contraseña'),
+(2, 'lhernandez', 'contraseña'),
+(3, 'jdiaz', 'contraseña'),
+(4, 'cvasquez', 'contraseña'),
+(5, 'fcruz', 'contraseña');
 go
 INSERT INTO RUTA (nombre_ruta, origen, destino, distancia_km) VALUES 
 ('Ruta 1', 'Ciudad A', 'Ciudad B', 120.50),
