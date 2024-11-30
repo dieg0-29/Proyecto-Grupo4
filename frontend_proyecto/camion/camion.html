@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Camion</title>
+    <link rel="stylesheet" href="camion.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Registrar Camion</h1>
+        <form id="camionForm">
+            <label for="id_empleado">ID Empleado:</label>
+            <input type="text" id="id_empleado" required>
+
+            <label for="id_carro">ID Carro:</label>
+            <input type="text" id="id_carro" required>
+
+            <label for="id_taller">ID Taller:</label>
+            <input type="text" id="id_taller" required>
+
+            <label for="calificacion">Calificación:</label>
+            <input type="number" id="calificacion" required>
+
+            <label for="fecha_inicio">Fecha Inicio:</label>
+            <input type="date" id="fecha_inicio" required>
+
+            <label for="fecha_salida_programada">Fecha Salida Programada:</label>
+            <input type="date" id="fecha_salida_programada" required>
+
+            <label for="costo">Costo:</label>
+            <input type="number" id="costo" required>
+
+            <label for="detalle">Detalle:</label>
+            <textarea id="detalle" required></textarea>
+
+            <button type="submit" id="btnRegistrar" class="formbold-btn">Registrar</button>
+        </form>
+        <div id="error-message" style="display: none;"></div>
+        <div id="success-message" style="display: none;"></div>
+    </div>
+    <button class="regresar-btn" onclick="window.location.href='http://127.0.0.1:5500/frontend_proyecto/camion/pagcamion/pagcamion.html'">Regresar</button>
+    <script src="camion.js"></script>
+</body>
+</html>

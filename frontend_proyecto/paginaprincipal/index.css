@@ -20,7 +20,7 @@ body {
 }
 
 h1 {
-    font-size: 28px; /* Aumentar tamaño del título */
+    font-size: 24px;
 }
 
 nav {
@@ -29,8 +29,6 @@ nav {
 
 .header-button {
     margin-left: 15px;
-    font-size: 18px; /* Aumentar tamaño de texto en botones de encabezado */
-    padding: 12px 24px; /* Aumentar tamaño de botones */
 }
 
 main {
@@ -40,7 +38,6 @@ main {
 
 h2, h3 {
     margin: 20px 0;
-    font-size: 24px; /* Aumentar tamaño de subtítulos */
 }
 
 .button-container {
@@ -55,12 +52,11 @@ h2, h3 {
     color: white;
     border: none;
     border-radius: 5px;
-    padding: 15px 30px; /* Aumentar tamaño de botones */
+    padding: 10px 20px;
     margin: 10px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
-    font-size: 18px; /* Aumentar tamaño de texto en botones */
-    min-width: 150px; /* Asegurar que todos los botones tengan el mismo ancho mínimo */
+    font-size: 16px;
 }
 
 .button:hover {
@@ -79,5 +75,4 @@ footer {
     position: relative;
     bottom: 0;
     width: 100%;
-    font-size: 18px; /* Aumentar tamaño del texto en el pie de página */
 }

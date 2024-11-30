@@ -43,55 +43,22 @@ datos.forEach((fila) => {
     editarCell.appendChild(editarButton);
     eliminarCell.appendChild(eliminarButton);
 });
-document.getElementById('mostrarTablaButton').addEventListener('click', function() {
-    const tablaSecundaria = document.getElementById('tablaSecundaria');
-    const tbody = tablaSecundaria.querySelector('tbody');
 
-    // Limpiar el contenido previo de la tabla
-    tbody.innerHTML = '';
-
-    // Agregar datos a la tabla
-    const datos = [
-        ['Dato A1', 'Dato B1', 'Dato C1', 'Dato D1', 'Dato E1'],
-        ['Dato A2', 'Dato B2', 'Dato C2', 'Dato D2', 'Dato E2'],
-        ['Dato A3', 'Dato B3', 'Dato C3', 'Dato D3', 'Dato E3']
-    ];
-
-    datos.forEach(fila => {
-        const tr = document.createElement('tr');
-        fila.forEach(dato => {
-            const td = document.createElement('td');
-            td.textContent = dato;
-            tr.appendChild(td);
-        });
-        tbody.appendChild(tr);
-    });
-
-    // Mostrar la tabla
-    if (tablaSecundaria.classList.contains('table-hidden')) {
-        tablaSecundaria.classList.remove('table-hidden');
-        tablaSecundaria.classList.add('table-visible');
-    } else {
-        tablaSecundaria.classList.remove('table-visible');
-        tablaSecundaria.classList.add('table-hidden');
-    }
-});
-
-// Agregar eventos a los botones del encabezado
 document.getElementById('inicioButton').addEventListener('click', () => {
-    window.location.href = 'index.html'; // Redirigir a la página principal
-});
-document.getElementById('inicioButton').onclick = function() {
     window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/paginaprincipal/index.html';
-};
+});
 
-document.getElementById('serviciosButton').onclick = function() {
-    window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/Paginaprincipal/servicios.html';
-};
+//document.getElementById('servicioButton').onclick = function() {
+    //window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/Paginaprincipal/servicios.html';
+//};
 
 document.getElementById('cerrarSesionButton').onclick = function() {
     window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/login/login.html';
 };
-document.getElementById('RegresarButton').onclick = function() {
-    window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/login/login.html';
+document.getElementById('nuevoRegistroButton').onclick = function() {
+    window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/conductor/conductor.html';
 };
+const username = localStorage.getItem('username');
+if (username) {
+    document.getElementById('welcomeMessage').innerText = `Bienvenido, ${username}!`; // Mensaje de bienvenida
+}

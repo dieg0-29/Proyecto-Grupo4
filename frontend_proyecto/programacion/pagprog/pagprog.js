@@ -77,10 +77,7 @@ document.getElementById('mostrarTablaButton').addEventListener('click', function
     }
 });
 
-// Agregar eventos a los botones del encabezado
-document.getElementById('inicioButton').addEventListener('click', () => {
-    window.location.href = 'index.html'; // Redirigir a la página principal
-});
+
 document.getElementById('inicioButton').onclick = function() {
     window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/paginaprincipal/index.html';
 };
@@ -92,6 +89,10 @@ document.getElementById('serviciosButton').onclick = function() {
 document.getElementById('cerrarSesionButton').onclick = function() {
     window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/login/login.html';
 };
-document.getElementById('RegresarButton').onclick = function() {
+document.getElementById('nuevoRegistroButton').onclick = function() {
     window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/login/login.html';
 };
+const username = localStorage.getItem('username');
+if (username) {
+    document.getElementById('welcomeMessage').innerText = `Bienvenido, ${username}!`; // Mensaje de bienvenida
+}

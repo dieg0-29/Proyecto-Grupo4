@@ -14,23 +14,23 @@ document.getElementById('ProgramacionButton').onclick = function() {
 };
 
 document.getElementById('MantenimientoButton').onclick = function() {
-    window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/node_modules/pruebas/Pag_principal';
+    window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/mantenimiento/pagmante/pagmant.html';
 };
 
 document.getElementById('camionesButton').onclick = function() {
-    window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/node_modules/pruebas/Pag_principal/bicicleta.html';
+    window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/camion/pagcamion/pagcamion.html';
 };
 
 document.getElementById('conductoresButton').onclick = function() {
-    window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/node_modules/pruebas/Pag_principal/transporte_publico.html';
+    window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/conductor/pagconductor/pagconductor.html';
 };
 
 document.getElementById('tallerButton').onclick = function() {
-    window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/node_modules/pruebas/Pag_principal/camion_carga.html';
+    window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/taller/pagtaller/pagtaller.html';
 };
 
 document.getElementById('rutaButton').onclick = function() {
-    window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/node_modules/pruebas/Pag_principal';
+    window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/ruta/pagruta/pagruta.html';
 };
 // Mostrar el nombre de usuario si está guardado en localStorage
 const username = localStorage.getItem('username');

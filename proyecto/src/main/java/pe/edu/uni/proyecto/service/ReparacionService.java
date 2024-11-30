@@ -25,7 +25,7 @@ public class ReparacionService {
 			validarEmpleado(bean.getIdempleado());
 			validarTaller(bean.getIdtaller());
 			validarCalificacion(bean.getCalificacion());
-			bean.setFechareparacion(convertirFecha(bean.getFechareparacion()));
+			bean.setFechareparacion(bean.getFechareparacion());
 			validarIngresoFecha(bean.getIdincidente(), bean.getFechareparacion());
 			// registro
 			registrarReparacion(bean.getIdempleado(), bean.getIdincidente(), bean.getIdtaller(), bean.getFechareparacion(),
