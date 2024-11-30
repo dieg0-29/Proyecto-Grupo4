@@ -56,7 +56,7 @@ document.getElementById('cerrarSesionButton').onclick = function() {
     window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/login/login.html';
 };
 document.getElementById('nuevoRegistroButton').onclick = function() {
-    window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/paginaprincipal';
+    window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/taller/taller.html';
 };
 const username = localStorage.getItem('username');
 if (username) {

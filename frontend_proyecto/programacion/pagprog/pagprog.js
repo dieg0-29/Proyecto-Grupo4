@@ -90,7 +90,7 @@ document.getElementById('cerrarSesionButton').onclick = function() {
     window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/login/login.html';
 };
 document.getElementById('nuevoRegistroButton').onclick = function() {
-    window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/login/login.html';
+    window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/programacion/registrarprogramacion/prog.html';
 };
 const username = localStorage.getItem('username');
 if (username) {
