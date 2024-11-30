@@ -1,5 +1,7 @@
 package pe.edu.uni.proyecto.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,8 +10,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RutaDto {
-	private String nombre;
-	private String origen;
-	private String destino;
-	private double distancia;
+
+	@JsonProperty("nombre")
+    private String nombre;
+
+	@JsonProperty("origen")
+    private String origen;
+
+	@JsonProperty("destino")
+    private String destino;
+	
+	@JsonProperty("distancia")
+    private double distancia;
 }

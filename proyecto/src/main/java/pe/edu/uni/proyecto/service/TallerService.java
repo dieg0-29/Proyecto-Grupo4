@@ -40,4 +40,31 @@ public class TallerService {
             throw new IllegalArgumentException("El teléfono debe empezar por 9 y tener 9 dígitos numéricos.");
         }
     }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
+    public boolean modificarTaller(String nombreTaller, TallerDto datosModificados) {
+        validarNumero(datosModificados.getTelefono());
+
+        String sql = """
+                UPDATE taller 
+                SET direccion = ?, telefono = ?, calificacion = ? 
+                WHERE nombre_taller = ?
+                """;
+
+        Object[] params = {datosModificados.getDireccion(), datosModificados.getTelefono(), datosModificados.getCalificacion(),nombreTaller};
+
+        int rowsAffected = jdbcTemplate.update(sql, params);
+        return rowsAffected > 0;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
+    public boolean borrarTaller(String nombreTaller) {
+        String sql = """
+                DELETE FROM taller 
+                WHERE nombre_taller = ?
+                """;
+
+        int rowsAffected = jdbcTemplate.update(sql, nombreTaller);
+        return rowsAffected > 0;
+    }
 }
