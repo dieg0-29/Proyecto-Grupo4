@@ -1,0 +1,98 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #1a1a1a, #0d0d0d); /* Fondo oscuro con gradiente */
+    color: #ffffff; /* Texto blanco */
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: rgba(30, 30, 30, 0.9); /* Fondo del encabezado con transparencia */
+    border-bottom: 2px solid #444; /* Línea inferior */
+}
+
+h1 {
+    font-size: 28px; /* Aumentar tamaño del título */
+}
+
+nav {
+    display: flex;
+}
+
+.header-button {
+    margin-left: 15px;
+    font-size: 18px; /* Aumentar tamaño de texto en botones de encabezado */
+    padding: 12px 24px; /* Aumentar tamaño de botones */
+}
+
+main {
+    padding: 20px;
+    text-align: center; /* Centrar texto */
+}
+
+h2 {
+    margin: 20px 0;
+    font-size: 24px; /* Aumentar tamaño de subtítulos */
+}
+
+.tabla-container {
+    overflow-x: auto; /* Permitir desplazamiento horizontal si es necesario */
+    margin: 20px auto; /* Espaciado superior y centrar la tabla */
+    max-width: 90%; /* Limitar ancho máximo */
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%; /* Ancho de la tabla */
+    margin: 0 auto; /* Centrar la tabla */
+    border-radius: 8px; /* Bordes redondeados */
+    overflow: hidden; /* Esconder bordes */
+}
+
+th, td {
+    border: 1px solid #666; /* Bordes de la tabla */
+    padding: 15px; /* Espaciado interno */
+    text-align: center; /* Centrar texto */
+}
+
+th {
+    background-color: #444; /* Fondo de encabezado */
+}
+
+.button-container {
+    display: flex;
+    justify-content: center; /* Centrar botones */
+    flex-wrap: wrap;
+    margin: 20px 0; /* Espaciado superior e inferior */
+}
+
+.button {
+    background-color: #007BFF; /* Color azul */
+    color: white;
+    border: none;
+    border-radius: 5px; /* Bordes redondeados para los botones */
+    padding: 10px 20px; /* Espaciado interno de los botones */
+    margin: 0 10px; /* Espaciado entre botones */
+    cursor: pointer; /* Cambiar cursor al pasar sobre el botón */
+    transition: background-color 0.3s; /* Transición suave para el color de fondo */
+}
+
+.button:hover {
+    background-color: #0056b3; /* Color más oscuro al pasar el mouse */
+}
+
+.table-hidden {
+    display: none; /* Ocultar la tabla por defecto */
+}
+
+.table-visible {
+    display: table; /* Mostrar la tabla cuando se activa */
+}

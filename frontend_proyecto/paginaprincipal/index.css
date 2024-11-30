@@ -1,0 +1,83 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #1a1a1a, #0d0d0d); /* Fondo oscuro con gradiente */
+    color: #ffffff; /* Texto blanco */
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: rgba(30, 30, 30, 0.9); /* Fondo del encabezado con transparencia */
+    border-bottom: 2px solid #444; /* Línea inferior */
+}
+
+h1 {
+    font-size: 28px; /* Aumentar tamaño del título */
+}
+
+nav {
+    display: flex;
+}
+
+.header-button {
+    margin-left: 15px;
+    font-size: 18px; /* Aumentar tamaño de texto en botones de encabezado */
+    padding: 12px 24px; /* Aumentar tamaño de botones */
+}
+
+main {
+    padding: 20px;
+    text-align: center;
+}
+
+h2, h3 {
+    margin: 20px 0;
+    font-size: 24px; /* Aumentar tamaño de subtítulos */
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+
+.button {
+    background-color: #007BFF; /* Color azul */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 15px 30px; /* Aumentar tamaño de botones */
+    margin: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    font-size: 18px; /* Aumentar tamaño de texto en botones */
+    min-width: 150px; /* Asegurar que todos los botones tengan el mismo ancho mínimo */
+}
+
+.button:hover {
+    background-color: #0056b3; /* Color azul más oscuro al pasar el ratón */
+    transform: scale(1.05); /* Aumentar ligeramente el tamaño */
+}
+
+.button:active {
+    transform: scale(0.95); /* Reducir ligeramente el tamaño al hacer clic */
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(30, 30, 30, 0.9); /* Fondo del pie de página con transparencia */
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    font-size: 18px; /* Aumentar tamaño del texto en el pie de página */
+}
