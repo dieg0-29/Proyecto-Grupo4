@@ -42,10 +42,15 @@ CREATE TABLE EST_MANTENIMIENTO (
 	descripcion Varchar(50) NOT NULL
 );
 go
-
+CREATE TABLE EST_CONDUCTOR(
+	id_estado INT IDENTITY PRIMARY KEY,
+	descripcion Varchar(50) NOT NULL
+);
+go
 -- Tabla de Conductor
 CREATE TABLE CONDUCTOR (
     id_conductor INT IDENTITY PRIMARY KEY,
+	id_estado INT NOT NULL FOREIGN KEY REFERENCES est_conductor(id_estado),
     nombre VARCHAR(100) NOT NULL,
 	apellido VARCHAR(100) NOT NULL,
     dni VARCHAR(8) NOT NULL,
