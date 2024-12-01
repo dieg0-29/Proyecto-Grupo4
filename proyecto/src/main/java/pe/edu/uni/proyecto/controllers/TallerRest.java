@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import pe.edu.uni.proyecto.dto.ResponseMessage;
 import pe.edu.uni.proyecto.dto.TallerDto;
 import pe.edu.uni.proyecto.service.TallerService;
 
@@ -33,36 +34,38 @@ public class TallerRest {
     }
 
     @PostMapping("/registrar")
-    public ResponseEntity<String> registrarTaller(@RequestBody TallerDto bean) {
+    public ResponseEntity<ResponseMessage> registrarTaller(@RequestBody TallerDto bean) {
         try {
-            boolean registrado = tallerService.registrarTaller(bean);
-            return registrado ? new ResponseEntity<>("Taller registrado exitosamente.", HttpStatus.CREATED) : 
-                                new ResponseEntity<>("Error al registrar taller.", HttpStatus.INTERNAL_SERVER_ERROR);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Error: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+            tallerService.registrarTaller(bean);
+            return new ResponseEntity<>(new ResponseMessage("Taller registrado exitosamente."), HttpStatus.CREATED);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(new ResponseMessage("Error: " + e.getMessage()), HttpStatus.BAD_REQUEST);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(new ResponseMessage("Error inesperado: " + e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PutMapping("/modificar")
-    public ResponseEntity<String> modificarTaller(@RequestParam String nombreTaller, @RequestBody TallerDto datosModificados) {
-        System.out.println("Datos recibidos: " + datosModificados);
+    public ResponseEntity<ResponseMessage> modificarTaller(@RequestParam String nombreTaller, @RequestBody TallerDto datosModificados) {
         try {
-            boolean actualizado = tallerService.modificarTaller(nombreTaller, datosModificados);
-            return actualizado ? ResponseEntity.ok("Taller modificado correctamente.") : 
-                                 ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el taller.");
-        } catch (Exception e) {
-            return new ResponseEntity<>("Error: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+            tallerService.modificarTaller(nombreTaller, datosModificados);
+            return ResponseEntity.ok(new ResponseMessage("Taller modificado correctamente."));
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(new ResponseMessage("Error: " + e.getMessage()), HttpStatus.BAD_REQUEST);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(new ResponseMessage("Error inesperado: " + e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @DeleteMapping("/borrar")
-    public ResponseEntity<String> borrarTaller(@RequestParam String nombreTaller) {
+    public ResponseEntity<ResponseMessage> borrarTaller(@RequestParam String nombreTaller) {
         try {
-            boolean eliminado = tallerService.borrarTaller(nombreTaller);
-            return eliminado ? ResponseEntity.ok("Taller eliminado correctamente.") : 
-                               ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el taller.");
-        } catch (Exception e) {
-            return new ResponseEntity<>("Error: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+            tallerService.borrarTaller(nombreTaller);
+            return ResponseEntity.ok(new ResponseMessage("Taller eliminado correctamente."));
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(new ResponseMessage("Error: " + e.getMessage()), HttpStatus.BAD_REQUEST);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(new ResponseMessage("Error inesperado: " + e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
