@@ -20,12 +20,16 @@ INSERT INTO EST_MANTENIMIENTO (descripcion) VALUES
 ('Cancelado'),
 ('Pendiente');
 go
-INSERT INTO CONDUCTOR (nombre, apellido, dni, correo, telefono) VALUES 
-('Juan', 'Pérez', '12345678', 'juan.perez@example.com', '987654321'),
-('María', 'Gómez', '23456789', 'maria.gomez@example.com', '987654322'),
-('Carlos', 'Sánchez', '34567890', 'carlos.sanchez@example.com', '987654323'),
-('Ana', 'Martínez', '45678901', 'ana.martinez@example.com', '987654324'),
-('Luis', 'Torres', '56789012', 'luis.torres@example.com', '987654325');
+INSERT INTO EST_CONDUCTOR (descripcion) VALUES 
+('Disponible'),
+('En Ruta');
+go
+INSERT INTO CONDUCTOR (id_estado, nombre, apellido, dni, correo, telefono) VALUES 
+(1, 'Juan', 'Pérez', '12345678', 'juan.perez@example.com', '987654321'),
+(1, 'María', 'Gómez', '23456789', 'maria.gomez@example.com', '987654322'),
+(1, 'Carlos', 'Sánchez', '34567890', 'carlos.sanchez@example.com', '987654323'),
+(1, 'Ana', 'Martínez', '45678901', 'ana.martinez@example.com', '987654324'),
+(1, 'Luis', 'Torres', '56789012', 'luis.torres@example.com', '987654325');
 go
 INSERT INTO EMPLEADO (nombre, apellido, dni, correo, telefono) VALUES 
 ('Pedro', 'Ramírez', '67890123', 'pedro.ramirez@example.com', '987654326'),
