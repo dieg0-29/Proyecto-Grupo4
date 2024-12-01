@@ -44,12 +44,64 @@ function mostrarDatos(datos) {
     });
 }
 
-// Funciones para editar y eliminar rutas
-function editarRuta(id) {
-    // Lógica para editar la ruta
-    console.log(`Editar ruta con ID: ${id}`);
+async function editarRuta(id, button) {
+    const row = button.parentNode.parentNode; // Obtener la fila
+    const cells = row.getElementsByTagName("td");
+
+    // Cambiar cada celda (excepto la de ID y los botones) a un input
+    for (let i = 1; i < cells.length - 2; i++) { // Excluye la primera celda (ID) y las últimas dos (Editar y Eliminar)
+        const cell = cells[i];
+        const currentValue = cell.innerHTML;
+
+        const input = document.createElement("input");
+        input.type = "text";
+        input.value = currentValue;
+
+        cell.innerHTML = ""; // Limpiar el contenido de la celda
+        cell.appendChild(input); // Agregar el input
+    }
+
+    // Cambiar el botón a "Guardar"
+    button.innerHTML = "Guardar";
+    button.setAttribute("onclick", `guardarRuta(${id}, this)`);
 }
 
+async function guardarRuta(id, button) {
+    const row = button.parentNode.parentNode; // Obtener la fila
+    const cells = row.getElementsByTagName("td");
+
+    const updatedData = {
+        Id_ruta: id,
+        Nombre: cells[1].getElementsByTagName("input")[0].value,
+        Origen: cells[2].getElementsByTagName("input")[0].value,
+        Destino: cells[3].getElementsByTagName("input")[0].value,
+        Distancia: cells[4].getElementsByTagName("input")[0].value
+    };
+
+    try {
+        const response = await fetch(`http://localhost:8080/api/ruta/editar/${Nombre}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedData)
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error en la actualización: ${response.status} ${response.statusText}`);
+        }
+
+        // Actualiza la tabla con los nuevos datos
+        mostrarDatos([updatedData]);
+
+        // Cambiar el botón de vuelta a "Editar"
+        button.innerHTML = "Editar";
+        button.setAttribute("onclick", `editarRuta(${id}, this)`);
+    } catch (error) {
+        console.error('Hubo un problema con la actualización:', error);
+        alert('Error al actualizar la ruta.');
+    }
+}
 function eliminarRuta(id) {
     // Lógica para eliminar la ruta
     console.log(`Eliminar ruta con ID: ${id}`);
