@@ -22,8 +22,8 @@ public class ReparacionService {
 	
 	public List<Map<String, Object>> consultaTodosLasReparaciones() {
 	    String sql = """
-	        select id_empleado, id_incidente, id_taller, fecha_reparacion,calificacion,costo,detalle
-	        from REPARACION
+	        select id_empleado, id_incidente, id_taller, CONVERT(VARCHAR, fecha_reparacion, 103) as fecha_reparacion,calificacion,costo,detalle
+            from REPARACION
 	    """;
 	    List<Map<String, Object>> lista;
 	    lista = jdbcTemplate.queryForList(sql); 

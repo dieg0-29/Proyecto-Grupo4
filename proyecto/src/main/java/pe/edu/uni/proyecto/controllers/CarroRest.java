@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import pe.edu.uni.proyecto.dto.CarroDto;
+import pe.edu.uni.proyecto.dto.ResponseMessage;
 import pe.edu.uni.proyecto.service.CarroService;
 
 @RestController
@@ -27,16 +28,16 @@ public class CarroRest {
     private CarroService carroService;
 
     @PostMapping("/registrar")
-    public ResponseEntity<String> registrarCarro(@RequestBody CarroDto carroDto) {
+    public ResponseEntity<ResponseMessage> registrarCarro(@RequestBody CarroDto carroDto) {
         try {
             carroService.registrarCarro(carroDto);
-            return new ResponseEntity<>("Carro registrada exitosamente.", HttpStatus.CREATED);
+            return new ResponseEntity<>(new ResponseMessage("Carro registrado exitosamente."), HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>("Error: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ResponseMessage("Error: " + e.getMessage()), HttpStatus.BAD_REQUEST);
         } catch (RuntimeException e) {
-            return new ResponseEntity<>("Error: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ResponseMessage("Error: " + e.getMessage()), HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
-            return new ResponseEntity<>("Error inesperado: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(new ResponseMessage("Error inesperado: " + e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     
@@ -52,22 +53,23 @@ public class CarroRest {
     }
     
     @DeleteMapping("/eliminar/{placa}")
-    public ResponseEntity<?> eliminarCarro(@PathVariable String placa) {
+    public ResponseEntity<ResponseMessage> eliminarCarro(@PathVariable String placa) {
         try {
-            carroService.eliminarCarro(placa);
-            return ResponseEntity.ok("Carro eliminado correctamente.");
+        	carroService.eliminarCarro(placa);
+            return new ResponseEntity<>(new ResponseMessage("Carro eliminado exitosamente."), HttpStatus.OK);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        	return new ResponseEntity<>(new ResponseMessage("Error inesperado: " + e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+  
         }
     }
 
     @PutMapping("/editar")
-    public ResponseEntity<?> editarCarro(@RequestBody CarroDto bean) {
+    public ResponseEntity<ResponseMessage> editarCarro(@RequestBody CarroDto bean) {
         try {
             carroService.editarCarro(bean);
-            return ResponseEntity.ok("Los datos del carro se han actualizado correctamente.");
+            return new ResponseEntity<>(new ResponseMessage("Carro editado exitosamente."), HttpStatus.OK);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            return new ResponseEntity<>(new ResponseMessage("Error inesperado: " + e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

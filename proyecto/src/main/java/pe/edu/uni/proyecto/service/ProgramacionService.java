@@ -23,7 +23,8 @@ public class ProgramacionService {
 	public List<Map<String, Object>> obtenerSinFechaFinReal() {
 		String sql = """
 				    SELECT id_programacion, id_carro, id_empleado, id_conductor, id_ruta,
-				    fecha_asignacion, fecha_fin_programada 
+				    CONVERT(VARCHAR, fecha_asignacion, 103) as fecha_asignacion, 
+					CONVERT(VARCHAR, fecha_fin_programada, 103) as fecha_fin_programada 
 				    FROM Programacion
 				    WHERE fecha_fin_real IS NULL
 				""";
@@ -35,7 +36,9 @@ public class ProgramacionService {
 	public List<Map<String, Object>> obtenerConFechaFinReal() {
 		String sql = """
 				    SELECT id_programacion, id_carro, id_empleado, id_conductor, id_ruta,
-				    fecha_asignacion, fecha_fin_programada, fecha_fin_real
+				    CONVERT(VARCHAR, fecha_asignacion, 103) as fecha_asignacion, 
+					CONVERT(VARCHAR, fecha_fin_programada, 103) as fecha_fin_programada , 
+					CONVERT(VARCHAR, fecha_fin_real, 103) as fecha_fin_real
 				    FROM Programacion
 				    WHERE fecha_fin_real IS NOT NULL
 				""";
