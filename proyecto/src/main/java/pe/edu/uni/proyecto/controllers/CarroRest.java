@@ -28,10 +28,11 @@ public class CarroRest {
     private CarroService carroService;
 
     @PostMapping("/registrar")
-    public ResponseEntity<ResponseMessage> registrarCarro(@RequestBody CarroDto bean) {
+        
+    public ResponseEntity<ResponseMessage> registrarCarro(@RequestBody CarroDto carroDto) {
         try {
-            carroService.registrarCarro(bean);
-            return new ResponseEntity<>(new ResponseMessage("Incidente registrado exitosamente."), HttpStatus.CREATED);
+            carroService.registrarCarro(carroDto);
+            return new ResponseEntity<>(new ResponseMessage("Carro registrado exitosamente."), HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(new ResponseMessage("Error: " + e.getMessage()), HttpStatus.BAD_REQUEST);
         } catch (RuntimeException e) {
@@ -53,22 +54,23 @@ public class CarroRest {
     }
     
     @DeleteMapping("/eliminar/{placa}")
-    public ResponseEntity<?> eliminarCarro(@PathVariable String placa) {
+    public ResponseEntity<ResponseMessage> eliminarCarro(@PathVariable String placa) {
         try {
-            carroService.eliminarCarro(placa);
-            return ResponseEntity.ok("Carro eliminado correctamente.");
+        	carroService.eliminarCarro(placa);
+            return new ResponseEntity<>(new ResponseMessage("Carro eliminado exitosamente."), HttpStatus.OK);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        	return new ResponseEntity<>(new ResponseMessage("Error inesperado: " + e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+  
         }
     }
 
     @PutMapping("/editar")
-    public ResponseEntity<?> editarCarro(@RequestBody CarroDto bean) {
+    public ResponseEntity<ResponseMessage> editarCarro(@RequestBody CarroDto bean) {
         try {
             carroService.editarCarro(bean);
-            return ResponseEntity.ok("Los datos del carro se han actualizado correctamente.");
+            return new ResponseEntity<>(new ResponseMessage("Carro editado exitosamente."), HttpStatus.OK);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            return new ResponseEntity<>(new ResponseMessage("Error inesperado: " + e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
