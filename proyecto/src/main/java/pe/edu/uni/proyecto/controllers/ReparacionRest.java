@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import pe.edu.uni.proyecto.dto.IncidenteDto;
+
 import pe.edu.uni.proyecto.dto.ReparacionDto;
 import pe.edu.uni.proyecto.dto.ResponseMessage;
 import pe.edu.uni.proyecto.service.ReparacionService;
