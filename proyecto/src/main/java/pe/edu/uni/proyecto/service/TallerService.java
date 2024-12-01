@@ -19,7 +19,6 @@ public class TallerService {
     public boolean registrarTaller(TallerDto bean) {
         validarNumero(bean.getTelefono());
 
-        // Registrar taller
         String sql = """
                 INSERT INTO taller(nombre_taller, direccion, telefono, calificacion) VALUES (?, ?, ?, ?)
                 """;
@@ -44,14 +43,12 @@ public class TallerService {
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
     public boolean modificarTaller(String nombreTaller, TallerDto datosModificados) {
         validarNumero(datosModificados.getTelefono());
-
+        
         String sql = """
-                UPDATE taller 
-                SET direccion = ?, telefono = ?, calificacion = ? 
-                WHERE nombre_taller = ?
+                UPDATE taller SET direccion = ?, telefono = ?, calificacion = ? WHERE nombre_taller = ?
                 """;
 
-        Object[] params = {datosModificados.getDireccion(), datosModificados.getTelefono(), datosModificados.getCalificacion(),nombreTaller};
+        Object[] params = {datosModificados.getDireccion(), datosModificados.getTelefono(), datosModificados.getCalificacion(), nombreTaller};
 
         int rowsAffected = jdbcTemplate.update(sql, params);
         return rowsAffected > 0;
@@ -59,12 +56,18 @@ public class TallerService {
 
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
     public boolean borrarTaller(String nombreTaller) {
-        String sql = """
+
+        String deleteMantenimientoSql = """
+                DELETE FROM mantenimiento 
+                WHERE id_taller = (SELECT id_taller FROM taller WHERE nombre_taller = ?)
+                """;
+        jdbcTemplate.update(deleteMantenimientoSql, nombreTaller);
+
+        String deleteTallerSql = """
                 DELETE FROM taller 
                 WHERE nombre_taller = ?
                 """;
-
-        int rowsAffected = jdbcTemplate.update(sql, nombreTaller);
+        int rowsAffected = jdbcTemplate.update(deleteTallerSql, nombreTaller);
         return rowsAffected > 0;
     }
 }

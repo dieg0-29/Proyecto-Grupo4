@@ -17,6 +17,7 @@ public class RutaService {
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
     public void registrarRuta(RutaDto bean) {
         validarRuta(bean.getOrigen(), bean.getDestino());
+        validarDistancia(bean.getDistancia());
         validarNombreRuta(bean.getNombre());
 
         if (bean.getOrigen().equals(bean.getDestino())) {
@@ -45,12 +46,11 @@ public class RutaService {
 
         String sql = """
                 UPDATE ruta 
-                SET nombre_ruta = ?, origen = ?, destino = ?, distancia_km = ? 
+                SET origen = ?, destino = ?, distancia_km = ? 
                 WHERE nombre_ruta = ?
                 """;
 
         Object[] params = {
-            datosModificados.getNombre(),
             datosModificados.getOrigen(),
             datosModificados.getDestino(),
             datosModificados.getDistancia(),
@@ -63,14 +63,18 @@ public class RutaService {
 
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
     public boolean borrarRuta(String nombreRuta) {
-        validarNombreRutaModificacion(nombreRuta);
 
-        String sql = """
+        String deleteProgramacionSql = """
+                DELETE FROM programacion 
+                WHERE id_ruta = (SELECT id_ruta FROM ruta WHERE nombre_ruta = ?)
+                """;
+        jdbcTemplate.update(deleteProgramacionSql, nombreRuta);
+
+        String deleteRutaSql = """
                 DELETE FROM ruta 
                 WHERE nombre_ruta = ?
                 """;
-
-        int rowsAffected = jdbcTemplate.update(sql, nombreRuta);
+        int rowsAffected = jdbcTemplate.update(deleteRutaSql, nombreRuta);
         return rowsAffected > 0;
     }
 
@@ -111,6 +115,12 @@ public class RutaService {
 
         if (count > 0) {
             throw new RuntimeException("La ruta ya existe.");
+        }
+    }
+    
+    private void validarDistancia(double distancia) {
+        if (distancia <= 0 || distancia > 999.99) {
+            throw new IllegalArgumentException("La distancia debe ser un valor positivo y no mayor a 99999999.99.");
         }
     }
 }
