@@ -36,6 +36,7 @@ function mostrarDatos(datos) {
             <td>${item.estado}</td>
             <td>${item.placa}</td>
             <td>${item.prox_mant}</td>
+            <td><button class="button" onclick="registrar_mant(${item.idCarro})">Registrar Mantenimiento</button></td>
             <td><button class="button" onclick="editarRuta(${item.idCarro})">Editar</button></td>
             <td><button class="button" onclick="eliminarRuta(${item.idCarro})">Eliminar</button></td>
         `;

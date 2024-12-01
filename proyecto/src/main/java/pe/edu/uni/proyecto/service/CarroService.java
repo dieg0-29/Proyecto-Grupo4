@@ -31,8 +31,7 @@ public class CarroService {
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
 	public void registrarCarro(CarroDto bean) {
 		Validarcarro(bean.getPlaca());
-		validarEstado(bean.getIdEstado());
-		bean.setProxMant(convertirFecha(bean.getProxMant()));
+		bean.setProxMant(bean.getProxMant());
 		//Registrar carro
 		String sql="""
 				insert into carro(id_estado, placa, prox_mant) values(?,?,?)

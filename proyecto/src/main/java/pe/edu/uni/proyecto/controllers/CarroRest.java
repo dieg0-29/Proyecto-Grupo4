@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import pe.edu.uni.proyecto.dto.CarroDto;
+import pe.edu.uni.proyecto.dto.ResponseMessage;
 import pe.edu.uni.proyecto.service.CarroService;
 
 @RestController
@@ -27,16 +28,16 @@ public class CarroRest {
     private CarroService carroService;
 
     @PostMapping("/registrar")
-    public ResponseEntity<String> registrarCarro(@RequestBody CarroDto carroDto) {
+    public ResponseEntity<ResponseMessage> registrarCarro(@RequestBody CarroDto bean) {
         try {
-            carroService.registrarCarro(carroDto);
-            return new ResponseEntity<>("Carro registrada exitosamente.", HttpStatus.CREATED);
+            carroService.registrarCarro(bean);
+            return new ResponseEntity<>(new ResponseMessage("Incidente registrado exitosamente."), HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>("Error: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ResponseMessage("Error: " + e.getMessage()), HttpStatus.BAD_REQUEST);
         } catch (RuntimeException e) {
-            return new ResponseEntity<>("Error: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ResponseMessage("Error: " + e.getMessage()), HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
-            return new ResponseEntity<>("Error inesperado: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(new ResponseMessage("Error inesperado: " + e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     

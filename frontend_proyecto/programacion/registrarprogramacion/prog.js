@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Convertir a formato DD/MM/YYYY
+        /* Convertir a formato DD/MM/YYYY
         const convertirFecha = (fecha) => {
             const [year, month, day] = fecha.split('-'); // Dividir la fecha en partes
             return `${day}/${month}/${year}`; // Reorganizar en formato DD/MM/YYYY
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const fecha_inicio_formateada = convertirFecha(fecha_inicio);
         const fecha_salida_programada_formateada = convertirFecha(fecha_salida_programada);
-
+        */
         // Crea un objeto con los datos a enviar
         const data = {
             idEmpleado: idEmpleado,
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         // Envía los datos al servidor usando fetch
-        fetch('http://localhost:8080/api/registrar/programar', {
+        fetch('http://localhost:8080/api/programacion/registrar', {
             method: 'POST', // Método de la solicitud
             headers: {
                 "Content-Type": "application/json" // Tipo de contenido

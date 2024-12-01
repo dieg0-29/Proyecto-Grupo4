@@ -6,12 +6,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Captura los valores de los campos del formulario
         const nombre = document.getElementById('nombre').value;
-        const origen = document.getElementById('origen').value;
-        const destino = document.getElementById('destino').value;
-        const distancia = document.getElementById('distancia').value;
+        const direccion = document.getElementById('direccion').value;
+        const telefono = document.getElementById('telefono').value;
 
         // Validación de datos
-        if (nombre === '' || origen === '' || destino === '' || distancia === '' ) {
+        if (nombre === '' || direccion === '' || telefono === '' ) {
             mostrarMensaje('Por favor, complete todos los campos obligatorios.');
             return;
         }
@@ -19,13 +18,12 @@ document.addEventListener('DOMContentLoaded', function() {
         // Crea un objeto con los datos a enviar
         const data = {
             Nombre : nombre,
-            Origen : origen,
-            Destino : destino,
-            Distancia : distancia
+            Direccion : direccion,
+            Telefono : telefono,
         };
 
         // Envía los datos al servidor usando fetch
-        fetch('http://localhost:8080/api/ruta/registrar', {
+        fetch('http://localhost:8080/api/taller/registrar', {
             method: 'POST', // Método de la solicitud
             headers: {
                 "Content-Type": "application/json" // Tipo de contenido
