@@ -1,5 +1,7 @@
 package pe.edu.uni.proyecto.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,8 +9,15 @@ import lombok.NoArgsConstructor;
 @Data @AllArgsConstructor @NoArgsConstructor
 public class CarroDto {
 	
+	@JsonProperty("idCarro")
 	private int idCarro;
-    private int id_estado; 
-    private String placa;
-    private String prox_mant; 
+    
+	@JsonProperty("idEstado")
+	private int idEstado; 
+    
+	@JsonProperty("placa")
+	private String placa;
+	
+	@JsonProperty("proxMant")
+    private String proxMant; 
 }

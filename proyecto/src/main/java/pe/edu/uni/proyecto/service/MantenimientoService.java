@@ -17,20 +17,22 @@ public class MantenimientoService {
     JdbcTemplate jdbcTemplate;
     public void registroMantenimiento(MantenimientoDto bean) {
     
-        	validarEmpleado( bean.getId_empleado());
-        	validarCarro( bean.getId_carro());
-        	validarTaller(bean.getId_taller());
+        	validarEmpleado( bean.getIdEmpleado());
+        	validarCarro( bean.getIdCarro());
+        	validarTaller(bean.getIdTaller());
         	bean.setId_est_mant(1);
-        	validarFechas(bean.getFecha_inicio(),bean.getFecha_salida_programada());
+        	validarFechas(bean.getFechaInicio(),bean.getFechaSalidaProgramada());
         	//actualizar estado carro
-        	carroMantenimiento(bean.getId_carro());
+        	carroMantenimiento(bean.getIdCarro());
         	validarCalificacion(bean.getCalificacion());
             String sql = "INSERT INTO MANTENIMIENTO (id_empleado, id_taller, id_est_mant, id_carro, calificacion, fecha_inicio, fecha_salida_programada, fecha_salida_real, costo, detalle) VALUES (?, ?, ?, ?, ?, ?, ?, NULL, ?, ?)";
            
-            jdbcTemplate.update(sql, bean.getId_empleado(), bean.getId_taller(),1, bean.getId_carro(), bean.getCalificacion(), bean.getFecha_inicio(), bean.getFecha_salida_programada(), bean.getCosto(), bean.getDetalle());
+            jdbcTemplate.update(sql, bean.getIdEmpleado(), bean.getIdTaller(),1, 
+            		bean.getIdCarro(), bean.getCalificacion(), bean.getFechaInicio(), 
+            		bean.getFechaSalidaProgramada(), bean.getCosto(), bean.getDetalle());
            
-            double calificacionfinal = obtenerCalificacionTaller(bean.getId_taller());
-    		actualizarpromediotaller(bean.getId_taller(),calificacionfinal);
+            double calificacionfinal = obtenerCalificacionTaller(bean.getIdTaller());
+    		actualizarpromediotaller(bean.getIdTaller(),calificacionfinal);
             
     		System.out.println("registro ok");
     }

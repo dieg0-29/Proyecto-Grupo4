@@ -20,19 +20,20 @@ public class ReparacionService {
 	@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
 	public void reparacion(ReparacionDto bean) {
 			// validaciones
-			validarIncidente(bean.getIdincidente());
-			validarEstadoAuto(bean.getIdincidente());
-			validarEmpleado(bean.getIdempleado());
-			validarTaller(bean.getIdtaller());
+			validarIncidente(bean.getIdIncidente());
+			validarEstadoAuto(bean.getIdIncidente());
+			validarEmpleado(bean.getIdEmpleado());
+			validarTaller(bean.getIdTaller());
 			validarCalificacion(bean.getCalificacion());
-			bean.setFechareparacion(bean.getFechareparacion());
-			validarIngresoFecha(bean.getIdincidente(), bean.getFechareparacion());
+			bean.setFechaReparacion(bean.getFechaReparacion());
+			validarIngresoFecha(bean.getIdIncidente(), bean.getFechaReparacion());
 			// registro
-			registrarReparacion(bean.getIdempleado(), bean.getIdincidente(), bean.getIdtaller(), bean.getFechareparacion(),
+			registrarReparacion(bean.getIdEmpleado(), bean.getIdIncidente(), 
+					bean.getIdTaller(), bean.getFechaReparacion(),
 					bean.getCalificacion(), bean.getCosto(), bean.getDetalle());
-			actualizarEstadoCarro(bean.getIdincidente());
-			double calificacionfinal = obtenerCalificacionTaller(bean.getIdtaller());
-			actualizarpromediotaller(bean.getIdtaller(),calificacionfinal);
+			actualizarEstadoCarro(bean.getIdIncidente());
+			double calificacionfinal = obtenerCalificacionTaller(bean.getIdTaller());
+			actualizarpromediotaller(bean.getIdTaller(),calificacionfinal);
 	
 			System.out.println("Proceso ok.");
 			

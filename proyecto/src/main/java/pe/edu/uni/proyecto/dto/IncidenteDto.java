@@ -15,8 +15,8 @@ public class IncidenteDto {
 	@JsonProperty("programacion")
 	private int programacion;
 	
-	@JsonProperty("tipo_incidente")
-	private int tipo_incidente;
+	@JsonProperty("tipoIncidente")
+	private int tipoIncidente;
 	
 	@JsonProperty("fecha")
 	private String fecha;

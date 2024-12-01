@@ -20,13 +20,13 @@ public class CarroService {
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
 	public void registrarCarro(CarroDto bean) {
 		Validarcarro(bean.getPlaca());
-		bean.setProx_mant(convertirFecha(bean.getProx_mant()));
+		bean.setProxMant(convertirFecha(bean.getProxMant()));
 		//Registrar carro
 		String sql="""
 				insert into carro(id_estado, placa, prox_mant) values(?,?,?)
 				""";
 	int estado = 1;
-	Object[] datos = {estado, bean.getPlaca(), bean.getProx_mant()};
+	Object[] datos = {estado, bean.getPlaca(), bean.getProxMant()};
 	jdbcTemplate.update(sql,datos);
 	System.out.print("Todo ok");
  }

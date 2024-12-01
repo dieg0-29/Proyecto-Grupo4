@@ -11,17 +11,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ReparacionDto {
 	
-	@JsonProperty("idempleado")
-	private int idempleado;
+	@JsonProperty("idEmpleado")
+	private int idEmpleado;
 	 
-	@JsonProperty("idincidente")
-	private int idincidente;
+	@JsonProperty("idIncidente")
+	private int idIncidente;
 	
-	@JsonProperty("idtaller")
-	private int idtaller;
+	@JsonProperty("idTaller")
+	private int idTaller;
 	
-	@JsonProperty("fechareparacion")
-	private String fechareparacion;
+	@JsonProperty("fechaReparacion")
+	private String fechaReparacion;
 	
 	@JsonProperty("calificacion")
 	private double calificacion;

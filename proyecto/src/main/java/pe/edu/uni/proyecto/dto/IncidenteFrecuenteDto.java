@@ -1,5 +1,7 @@
 package pe.edu.uni.proyecto.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +10,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class IncidenteFrecuenteDto {
-	private int id_tipo;
+	
+	@JsonProperty("idTipo")
+	private int idTipo;
+	
+	@JsonProperty("descripcion")
 	private String descripcion;
-	private int cant;
+	
+	@JsonProperty("cantidad")
+	private int cantidad;
 }

@@ -3,6 +3,7 @@ package pe.edu.uni.proyecto.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +12,7 @@ import pe.edu.uni.proyecto.dto.IncidenteFrecuenteDto;
 import pe.edu.uni.proyecto.service.ConsultaIncidenteFrec;
 
 @RestController
+@CrossOrigin(origins = {"http://localhost:5500", "http://127.0.0.1:5500"})
 public class IncidenteFrecuenteRest {
 	@Autowired    
     private ConsultaIncidenteFrec consultaIncidenteFrec;

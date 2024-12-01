@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class TallerDto {
 	
-	@JsonProperty("idtaller")
+	@JsonProperty("idTaller")
 	private int idtaller;
 
 	@JsonProperty("nombreTaller")

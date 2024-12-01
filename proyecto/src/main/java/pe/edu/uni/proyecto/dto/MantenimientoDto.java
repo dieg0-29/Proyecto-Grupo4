@@ -9,23 +9,23 @@ import lombok.NoArgsConstructor;
 @Data @AllArgsConstructor @NoArgsConstructor
 public class MantenimientoDto {
 
-	@JsonProperty("id_empleado")
-	private int id_empleado;
+	@JsonProperty("idEmpleado")
+	private int idEmpleado;
 
-    @JsonProperty("id_carro")
-    private int id_carro;
+    @JsonProperty("idCarro")
+    private int idCarro;
 
-    @JsonProperty("id_taller")
-    private int id_taller;
+    @JsonProperty("idTaller")
+    private int idTaller;
 
     @JsonProperty("calificacion")
     private double calificacion;
 
-    @JsonProperty("fecha_inicio")
-    private String fecha_inicio;
+    @JsonProperty("fechaInicio")
+    private String fechaInicio;
 
-    @JsonProperty("fecha_salida_programada")
-    private String fecha_salida_programada;
+    @JsonProperty("fechaSalidaProgramada")
+    private String fechaSalidaProgramada;
 
     @JsonProperty("costo")
     private double costo;

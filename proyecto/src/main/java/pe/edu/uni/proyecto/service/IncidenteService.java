@@ -28,7 +28,8 @@ public class IncidenteService {
 		
 		
 		// Proceso
-		registrarIncidente(bean.getEmpleado(), bean.getProgramacion(), bean.getTipo_incidente(), bean.getFecha(), bean.getDetalle());
+		registrarIncidente(bean.getEmpleado(), bean.getProgramacion(),
+				bean.getTipoIncidente(), bean.getFecha(), bean.getDetalle());
 		actualizarEstadoCarro(bean.getProgramacion());
 		// Reporte final
 		System.out.println("Proceso ok.");		

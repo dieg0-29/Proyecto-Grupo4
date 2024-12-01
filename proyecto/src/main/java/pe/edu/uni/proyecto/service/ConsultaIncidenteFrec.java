@@ -22,13 +22,13 @@ public class ConsultaIncidenteFrec {
 				select count(*) cont From Incidente where id_tipo = ?;
 				""";
 		int cont = jdbcTemplate.queryForObject(sql, Integer.class, id_tipo);
-		bean.setCant(cont);
+		bean.setCantidad(cont);
 		sql = """
 				select descripcion From Tipo_Incidente where id_tipo = ?;
 				""";
 		String descripcion = jdbcTemplate.queryForObject(sql, String.class, id_tipo);
 		bean.setDescripcion(descripcion);
-		bean.setId_tipo(id_tipo);
+		bean.setIdTipo(id_tipo);
 		return bean;
 	}
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
