@@ -3,6 +3,8 @@ package pe.edu.uni.proyecto.service;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -17,6 +19,30 @@ public class ProgramacionService {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	public List<Map<String, Object>> obtenerSinFechaFinReal() {
+		String sql = """
+				    SELECT id_programacion, id_carro, id_empleado, id_conductor, id_ruta,
+				    fecha_asignacion, fecha_fin_programada 
+				    FROM Programacion
+				    WHERE fecha_fin_real IS NULL
+				""";
+		List<Map<String, Object>> lista;
+		lista = jdbcTemplate.queryForList(sql);
+		return lista;
+	}
+
+	public List<Map<String, Object>> obtenerConFechaFinReal() {
+		String sql = """
+				    SELECT id_programacion, id_carro, id_empleado, id_conductor, id_ruta,
+				    fecha_asignacion, fecha_fin_programada, fecha_fin_real
+				    FROM Programacion
+				    WHERE fecha_fin_real IS NOT NULL
+				""";
+		List<Map<String, Object>> lista;
+		lista = jdbcTemplate.queryForList(sql); 
+		return lista;
+	}
 	
 	@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
 	public void registrarProg(ProgramacionDto bean) {

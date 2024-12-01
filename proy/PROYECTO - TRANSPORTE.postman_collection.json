@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "fcdc1b28-b7b2-4973-8485-5f6713f5497b",
+		"_postman_id": "acda64f9-4da4-47cc-b1a9-19236dded46e",
 		"name": "PROYECTO - TRANSPORTE",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "34898503"
@@ -905,191 +905,6 @@
 			]
 		},
 		{
-			"name": "REGISTRAR REPARACION",
-			"item": [
-				{
-					"name": "iNCIDENTE INVALIDO",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"idincidente\":8\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/registrar/reparacion",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"registrar",
-								"reparacion"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "VALIDAR CALIFICACION",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"idincidente\":3\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/registrar/reparacion",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"registrar",
-								"reparacion"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "VALIDAR EMPLEADO",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"idincidente\":4,\r\n    \"idempleado\":9\r\n    \r\n\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/registrar/reparacion",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"registrar",
-								"reparacion"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "VALIDAR TALLER",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"idincidente\":4,\r\n    \"idempleado\":3,\r\n    \"idtaller\": 9\r\n\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/registrar/reparacion",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"registrar",
-								"reparacion"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "VALIDAR CALIFICACION",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"idempleado\":3,\r\n    \"idcarro\":2,\r\n    \"idincidente\":3,\r\n    \"idtaller\": 3,\r\n    \"fechareparacion\":\"14/01/2024\",\r\n    \"calificacion\":4,\r\n    \"costo\":210.0,\r\n    \"detalle\":\"Puerta Reparada\"\r\n\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/registrar/reparacion",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"registrar",
-								"reparacion"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DATOS OK",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"idempleado\":3,\r\n    \"idincidente\":6,\r\n    \"idtaller\": 3,\r\n    \"fechareparacion\":\"26/01/2024\",\r\n    \"calificacion\":4,\r\n    \"costo\":210.0,\r\n    \"detalle\":\"Puerta Reparada\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/registrar/reparacion",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"registrar",
-								"reparacion"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
 			"name": "REGISTRAR INCIDENTES",
 			"item": [
 				{
@@ -1206,99 +1021,6 @@
 								"api",
 								"registrar",
 								"incidente"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "REGISTRAR CARRO",
-			"item": [
-				{
-					"name": "Datos ok",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"placa\": \"ABF357\",\r\n    \"prox_mant\": \"29/02/2025\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/registrar/carro",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"registrar",
-								"carro"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Fecha inválida",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"placa\": \"ABC126\",\r\n    \"prox_mant\": \"2024/12/10\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/registrar/carro",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"registrar",
-								"carro"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Fecha inválida Copy",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"placa\": \"ADD133\",\r\n    \"prox_mant\": \"31/02/2024\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/registrarcarro",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"registrarcarro"
 							]
 						}
 					},
@@ -1704,6 +1426,653 @@
 							"path": [
 								"rutas",
 								"mas-incidentes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "REGISTRAR REPARACION",
+			"item": [
+				{
+					"name": "INCIDENTE NO EXISTE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idIncidente\":8\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/reparacion/registrar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"reparacion",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EL ESTADO DEL AUTO NO ES GRAVE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idIncidente\":5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/reparacion/registrar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"reparacion",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EMPLEADO NO EXISTE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idIncidente\":4,\r\n    \"idEmpleado\":9\r\n    \r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/reparacion/registrar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"reparacion",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TALLER NO EXISTE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idIncidente\":4,\r\n    \"idEmpleado\":3,\r\n    \"idTaller\": 9\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/reparacion/registrar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"reparacion",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CALIFICACION INCORRECTA",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idIncidente\":4,\r\n    \"idEmpleado\":3,\r\n    \"idTaller\": 3,\r\n    \"calificacion\":8\r\n \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/reparacion/registrar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"reparacion",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FORMATO DE FECHA INCORRECTO",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idIncidente\":4,\r\n    \"idEmpleado\":3,\r\n    \"idTaller\": 3,\r\n    \"calificacion\":4,\r\n    \"fechaReparacion\":\"2024/06/12\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/reparacion/registrar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"reparacion",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FECHA INCORRECTA",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idIncidente\":4,\r\n    \"idEmpleado\":3,\r\n    \"idTaller\": 3,\r\n    \"calificacion\":4,\r\n    \"fechaReparacion\":\"12/06/2024\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/reparacion/registrar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"reparacion",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "COSTO INCORRECTO",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idIncidente\":4,\r\n    \"idEmpleado\":3,\r\n    \"idTaller\": 3,\r\n    \"calificacion\":4,\r\n    \"fechaReparacion\":\"03/04/2024\",\r\n    \"costo\":-200.0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/reparacion/registrar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"reparacion",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "REGISTRAR REPARACION",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idIncidente\":6,\r\n    \"idEmpleado\":3,\r\n    \"idTaller\": 3,\r\n    \"calificacion\":4,\r\n    \"fechaReparacion\":\"2024-06-15\",\r\n    \"costo\":210.0,\r\n    \"detalle\":\"Puerta Reparada\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/reparacion/registrar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"reparacion",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "LISTA PROGRAMACION",
+			"item": [
+				{
+					"name": "LISTA-CON-FECHA-REAL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/programacion/lista-con-fecha-fin-real",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"programacion",
+								"lista-con-fecha-fin-real"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LISTA-SIN-FECHA-REAL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/programacion/lista-sin-fecha-fin-real",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"programacion",
+								"lista-sin-fecha-fin-real"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "REGISTRAR CARRO",
+			"item": [
+				{
+					"name": "CARRO YA EXISTE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"placa\": \"ABC123\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/carro/registrar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"carro",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "VALIDAR ESTADO",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"placa\": \"ADD133\",\r\n    \"idEstado\": 6\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/carro/registrar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"carro",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FECHA INCORRECTA",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"placa\": \"ADD133\",\r\n    \"idEstado\": 1,\r\n    \"proxMant\":\"2024/12/22\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/carro/registrar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"carro",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Datos ok",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"placa\": \"ADD133\",\r\n    \"idEstado\": 1,\r\n    \"proxMant\":\"22/12/2025\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/carro/registrar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"carro",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "LISTA CARROS",
+			"item": [
+				{
+					"name": "LISTA CARROS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/carro/lista",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"carro",
+								"lista"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "EDITAR CARRO",
+			"item": [
+				{
+					"name": "EXISTENCIA DEL CARRO",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"placa\": \"ABC125\",\r\n    \"idEstado\": 2,\r\n    \"proxMant\": \"20/12/2024\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/carro/editar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"carro",
+								"editar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ESTADO NO VALIDO",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"placa\": \"ABC123\",\r\n    \"idEstado\": 10,\r\n    \"proxMant\": \"20/12/2024\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/carro/editar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"carro",
+								"editar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FECHA INVALIDA",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"placa\": \"ABC123\",\r\n    \"idEstado\": 1,\r\n    \"proxMant\": \"2024/20/12\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/carro/editar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"carro",
+								"editar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EDITAR CARRO",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"placa\": \"ABC123\",\r\n    \"idEstado\": 1,\r\n    \"proxMant\": \"26/12/2024\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/carro/editar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"carro",
+								"editar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ELIMINAR CARRO",
+			"item": [
+				{
+					"name": "CARRO NO EXISTE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/carro/eliminar/ABC129",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"carro",
+								"eliminar",
+								"ABC129"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ELIMINACION CORRECTA",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/carro/eliminar/MNO345",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"carro",
+								"eliminar",
+								"MNO345"
 							]
 						}
 					},
