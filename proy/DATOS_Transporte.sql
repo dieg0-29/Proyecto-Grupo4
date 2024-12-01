@@ -103,6 +103,7 @@ select * From RUTA;
 select * From PROGRAMACION;
 select * from INCIDENTE;
 select * From TIPO_INCIDENTE;
-select * From ESTADO;
+select * From EST_CARRO;
+select * From Est_Conductor;
 select * From TALLER;
 go

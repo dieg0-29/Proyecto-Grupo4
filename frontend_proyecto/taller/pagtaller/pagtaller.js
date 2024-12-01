@@ -1,6 +1,6 @@
 
 async function obtenerDatos() {
-    const url = 'http://localhost:8080/api/ruta/listar'; // Reemplaza con tu URL de API
+    const url = 'http://localhost:8080/api/taller/listar'; // Reemplaza con tu URL de API
 
     try {
         const response = await fetch(url);
@@ -32,11 +32,11 @@ function mostrarDatos(datos) {
 
         // Crear celdas para cada propiedad del objeto
         fila.innerHTML = `
-            <td>${item.Id_ruta}</td>
+            <td>${item.Id_taller}</td>
             <td>${item.Nombre}</td>
-            <td>${item.Origen}</td>
-            <td>${item.Destino}</td>
-            <td>${item.Distancia}</td>
+            <td>${item.Direccion}</td>
+            <td>${item.Telefono}</td>
+            <td>${item.Calificacion}</td>
             <td><button class="button" onclick="editarRuta(${item.Id_ruta})">Editar</button></td>
             <td><button class="button" onclick="eliminarRuta(${item.Id_ruta})">Eliminar</button></td>
         `;
