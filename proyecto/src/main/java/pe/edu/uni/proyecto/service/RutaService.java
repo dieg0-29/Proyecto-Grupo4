@@ -1,5 +1,7 @@
 package pe.edu.uni.proyecto.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -63,21 +65,49 @@ public class RutaService {
 
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
     public boolean borrarRuta(String nombreRuta) {
-
+        // Eliminar dependencias en REPARACION
+        String deleteReparacionSql = """
+                DELETE FROM reparacion 
+                WHERE id_incidente IN (
+                    SELECT id_incidente 
+                    FROM incidente 
+                    WHERE id_programacion IN (
+                        SELECT id_programacion 
+                        FROM programacion 
+                        WHERE id_ruta = (SELECT id_ruta FROM ruta WHERE nombre_ruta = ?)
+                    )
+                )
+                """;
+        jdbcTemplate.update(deleteReparacionSql, nombreRuta);
+    
+        // Eliminar dependencias en INCIDENTE
+        String deleteIncidenteSql = """
+                DELETE FROM incidente 
+                WHERE id_programacion IN (
+                    SELECT id_programacion 
+                    FROM programacion 
+                    WHERE id_ruta = (SELECT id_ruta FROM ruta WHERE nombre_ruta = ?)
+                )
+                """;
+        jdbcTemplate.update(deleteIncidenteSql, nombreRuta);
+    
+        // Eliminar dependencias en PROGRAMACION
         String deleteProgramacionSql = """
                 DELETE FROM programacion 
                 WHERE id_ruta = (SELECT id_ruta FROM ruta WHERE nombre_ruta = ?)
                 """;
         jdbcTemplate.update(deleteProgramacionSql, nombreRuta);
-
+    
+        // Finalmente, eliminar la ruta
         String deleteRutaSql = """
                 DELETE FROM ruta 
                 WHERE nombre_ruta = ?
                 """;
         int rowsAffected = jdbcTemplate.update(deleteRutaSql, nombreRuta);
+    
         return rowsAffected > 0;
-    }
-
+    }    
+    
     @Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
     private void registrarRuta(String nombre, String origen, String destino, double distancia) {
         String sql = """
@@ -120,7 +150,21 @@ public class RutaService {
     
     private void validarDistancia(double distancia) {
         if (distancia <= 0 || distancia > 999.99) {
-            throw new IllegalArgumentException("La distancia debe ser un valor positivo y no mayor a 99999999.99.");
+            throw new IllegalArgumentException("La distancia debe ser un valor positivo y no mayor a 999.99.");
         }
     }
+    @Transactional(readOnly = true)
+public List<RutaDto> listarRutas() {
+    String sql = """
+            SELECT id_ruta, nombre_ruta AS Nombre, origen AS Origen, destino AS Destino, distancia_km AS Distancia
+            FROM ruta
+            """;
+    return jdbcTemplate.query(sql, (rs, rowNum) -> new RutaDto(
+            rs.getInt("id_ruta"),
+            rs.getString("Nombre"),
+            rs.getString("Origen"),
+            rs.getString("Destino"),
+            rs.getDouble("Distancia")
+    ));
+}
 }

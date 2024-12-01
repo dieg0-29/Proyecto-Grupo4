@@ -10,19 +10,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TallerDto {
-	
-	@JsonProperty("idTaller")
-	private int idtaller;
 
-	@JsonProperty("nombreTaller")
-    private String nombreTaller;
-	
-	@JsonProperty("direccion")
+    @JsonProperty("Id_taller")
+    private int idTaller;
+
+    @JsonProperty("Nombre")
+    private String nombre;
+
+    @JsonProperty("Direccion")
     private String direccion;
-	
-	@JsonProperty("telefono")
+
+    @JsonProperty("Telefono")
     private String telefono;
 
-	@JsonProperty("calificacion")
+    @JsonProperty("Calificacion")
     private double calificacion;
 }
