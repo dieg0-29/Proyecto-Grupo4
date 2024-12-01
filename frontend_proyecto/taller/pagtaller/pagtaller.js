@@ -1,48 +1,116 @@
 
-// Datos de ejemplo para llenar la tabla
-const datos = [
-    ["Camión 1", "Conductor 1", "Ruta A", "10:00", "20 km", "Editar", "Eliminar"],
-    ["Camión 2", "Conductor 2", "Ruta B", "11:00", "15 km", "Editar", "Eliminar"],
-    ["Camión 3", "Conductor 3", "Ruta C", "12:00", "25 km", "Editar", "Eliminar"],
-    ["Camión 4", "Conductor 4", "Ruta D", "13:00", "30 km", "Editar", "Eliminar"],
-    ["Camión 5", "Conductor 5", "Ruta E", "14:00", "10 km", "Editar", "Eliminar"],
-];
+async function obtenerDatos() {
+    const url = 'http://localhost:8080/api/taller/listar'; // Reemplaza con tu URL de API
 
-// Obtener la referencia a la tabla
-const tabla = document.getElementById('tablaDatos').getElementsByTagName('tbody')[0];
+    try {
+        const response = await fetch(url);
 
-// Llenar la tabla con los datos
-datos.forEach((fila) => {
-    const newRow = tabla.insertRow();
-    
-    fila.forEach((dato) => {
-        const newCell = newRow.insertCell();
-        newCell.textContent = dato;
-    });
-    
-    // Agregar botones de acción
-    const editarCell = newRow.insertCell();
-    const eliminarCell = newRow.insertCell();
-    
-    const editarButton = document.createElement('button');
-    editarButton.textContent = 'Editar';
-    editarButton.className = 'button';
-    editarButton.onclick = () => {
-        alert('Funcionalidad de editar no implementada.');
-    };
-    
-    const eliminarButton = document.createElement('button');
-    eliminarButton.textContent = 'Eliminar';
-    eliminarButton.className = 'button';
-    eliminarButton.onclick = () => {
-        if (confirm('¿Estás seguro de que deseas eliminar esta fila?')) {
-            tabla.deleteRow(newRow.rowIndex - 1); // Eliminar la fila
+        // Verifica si la respuesta es exitosa (código 200-299)
+        if (!response.ok) {
+            throw new Error(`Error en la red: ${response.status} ${response.statusText}`);
         }
+
+        // Convierte la respuesta a JSON
+        const data = await response.json();
+
+        // Muestra los datos en la tabla
+        mostrarDatos(data);
+
+    } catch (error) {
+        console.error('Hubo un problema con la petición Fetch:', error);
+        alert('Error al cargar los datos.'); // Mensaje de error
+    }
+}
+
+function mostrarDatos(datos) {
+    const tablaBody = document.querySelector('#tablaDatos tbody');
+    tablaBody.innerHTML = ''; // Limpiar la tabla antes de agregar nuevos datos
+
+    // Asumiendo que 'datos' es un array de objetos
+    datos.forEach(item => {
+        const fila = document.createElement('tr');
+
+        // Crear celdas para cada propiedad del objeto
+        fila.innerHTML = `
+            <td>${item.Id_taller}</td>
+            <td>${item.Nombre}</td>
+            <td>${item.Direccion}</td>
+            <td>${item.Telefono}</td>
+            <td>${item.Calificacion}</td>
+            <td><button class="button" onclick="editarRuta(${item.Id_ruta})">Editar</button></td>
+            <td><button class="button" onclick="eliminarRuta(${item.Id_ruta})">Eliminar</button></td>
+        `;
+
+        tablaBody.appendChild(fila);
+    });
+}
+
+async function editarRuta(id, button) {
+    const row = button.parentNode.parentNode; // Obtener la fila
+    const cells = row.getElementsByTagName("td");
+
+    // Cambiar cada celda (excepto la de ID y los botones) a un input
+    for (let i = 1; i < cells.length - 2; i++) { // Excluye la primera celda (ID) y las últimas dos (Editar y Eliminar)
+        const cell = cells[i];
+        const currentValue = cell.innerHTML;
+
+        const input = document.createElement("input");
+        input.type = "text";
+        input.value = currentValue;
+
+        cell.innerHTML = ""; // Limpiar el contenido de la celda
+        cell.appendChild(input); // Agregar el input
+    }
+
+    // Cambiar el botón a "Guardar"
+    button.innerHTML = "Guardar";
+    button.setAttribute("onclick", `guardarRuta(${id}, this)`);
+}
+
+async function guardarRuta(id, button) {
+    const row = button.parentNode.parentNode; // Obtener la fila
+    const cells = row.getElementsByTagName("td");
+
+    const updatedData = {
+        Id_ruta: id,
+        Nombre: cells[1].getElementsByTagName("input")[0].value,
+        Origen: cells[2].getElementsByTagName("input")[0].value,
+        Destino: cells[3].getElementsByTagName("input")[0].value,
+        Distancia: cells[4].getElementsByTagName("input")[0].value
     };
-    
-    editarCell.appendChild(editarButton);
-    eliminarCell.appendChild(eliminarButton);
-});
+
+    try {
+        const response = await fetch(`http://localhost:8080/api/ruta/editar/${Nombre}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedData)
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error en la actualización: ${response.status} ${response.statusText}`);
+        }
+
+        // Actualiza la tabla con los nuevos datos
+        mostrarDatos([updatedData]);
+
+        // Cambiar el botón de vuelta a "Editar"
+        button.innerHTML = "Editar";
+        button.setAttribute("onclick", `editarRuta(${id}, this)`);
+    } catch (error) {
+        console.error('Hubo un problema con la actualización:', error);
+        alert('Error al actualizar la ruta.');
+    }
+}
+function eliminarRuta(id) {
+    // Lógica para eliminar la ruta
+    console.log(`Eliminar ruta con ID: ${id}`);
+}
+
+// Llamada a la función para obtener y mostrar los datos
+obtenerDatos();
+
 
 document.getElementById('inicioButton').addEventListener('click', () => {
     window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/paginaprincipal/index.html';
