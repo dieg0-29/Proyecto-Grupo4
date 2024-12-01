@@ -142,6 +142,7 @@ public class ProgramacionService {
 		sql += "where id_conductor = ? order by fecha_fin_programada desc";
 		String fecha = jdbcTemplate.queryForObject(sql, String.class, idConductor);
 		sql = "select DATEDIFF(DAY,'" + fecha + "','" + fechaPartida + "')";
+		@SuppressWarnings("null")
 		int dif = jdbcTemplate.queryForObject(sql, Integer.class);
 		if(dif<0) {
 			throw new RuntimeException("Fecha de partida " + fechaPartida  + " no valida");
@@ -153,6 +154,7 @@ public class ProgramacionService {
 		fechaPartida = "'" + fechaPartida + "'";
 		fechaFin = "'" + fechaFin + "'";
 		String sql = "select DATEDIFF(DAY," + fechaPartida + "," + fechaFin + ")";
+		@SuppressWarnings("null")
 		int dif = jdbcTemplate.queryForObject(sql, Integer.class);
 		if(dif<=0) {
 			throw new RuntimeException("Fecha final " + fechaFin  + " no valida");
