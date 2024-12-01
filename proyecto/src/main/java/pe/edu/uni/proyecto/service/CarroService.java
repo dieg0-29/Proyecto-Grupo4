@@ -3,6 +3,8 @@ package pe.edu.uni.proyecto.service;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -17,9 +19,19 @@ import pe.edu.uni.proyecto.dto.CarroDto;
 public class CarroService {
 	@Autowired
     JdbcTemplate jdbcTemplate;
+	
+	public List<Map<String, Object>> obtenerCarrosConDescripcionEstado() {
+		String sql = """
+				SELECT t1.id_carro, t2.descripcion AS estado, t1.placa, t1.prox_mant
+				FROM CARRO t1 INNER JOIN EST_CARRO t2 ON t1.id_estado = t2.id_estado
+					    """;
+		return jdbcTemplate.queryForList(sql);
+	}
+	
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
 	public void registrarCarro(CarroDto bean) {
 		Validarcarro(bean.getPlaca());
+		validarEstado(bean.getIdEstado());
 		bean.setProxMant(convertirFecha(bean.getProxMant()));
 		//Registrar carro
 		String sql="""
@@ -29,7 +41,30 @@ public class CarroService {
 	Object[] datos = {estado, bean.getPlaca(), bean.getProxMant()};
 	jdbcTemplate.update(sql,datos);
 	System.out.print("Todo ok");
- }
+    }
+    
+    @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
+    public void eliminarCarro(String placa) {
+        validarCarroNoExiste(placa);
+        String sql = """
+            DELETE FROM CARRO WHERE placa = ?
+        """;
+        jdbcTemplate.update(sql, placa);
+        System.out.println("Carro con la placa" + placa + "eliminado correctamente.");
+    }
+    
+    @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
+    public void editarCarro(CarroDto bean) {
+        validarCarroNoExiste(bean.getPlaca());
+        validarEstado(bean.getIdEstado());
+        bean.setProxMant(convertirFecha(bean.getProxMant()));
+        String sql = """
+            UPDATE carro SET id_estado = ?, prox_mant = ? WHERE placa = ?
+        """;
+        Object[] datos = { bean.getIdEstado(), bean.getProxMant(), bean.getPlaca() };
+        jdbcTemplate.update(sql, datos);
+        System.out.println("Carro con placa " + bean.getPlaca() + " actualizado correctamente.");
+    }
 
 
     @Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
@@ -42,6 +77,29 @@ public class CarroService {
 		    throw new RuntimeException("El carro con la placa " + placa + " ya existe.");
 		}
 	}
+    
+    @Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
+	private void validarEstado(int estado) {
+		String sql = """
+				select Count(*) from EST_CARRO where id_estado = ?
+				""";
+		int cont = jdbcTemplate.queryForObject(sql, Integer.class, estado);
+		if (cont == 0) {
+			throw new RuntimeException("El estado no existe.");
+		}
+		
+	}
+    
+    @Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
+	private void validarCarroNoExiste(String placa) {
+	        String sql = """
+	            SELECT COUNT(*) FROM Carro WHERE placa = ?
+	        """;
+	        int cont = jdbcTemplate.queryForObject(sql, Integer.class, placa);
+	        if (cont == 0) {
+	            throw new RuntimeException("El carro con la placa " + placa + " no existe.");
+	        }
+	    }
   
 	
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)

@@ -2,6 +2,8 @@ package pe.edu.uni.proyecto.service;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -16,6 +18,18 @@ public class ReparacionService {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	
+	public List<Map<String, Object>> consultaTodosLasReparaciones() {
+	    String sql = """
+	        select id_empleado, id_incidente, id_taller, fecha_reparacion,calificacion,costo,detalle
+	        from REPARACION
+	    """;
+	    List<Map<String, Object>> lista;
+	    lista = jdbcTemplate.queryForList(sql); 
+	    return lista;
+	}
+	
 
 	@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
 	public void reparacion(ReparacionDto bean) {
@@ -25,8 +39,9 @@ public class ReparacionService {
 			validarEmpleado(bean.getIdEmpleado());
 			validarTaller(bean.getIdTaller());
 			validarCalificacion(bean.getCalificacion());
-			bean.setFechaReparacion(bean.getFechaReparacion());
+			bean.setFechaReparacion(convertirFecha(bean.getFechaReparacion()));
 			validarIngresoFecha(bean.getIdIncidente(), bean.getFechaReparacion());
+			validarCosto(bean.getCosto());
 			// registro
 			registrarReparacion(bean.getIdEmpleado(), bean.getIdIncidente(), 
 					bean.getIdTaller(), bean.getFechaReparacion(),
@@ -111,6 +126,13 @@ public class ReparacionService {
 		
 
 	}
+	
+	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
+	private void validarCosto(double costo) {
+	    if (costo <= 0) {
+	        throw new IllegalArgumentException("El costo debe ser un valor positivo mayor a 0.");
+	    }
+	}
 
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
 	private void registrarReparacion(int idempleado, int idincidente, int idtaller, String fechareparacion,
@@ -147,8 +169,8 @@ public class ReparacionService {
 				where t1.id_incidente = ?
 				   """;
 		int estado = jdbcTemplate.queryForObject(sql, Integer.class, idincidente);
-		if (estado == 3) {
-			throw new RuntimeException("El carro se encuentra en reparacion.");
+		if (estado != 3) {
+			throw new RuntimeException("El carro no se encuentra en reparacion.");
 		}
 
 	}

@@ -1,11 +1,14 @@
 package pe.edu.uni.proyecto.controllers;
 
 import java.time.format.DateTimeParseException;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,13 +21,13 @@ import pe.edu.uni.proyecto.service.ProgramacionService;
 
 @RestController
 @CrossOrigin(origins = {"http://localhost:5500", "http://127.0.0.1:5500"})
-@RequestMapping("/api/registrar/programar")
+@RequestMapping("/api/programacion")
 public class ProgramacionRest {
 
 	@Autowired
 	private ProgramacionService programacionService;
 
-	@PostMapping
+	@PostMapping("/registrar")
     public ResponseEntity<ResponseMessage> registrarMantenimiento(@RequestBody ProgramacionDto bean) throws DateTimeParseException {
         try {
         	programacionService.registrarProg(bean);
@@ -35,6 +38,28 @@ public class ProgramacionRest {
             return new ResponseEntity<>(new ResponseMessage("Error: " + e.getMessage()), HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             return new ResponseEntity<>(new ResponseMessage("Error inesperado: " + e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+	
+	@GetMapping("/lista-sin-fecha-fin-real")
+    public ResponseEntity<?> obtenerSinFechaFinReal() {
+        try {
+            List<Map<String, Object>> lista = programacionService.obtenerSinFechaFinReal();
+            return ResponseEntity.ok(lista); 
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error al obtener la lista de las programaciones: " + e.getMessage());
+        }
+    }
+	
+	@GetMapping("/lista-con-fecha-fin-real")
+    public ResponseEntity<?> obtenerConFechaFinReal() {
+        try {
+            List<Map<String, Object>> lista = programacionService.obtenerConFechaFinReal();
+            return ResponseEntity.ok(lista); 
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error al obtener la lista de las programaciones: " + e.getMessage());
         }
     }
 }
