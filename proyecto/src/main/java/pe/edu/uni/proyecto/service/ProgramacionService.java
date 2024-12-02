@@ -54,11 +54,10 @@ public class ProgramacionService {
 		validarCarro(bean.getIdCarro());
 		validarEstadoCarro(bean.getIdCarro());
 		validarConductor(bean.getIdConductor());
-		validarEstadoConductor(bean.getIdConductor());
 		validarRuta(bean.getIdRuta());
-		bean.setFechaAsignacion(bean.getFechaAsignacion());
+		bean.setFechaAsignacion(convertirFecha(bean.getFechaAsignacion()));
 		validarFechaPartida(bean.getIdConductor(), bean.getFechaAsignacion());
-		bean.setFechaFinProgramada(bean.getFechaFinProgramada());
+		bean.setFechaFinProgramada(convertirFecha(bean.getFechaFinProgramada()));
 		validarFechaFin(bean.getFechaFinProgramada(), bean.getFechaAsignacion());
 		//Registrar Programacion
 		registrarProgamacion(bean);		
@@ -100,16 +99,7 @@ public class ProgramacionService {
 			throw new RuntimeException("Conductor " + idConductor  + " no existe");
 		}
 	}
-	
-	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
-	private void validarEstadoConductor(int idConductor) {
-		String sql = "select id_estado estado from CONDUCTOR where id_conductor = ?";
-		int estado = jdbcTemplate.queryForObject(sql, Integer.class, idConductor);
-		if(estado != 1) {
-			throw new RuntimeException("Conductor " + idConductor  + " no disponible");
-		}
-	}
-	
+		
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
 	private void validarRuta(int idRuta) {
 		String sql = "select count(1) cont from RUTA where id_ruta = ?";
@@ -168,8 +158,7 @@ public class ProgramacionService {
 				bean.getIdRuta(),bean.getFechaAsignacion(),bean.getFechaFinProgramada());
 		sql = "update carro set id_estado = 5 where id_carro = ?";
 		jdbcTemplate.update(sql,bean.getIdCarro());
-		sql = "update conductor set id_estado = 2 where id_conductor = ?";
-		jdbcTemplate.update(sql,bean.getIdConductor());
+		
 	}
 	
 }
