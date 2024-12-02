@@ -55,9 +55,9 @@ public class ProgramacionService {
 		validarEstadoCarro(bean.getIdCarro());
 		validarConductor(bean.getIdConductor());
 		validarRuta(bean.getIdRuta());
-		bean.setFechaAsignacion(convertirFecha(bean.getFechaAsignacion()));
+		bean.setFechaAsignacion(bean.getFechaAsignacion());
 		validarFechaPartida(bean.getIdConductor(), bean.getFechaAsignacion());
-		bean.setFechaFinProgramada(convertirFecha(bean.getFechaFinProgramada()));
+		bean.setFechaFinProgramada(bean.getFechaFinProgramada());
 		validarFechaFin(bean.getFechaFinProgramada(), bean.getFechaAsignacion());
 		//Registrar Programacion
 		registrarProgamacion(bean);		

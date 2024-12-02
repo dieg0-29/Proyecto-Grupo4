@@ -4,9 +4,9 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('programacionForm').addEventListener('submit', function(event) {
         // Previene el comportamiento por defecto del formulario
         event.preventDefault();
-
+        const id = localStorage.getItem('id');
         // Captura los valores de los campos del formulario
-        const idEmpleado = document.getElementById('id_empleado').value;
+        const idEmpleado = id;
         const idCarro = document.getElementById('id_carro').value;
         const idConductor = document.getElementById('id_conductor').value;
         const idRuta = document.getElementById('id_ruta').value;
@@ -14,12 +14,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const fechaFin = document.getElementById('fecha_salida_programada').value;
 
         // Validación de datos
-        if (id_empleado === '' || id_conductor === '' || id_carro === '' || id_ruta === '' || fecha_inicio === '' || fecha_salida_programada === '') {
+        if (id_conductor === '' || id_carro === '' || id_ruta === '' || fecha_inicio === '' || fecha_salida_programada === '') {
             mostrarMensaje('Por favor, complete todos los campos obligatorios.');
             return;
         }
-
-        /* Convertir a formato DD/MM/YYYY
+        /*
+        //Convertir a formato DD/MM/YYYY
         const convertirFecha = (fecha) => {
             const [year, month, day] = fecha.split('-'); // Dividir la fecha en partes
             return `${day}/${month}/${year}`; // Reorganizar en formato DD/MM/YYYY

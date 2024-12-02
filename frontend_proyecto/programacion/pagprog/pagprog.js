@@ -80,7 +80,7 @@ document.getElementById('nuevoRegistroButton').onclick = function() {
 };
 
 // Mostrar mensaje de bienvenida
-const username = localStorage.getItem('username');
+const username = localStorage.getItem('name');
 if (username) {
     document.getElementById('welcomeMessage').innerText = `Bienvenido, ${username}!`;
 }
