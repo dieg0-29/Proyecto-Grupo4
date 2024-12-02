@@ -42,19 +42,12 @@ INSERT INTO CONDUCTOR (id_estado, nombre, apellido, dni, correo, telefono) VALUE
 (1, 'Leandro', 'Torres', '23789012', 'ltorres@gmail.com', '900234598'),
 (1, 'Mauricio', 'Guerrero', '43189054', 'mguerrero@gmail.com', '943223441');
 go
-INSERT INTO EMPLEADO (nombre, apellido, dni, correo, telefono) VALUES 
-('Pedro', 'Ramírez', '67890123', 'pedro.ramirez@example.com', '987654326'),
-('Laura', 'Hernández', '78901234', 'laura.hernandez@example.com', '987654327'),
-('Jorge', 'Díaz', '89012345', 'jorge.diaz@example.com', '987654328'),
-('Clara', 'Vásquez', '90123456', 'clara.vasquez@example.com', '987654329'),
-('Fabian', 'Cruz', '01234567', 'diego.cruz@example.com', '987654330');
-go
-INSERT INTO USUARIO (id_empleado, usuario, clave) VALUES 
-(1, 'pramirez', 'contraseña'),
-(2, 'lhernandez', 'contraseña'),
-(3, 'jdiaz', 'contraseña'),
-(4, 'cvasquez', 'contraseña'),
-(5, 'fcruz', 'contraseña');
+INSERT INTO EMPLEADO (nombre, apellido, dni, correo, telefono, usuario, clave) VALUES 
+('Pedro', 'Ramírez', '67890123', 'pedro.ramirez@example.com', '987654326', 'pramirez', 'contraseña'),
+('Laura', 'Hernández', '78901234', 'laura.hernandez@example.com', '987654327', 'lhernandez', 'contraseña'),
+('Jorge', 'Díaz', '89012345', 'jorge.diaz@example.com', '987654328', 'jdiaz', 'contraseña'),
+('Clara', 'Vásquez', '90123456', 'clara.vasquez@example.com', '987654329', 'cvasquez', 'contraseña'),
+('Fabian', 'Cruz', '01234567', 'diego.cruz@example.com', '987654330', 'fcruz', 'contraseña');
 go
 INSERT INTO RUTA (nombre_ruta, origen, destino, distancia_km) VALUES 
 ('Ruta 1', 'Ciudad A', 'Ciudad B', 120.50),

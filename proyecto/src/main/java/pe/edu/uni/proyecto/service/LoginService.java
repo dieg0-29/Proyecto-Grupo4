@@ -1,5 +1,7 @@
 package pe.edu.uni.proyecto.service;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -15,7 +17,7 @@ public class LoginService {
 	private JdbcTemplate jdbcTemplate;
 		
 	@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
-	public String login(LoginDto bean) {
+	public Map<String,String> login(LoginDto bean) {
 		//validarEmpleado(bean.getIdEmpleado());
 		validarUsuario(bean.getUsuario());
 		validarClave(bean.getUsuario(), bean.getClave());

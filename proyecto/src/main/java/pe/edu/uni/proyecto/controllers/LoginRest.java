@@ -12,7 +12,7 @@ import pe.edu.uni.proyecto.service.LoginService;
 
 @RestController
 @CrossOrigin(origins = {"http://localhost:5500", "http://127.0.0.1:5500"})
-public class LoginController {
+public class LoginRest {
 
     @Autowired
     private LoginService loginService;
