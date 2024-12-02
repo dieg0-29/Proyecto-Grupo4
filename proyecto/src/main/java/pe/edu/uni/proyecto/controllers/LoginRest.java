@@ -1,6 +1,9 @@
 package pe.edu.uni.proyecto.controllers;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,31 +22,22 @@ public class LoginRest {
 
     @GetMapping("/login")
     public ResponseEntity<Object> login(@RequestParam String usuario, @RequestParam String clave) {
+        LoginDto loginDto = new LoginDto();
+        loginDto.setUsuario(usuario);
+        loginDto.setClave(clave);
+        
         try {
-            LoginDto loginDto = new LoginDto();
-            loginDto.setUsuario(usuario);
-            loginDto.setClave(clave);
-            String mensaje = loginService.login(loginDto);
-            return ResponseEntity.ok().body(new ResponseMessage(mensaje)); // Retorna el mensaje en formato JSON
+            Map<String,Object> rec = loginService.login(loginDto);
+            return ResponseEntity.status(HttpStatus.OK).body(rec); // Cambié a HttpStatus.OK para un inicio de sesión exitoso
         } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(new ResponseMessage(e.getMessage())); // Retorna el error en formato JSON
-        }
-    }
-
-    // Clase interna para el mensaje de respuesta
-    static class ResponseMessage {
-        private String message;
-
-        public ResponseMessage(String message) {
-            this.message = message;
-        }
-
-        public String getMessage() {
-            return message;
-        }
-
-        public void setMessage(String message) {
-            this.message = message;
+            String errorMessage = e.getMessage();
+            if (errorMessage.contains("no existe")) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El usuario no existe");
+            } else if (errorMessage.contains("no es correcta")) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La clave ingresada no es correcta");
+            } else {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error interno del servidor");
+            }
         }
     }
 }
