@@ -1,11 +1,317 @@
 {
 	"info": {
-		"_postman_id": "51b686ed-e2c5-4d97-8270-c214cd5fddf2",
+		"_postman_id": "6f67bc4f-30f6-4c1d-95f3-40a23b3bb05f",
 		"name": "PROYECTO - TRANSPORTE",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "34898503"
+		"_exporter_id": "34967537",
+		"_collection_link": "https://crimson-crater-437291.postman.co/workspace/UNI-FIIS_2024-1_WS_POO_SEC-V~d1f8eb87-1c03-4832-892c-da5f248983a3/collection/34967537-6f67bc4f-30f6-4c1d-95f3-40a23b3bb05f?action=share&source=collection_link&creator=34967537"
 	},
 	"item": [
+		{
+			"name": "REGISTRO PROGRAMACION",
+			"item": [
+				{
+					"name": "EMPLEADO NO EXISTE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idEmpleado\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/registrar/programar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"registrar",
+								"programar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CARRO NO EXISTE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idEmpleado\": 2,\r\n    \"idCarro\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/registrar/programar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"registrar",
+								"programar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CARRO NO DISPONIBLE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idEmpleado\": 2,\r\n    \"idCarro\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/registrar/programar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"registrar",
+								"programar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CONDUCTOR NO EXISTE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idEmpleado\": 2,\r\n    \"idCarro\": 1,\r\n    \"idConductor\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/registrar/programar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"registrar",
+								"programar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CONDUCTOR NO DISPONIBLE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idEmpleado\": 2,\r\n    \"idCarro\": 1,\r\n    \"idConductor\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/registrar/programar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"registrar",
+								"programar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RUTA NO EXISTE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idEmpleado\": 2,\r\n    \"idCarro\": 1,\r\n    \"idConductor\": 1,\r\n    \"idRuta\": 7\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/registrar/programar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"registrar",
+								"programar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FECHA ASIG. NO VALIDA",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idEmpleado\": 2,\r\n    \"idCarro\": 1,\r\n    \"idConductor\": 1,\r\n    \"idRuta\": 2,\r\n    \"fechaAsignacion\": \"2444444/01/2024\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/registrar/programar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"registrar",
+								"programar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FECHA FIN NO VALIDA",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idEmpleado\": 2,\r\n    \"idCarro\": 1,\r\n    \"idConductor\": 1,\r\n    \"idRuta\": 2,\r\n    \"fechaAsignacion\": \"26/12/2024\",\r\n    \"fechaFinProgramada\": \"25/12/2024\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/registrar/programar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"registrar",
+								"programar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PROGRAMACION NO EXITOSA",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idEmpleado\": 2,\r\n    \"idCarro\": 1,\r\n    \"idConductor\": 1,\r\n    \"idRuta\": 2,\r\n    \"fechaAsignacion\": \"20/01/2024\",\r\n    \"fechaFinProgramada\": \"23/01/2024\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/registrar/programar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"registrar",
+								"programar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Datos ok",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idEmpleado\": 2,\r\n    \"idCarro\": 1,\r\n    \"idConductor\": 1,\r\n    \"idRuta\": 2,\r\n    \"fechaAsignacion\": \"23/12/2024\",\r\n    \"fechaFinProgramada\": \"26/12/2024\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/registrar/programar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"registrar",
+								"programar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
 		{
 			"name": "REGISTRAR CONDUCTOR",
 			"item": [
@@ -204,7 +510,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/registrar/conductor",
+							"raw": "http://localhost:8080/api/conductor/registrar",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -212,8 +518,8 @@
 							"port": "8080",
 							"path": [
 								"api",
-								"registrar",
-								"conductor"
+								"conductor",
+								"registrar"
 							]
 						}
 					},
@@ -707,15 +1013,15 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/registrar/incidente",
+							"raw": "localhost:8080/api/incidente/registrar",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"api",
-								"registrar",
-								"incidente"
+								"incidente",
+								"registrar"
 							]
 						}
 					},
@@ -763,7 +1069,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id_empleado\": 1,\r\n    \"id_taller\": 2,\r\n    \"id_carro\": 3,\r\n    \"calificacion\": 4.5,\r\n    \"fecha_inicio\": \"2024-11-20\",\r\n    \"fecha_salida_programada\": \"2024-11-25\",\r\n    \"costo\": 1200.50,\r\n    \"detalle\": \"Cambio de frenos y mantenimiento general\"\r\n}",
+							"raw": "{\r\n    \"id_empleado\": 2,\r\n    \"id_taller\": 2,\r\n    \"id_carro\": 3,\r\n    \"calificacion\": 4.5,\r\n    \"fecha_inicio\": \"2024-11-20\",\r\n    \"fecha_salida_programada\": \"2024-11-25\",\r\n    \"costo\": 1200.50,\r\n    \"detalle\": \"Cambio de frenos y mantenimiento general\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -771,7 +1077,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/registrar/mantenimiento",
+							"raw": "http://localhost:8080/api/mantenimiento/registrar",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -779,8 +1085,8 @@
 							"port": "8080",
 							"path": [
 								"api",
-								"registrar",
-								"mantenimiento"
+								"mantenimiento",
+								"registrar"
 							]
 						}
 					},
@@ -1776,15 +2082,15 @@
 			]
 		},
 		{
-			"name": "LISTA REPARACIONES",
+			"name": "LISTA MANTENIMIENTO",
 			"item": [
 				{
-					"name": "LISTA REPARACIONES",
+					"name": "LISTA MANTENIMIENTOS",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/reparacion/lista",
+							"raw": "http://localhost:8080/api/mantenimiento/lista",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1792,7 +2098,7 @@
 							"port": "8080",
 							"path": [
 								"api",
-								"reparacion",
+								"mantenimiento",
 								"lista"
 							]
 						}
@@ -1802,24 +2108,15 @@
 			]
 		},
 		{
-			"name": "REGISTRO PROGRAMACION Copy 2",
+			"name": "LISTA CONDUCTOR",
 			"item": [
 				{
-					"name": "EMPLEADO NO EXISTE",
+					"name": "LISTA CONDUCTORES",
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"idEmpleado\": 100\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "http://localhost:8080/api/programacion/registrar",
+							"raw": "http://localhost:8080/api/conductor/lista",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1827,278 +2124,33 @@
 							"port": "8080",
 							"path": [
 								"api",
-								"programacion",
-								"registrar"
+								"conductor",
+								"lista"
 							]
 						}
 					},
 					"response": []
-				},
+				}
+			]
+		},
+		{
+			"name": "LISTA INCIDENTE",
+			"item": [
 				{
-					"name": "CARRO NO EXISTE",
+					"name": "LISTA INCIDENTES",
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"idEmpleado\": 2,\r\n    \"idCarro\": 100\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "http://localhost:8080/api/programacion/registrar",
-							"protocol": "http",
+							"raw": "localhost:8080/api/incidente/lista",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"api",
-								"programacion",
-								"registrar"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "CARRO NO DISPONIBLE",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"idEmpleado\": 2,\r\n    \"idCarro\": 5\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/programacion/registrar",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"programacion",
-								"registrar"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "CONDUCTOR NO EXISTE",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"idEmpleado\": 2,\r\n    \"idCarro\": 1,\r\n    \"idConductor\": 100\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/programacion/registrar",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"programacion",
-								"registrar"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "RUTA NO EXISTE",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"idEmpleado\": 2,\r\n    \"idCarro\": 1,\r\n    \"idConductor\": 2,\r\n    \"idRuta\": 7\r\n\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/programacion/registrar",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"programacion",
-								"registrar"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "FECHA ASIG. NO VALIDA",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"idEmpleado\": 2,\r\n    \"idCarro\": 1,\r\n    \"idConductor\": 1,\r\n    \"idRuta\": 2,\r\n    \"fechaAsig\": \"2444444/01/2024\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/programacion/registrar",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"programacion",
-								"registrar"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "FECHA FIN NO VALIDA 1",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"idEmpleado\": 2,\r\n    \"idCarro\": 1,\r\n    \"idRuta\": 2,\r\n    \"idConductor\": 1,\r\n    \"fechaAsig\": \"26/12/2024\",\r\n    \"fechaFin\": \"2024/12/03\"\r\n\r\n\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/programacion/registrar",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"programacion",
-								"registrar"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "FECHA FIN NO VALIDA 2",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"idEmpleado\": 2,\r\n    \"idCarro\": 1,\r\n    \"idRuta\": 2,\r\n    \"idConductor\": 1,\r\n    \"fechaAsig\": \"26/12/2024\",\r\n    \"fechaFin\": \"25/12/2024\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/programacion/registrar",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"programacion",
-								"registrar"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "CONDUCTOR NO DISPONIBLE EN EL INTERVALO DE FECHAS",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"idEmpleado\": 2,\r\n    \"idCarro\": 1,\r\n    \"idConductor\": 1,\r\n    \"idRuta\": 2,\r\n    \"fechaAsig\": \"13/01/2024\",\r\n    \"fechaFin\": \"25/01/2024\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/programacion/registrar",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"programacion",
-								"registrar"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "REGISTRO OK",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"idEmpleado\": 2,\r\n    \"idCarro\": 1,\r\n    \"idConductor\": 1,\r\n    \"idRuta\": 2,\r\n    \"fechaAsig\": \"17/07/2024\",\r\n    \"fechaFin\": \"26/07/2024\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/programacion/registrar",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"programacion",
-								"registrar"
+								"incidente",
+								"lista"
 							]
 						}
 					},

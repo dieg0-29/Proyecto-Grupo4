@@ -1,5 +1,8 @@
 package pe.edu.uni.proyecto.service;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -13,6 +16,16 @@ public class IncidenteService {
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	public List<Map<String, Object>> obtenerListaIncidente() {
+		String sql = "SELECT id_incidente Id_incidente,id_empleado Empleado, "
+				+ "id_programacion Programacion,id_tipo Tipo,fecha_incidente Fecha, "
+				+ "detalle Detalle "
+				+ "FROM INCIDENTE "
+				+ "ORDER BY 1";
+		return jdbcTemplate.queryForList(sql);
+	}
+
 	
 	@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
 	public void reportarincidente(IncidenteDto bean) {

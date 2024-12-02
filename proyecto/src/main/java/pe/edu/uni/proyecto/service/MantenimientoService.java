@@ -2,6 +2,8 @@ package pe.edu.uni.proyecto.service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -15,6 +17,18 @@ import pe.edu.uni.proyecto.dto.MantenimientoDto;
 public class MantenimientoService {
     @Autowired
     JdbcTemplate jdbcTemplate;
+    
+    public List<Map<String, Object>> obtenerListaMantenimiento() {
+    	String sql = "SELECT id_mantenimiento id, id_empleado empleado, "
+    			+ "id_taller taller, id_est_mant estado, id_carro carro, "
+    			+ "calificacion, fecha_inicio inicio, fecha_salida_programada salida, "
+    			+ "fecha_salida_real fin, costo, detalle "
+    			+ "FROM MANTENIMIENTO "
+    			+ "ORDER BY 1";
+    	return jdbcTemplate.queryForList(sql);
+    }
+
+    
     public void registroMantenimiento(MantenimientoDto bean) {
     
         	validarEmpleado( bean.getIdEmpleado());
