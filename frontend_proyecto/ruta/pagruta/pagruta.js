@@ -72,14 +72,14 @@ async function guardarRuta(id, button) {
 
     // Crear el objeto updatedData
     const updatedData = {
-        idRuta: id, // Cambia 'Id_ruta' a 'idRuta'
+        IdRuta: id,
+        Nombre: cells[1].getElementsByTagName("input")[0].value, // Cambia 'Nombre' a 'nombre'
+        Origen: cells[2].getElementsByTagName("input")[0].value, // Cambia 'Origen' a 'origen'
+        Destino: cells[3].getElementsByTagName("input")[0].value, // Cambia 'Destino' a 'destino'
+        Distancia: parseFloat(cells[4].getElementsByTagName("input")[0].value), // Cambia 'Distancia' a 'distancia'
         
-        origen: cells[2].getElementsByTagName("input")[0].value, // Cambia 'Origen' a 'origen'
-        destino: cells[3].getElementsByTagName("input")[0].value, // Cambia 'Destino' a 'destino'
-        distancia: parseFloat(cells[4].getElementsByTagName("input")[0].value), // Cambia 'Distancia' a 'distancia'
-        nombre: cells[1].getElementsByTagName("input")[0].value, // Cambia 'Nombre' a 'nombre'
     };
-    if (updatedData.nombre === '' || updatedData.origen === '' || updatedData.destino === '' || isNaN(updatedData.distancia) || updatedData.distancia <= 0) {
+    if (updatedData.Nombre === '' || updatedData.Origen === '' || updatedData.Destino === '' || isNaN(updatedData.Distancia) || updatedData.Distancia <= 0) {
         alert("Por favor, completa todos los campos correctamente.");
         return;
     }
