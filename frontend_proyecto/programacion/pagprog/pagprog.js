@@ -78,6 +78,12 @@ document.getElementById('cerrarSesionButton').onclick = function() {
 document.getElementById('nuevoRegistroButton').onclick = function() {
     window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/programacion/registrarprogramacion/prog.html';
 };
+function ReportarIncidente(id_programacion) {
+    // Guardar el id_programacion en localStorage
+    localStorage.setItem('id_p', id_programacion);
+    // Redirigir a la página de incidente
+    window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/incidente/incidente.html';
+}
 
 // Mostrar mensaje de bienvenida
 const username = localStorage.getItem('name');
