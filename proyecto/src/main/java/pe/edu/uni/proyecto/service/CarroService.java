@@ -46,6 +46,22 @@ public class CarroService {
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
     public void eliminarCarro(String placa) {
         validarCarroNoExiste(placa);
+        String sql1 = """
+				 select COUNT(*) from MANTENIMIENTO t1 inner join CARRO t2 on t1.id_carro = t2.id_carro
+				where t2.placa = ?
+				            """;
+		int cont1 = jdbcTemplate.queryForObject(sql1, Integer.class, placa);
+		if (cont1 >= 1) {
+			throw new RuntimeException("El CARRO NO PUEDE SER ELIMINADO");
+		}
+		String sql2 = """
+				 select COUNT(*) from PROGRAMACION t1 inner join CARRO t2 on t1.id_carro = t2.id_carro
+				where t2.placa = ?
+				            """;
+		int cont2 = jdbcTemplate.queryForObject(sql2, Integer.class, placa);
+		if (cont2 >= 1) {
+			throw new RuntimeException("El CARRO NO PUEDE SER ELIMINADO");
+		}
         String sql = """
             DELETE FROM CARRO WHERE placa = ?
         """;

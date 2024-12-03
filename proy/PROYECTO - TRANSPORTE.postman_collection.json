@@ -1,10 +1,9 @@
 {
 	"info": {
-		"_postman_id": "55741c0f-6396-4e83-b538-9ed7ec9ef9d2",
+		"_postman_id": "aecf4236-b16c-44ef-8fb6-dfa3d8b81fcc",
 		"name": "PROYECTO - TRANSPORTE",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "39400177",
-		"_collection_link": "https://proyecto-transporte.postman.co/workspace/Proyecto---Transporte-Workspace~dbd70176-8779-486c-b5a8-afb2102285a5/collection/39367313-55741c0f-6396-4e83-b538-9ed7ec9ef9d2?action=share&source=collection_link&creator=39400177"
+		"_exporter_id": "34898503"
 	},
 	"item": [
 		{
@@ -2117,55 +2116,6 @@
 			]
 		},
 		{
-			"name": "ELIMINAR CARRO",
-			"item": [
-				{
-					"name": "CARRO NO EXISTE",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/carro/eliminar/ABC129",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"carro",
-								"eliminar",
-								"ABC129"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ELIMINACION CORRECTA",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/carro/eliminar/MNO345",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"carro",
-								"eliminar",
-								"MNO345"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
 			"name": "LISTA MANTENIMIENTO",
 			"item": [
 				{
@@ -2235,6 +2185,77 @@
 								"api",
 								"incidente",
 								"lista"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ELIMINAR CARRO",
+			"item": [
+				{
+					"name": "CARRO NO EXISTE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/carro/eliminar/ABC129",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"carro",
+								"eliminar",
+								"ABC129"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EL CARRO YA TIENE REGISTROS",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/carro/eliminar/ABC123",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"carro",
+								"eliminar",
+								"ABC123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ELIMINACION CORRECTA",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/carro/eliminar/ADD134",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"carro",
+								"eliminar",
+								"ADD134"
 							]
 						}
 					},
