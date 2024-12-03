@@ -54,6 +54,7 @@ public class ProgramacionService {
 		validarCarro(bean.getIdCarro());
 		validarEstadoCarro(bean.getIdCarro());
 		validarConductor(bean.getIdConductor());
+		validarEstadoCond(bean.getIdConductor());
 		validarRuta(bean.getIdRuta());
 		bean.setFechaAsignacion(bean.getFechaAsignacion());
 		validarFechaPartida(bean.getIdConductor(), bean.getFechaAsignacion());
@@ -99,6 +100,16 @@ public class ProgramacionService {
 			throw new RuntimeException("Conductor " + idConductor  + " no existe");
 		}
 	}
+	
+	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
+	private void validarEstadoCond(int idCond) {
+		String sql = "select id_estado estado from CONDUCTOR where id_conductor = ?";
+		int estado = jdbcTemplate.queryForObject(sql, Integer.class, idCond);
+		if(estado != 1) {
+			throw new RuntimeException("Conductor " + idCond  + " no disponible");
+		}
+	}
+
 		
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
 	private void validarRuta(int idRuta) {
@@ -117,20 +128,22 @@ public class ProgramacionService {
 		DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 		//Parsear la fecha de entrada y formatearla al nuevo formato
-				    LocalDate date = LocalDate.parse(fecha, inputFormatter);
-				    return date.format(outputFormatter);
-		    	} catch (DateTimeParseException e) {
-					throw new RuntimeException("Formato de fecha inválido. Asegúrese de usar el formato dd/MM/yyyy");
-				} catch (NullPointerException e) {
-			   	 throw new RuntimeException("Las fechas no pueden ser nulas.");
-			    }
+		LocalDate date = LocalDate.parse(fecha, inputFormatter);
+		return date.format(outputFormatter);
+    	} catch (DateTimeParseException e) {
+    		throw new RuntimeException("Formato de fecha inválido. Asegúrese de usar el formato dd/MM/yyyy");
+		} catch (NullPointerException e) {
+			throw new RuntimeException("Las fechas no pueden ser nulas.");
 		}
+	
+	}
 	
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
 	private void validarFechaPartida(int idConductor, String fechaPartida) {
 		String sql = "select top 1 cast(fecha_fin_programada as date) ult_fecha from PROGRAMACION ";
 		sql += "where id_conductor = ? order by fecha_fin_programada desc";
 		String fecha = jdbcTemplate.queryForObject(sql, String.class, idConductor);
+		fechaPartida = convertirFecha(fechaPartida);
 		sql = "select DATEDIFF(DAY,'" + fecha + "','" + fechaPartida + "')";
 		@SuppressWarnings("null")
 		int dif = jdbcTemplate.queryForObject(sql, Integer.class);
@@ -141,9 +154,9 @@ public class ProgramacionService {
 	
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
 	private void validarFechaFin(String fechaFin, String fechaPartida) {
-		fechaPartida = "'" + fechaPartida + "'";
-		fechaFin = "'" + fechaFin + "'";
-		String sql = "select DATEDIFF(DAY," + fechaPartida + "," + fechaFin + ")";
+		fechaFin = convertirFecha(fechaFin);
+		fechaPartida = convertirFecha(fechaPartida);
+		String sql = "select DATEDIFF(DAY,'" + fechaPartida + "','" + fechaFin + "')";
 		@SuppressWarnings("null")
 		int dif = jdbcTemplate.queryForObject(sql, Integer.class);
 		if(dif<=0) {

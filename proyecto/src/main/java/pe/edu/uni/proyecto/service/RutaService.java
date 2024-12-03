@@ -20,11 +20,10 @@ public class RutaService {
     public void registrarRuta(RutaDto bean) {
         validarNombreRuta(bean.getNombre());
         validarRuta(bean.getOrigen(), bean.getDestino());
-        validarDistancia(bean.getDistancia());
-
         if (bean.getOrigen().equals(bean.getDestino())) {
             throw new IllegalArgumentException("El origen y el destino no pueden ser iguales.");
         }
+        validarDistancia(bean.getDistancia());
 
         String sql = """
                 INSERT INTO ruta (nombre_ruta, origen, destino, distancia_km)
