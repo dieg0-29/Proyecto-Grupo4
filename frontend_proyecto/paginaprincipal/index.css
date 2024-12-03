@@ -5,9 +5,12 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #1a1a1a, #0d0d0d); /* Fondo oscuro con gradiente */
+    font-family: 'Roboto', Arial, sans-serif; /* Usar la fuente Roboto */
+    background: linear-gradient(135deg, #6a11cb, #2575fc); /* Fondo similar al login */
     color: #ffffff; /* Texto blanco */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .header-container {
@@ -17,10 +20,12 @@ body {
     padding: 20px;
     background-color: rgba(30, 30, 30, 0.9); /* Fondo del encabezado con transparencia */
     border-bottom: 2px solid #444; /* Línea inferior */
+    color: #ffffff;
 }
 
 h1 {
     font-size: 24px;
+    margin: 0;
 }
 
 nav {
@@ -29,38 +34,70 @@ nav {
 
 .header-button {
     margin-left: 15px;
+    background-color: #6a11cb; /* Color similar al botón de login */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    font-size: 16px;
+    color: white;
+    font-family: 'Roboto', Arial, sans-serif; /* Usar la fuente Roboto */
+}
+
+.header-button:hover {
+    background-color: #2575fc; /* Color más oscuro al pasar el ratón */
+    transform: scale(1.05); /* Aumentar ligeramente el tamaño */
+}
+
+.header-button:active {
+    transform: scale(0.95); /* Reducir ligeramente el tamaño al hacer clic */
 }
 
 main {
-    padding: 20px;
+    padding: 40px 20px; /* Aumentar el padding */
     text-align: center;
+    flex: 1;
 }
 
-h2, h3 {
-    margin: 20px 0;
+h2 {
+    margin: 40px 0 50px; /* Aumentar margen inferior */
+    color: #ffffff; /* Color blanco */
+    font-size: 48px; /* Tamaño de letra ajustado */
+    font-family: 'RiotSquad', sans-serif; /* Usar la fuente RiotSquad */
+    font-weight: normal; /* Quitar negrita */
+}
+
+h3 {
+    margin: 60px 0 30px; /* Aumentar margen superior e inferior */
+    color: #ffffff; /* Color blanco */
+    font-size: 48px; /* Tamaño de letra ajustado */
+    font-family: 'RiotSquad', sans-serif; /* Usar la fuente RiotSquad */
+    font-weight: normal; /* Quitar negrita */
 }
 
 .button-container {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    margin: 20px 0;
+    margin: 50px 0; /* Aumentar espacio entre contenedores de botones */
 }
 
 .button {
-    background-color: #007BFF; /* Color azul */
+    background-color: #da16d0; /* Cambiar color de fondo a #00B050 */
     color: white;
     border: none;
     border-radius: 5px;
-    padding: 10px 20px;
-    margin: 10px;
+    padding: 15px 25px; /* Botones más grandes */
+    margin: 15px; /* Aumentar margen entre botones */
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
-    font-size: 16px;
+    font-size: 30px; /* Tamaño de letra ajustado a 30px */
+    font-family: 'Modern No. 20', sans-serif; /* Usar la fuente Biome */
 }
 
 .button:hover {
-    background-color: #0056b3; /* Color azul más oscuro al pasar el ratón */
+    background-color: #009933; /* Color más oscuro al pasar el ratón */
     transform: scale(1.05); /* Aumentar ligeramente el tamaño */
 }
 
@@ -72,7 +109,9 @@ footer {
     text-align: center;
     padding: 20px;
     background-color: rgba(30, 30, 30, 0.9); /* Fondo del pie de página con transparencia */
+    color: #ffffff;
     position: relative;
     bottom: 0;
     width: 100%;
+    font-family: 'Roboto', Arial, sans-serif; /* Usar la fuente Roboto */
 }

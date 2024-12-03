@@ -3,6 +3,7 @@ document.getElementById('inicioButton').onclick = function() {
 };
 
 document.getElementById('serviciosButton').onclick = function() {
+    // Acción para el botón de servicios
 };
 
 document.getElementById('cerrarSesionButton').onclick = function() {
@@ -32,6 +33,7 @@ document.getElementById('tallerButton').onclick = function() {
 document.getElementById('rutaButton').onclick = function() {
     window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/ruta/pagruta/pagruta.html';
 };
+
 // Mostrar el nombre de usuario si está guardado en localStorage
 const username = localStorage.getItem('name');
 if (username) {
