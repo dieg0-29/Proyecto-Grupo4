@@ -1,6 +1,6 @@
 body {
     font-family: 'Roboto', Arial, sans-serif;
-    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    background: linear-gradient(135deg, #6a11cb, #2575fc); /* Mantener el fondo actual */
     color: #ffffff;
     display: flex;
     justify-content: center;
@@ -15,18 +15,18 @@ body {
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-    width: 400px;
+    width: 400px; /* Ajustado para ser más cuadrado */
+    height: 450px; /* Ajustado para ser más cuadrado */
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .login-header h2 {
     font-size: 28px;
     margin-bottom: 10px;
     color: #6a11cb;
-}
-
-.aptos-display {
-    font-family: 'Aptos Display', Arial, sans-serif;
 }
 
 .login-header p {
@@ -37,33 +37,32 @@ body {
 .form-group {
     margin-bottom: 25px;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .form-group label {
-    display: flex;
-    align-items: center;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 15px;
-    background: #f9f9f9;
-}
-
-.form-group i {
-    margin-right: 10px;
-    color: #6a11cb;
+    display: block;
+    margin-bottom: 5px;
+    color: #333333;
+    width: 100%;
+    text-align: left;
 }
 
 .form-group input {
-    border: none;
-    outline: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
     width: 100%;
     font-size: 16px;
-    color: #333333;
+    color: #0000ff; /* Azul claro */
     background: none;
+    text-align: left; /* Texto alineado a la izquierda */
 }
 
 .form-group input::placeholder {
-    color: #aaa;
+    color: #0000ff; /* Azul claro */
 }
 
 .btn {
@@ -83,16 +82,5 @@ body {
 }
 
 .footer {
-    margin-top: 20px;
-    font-size: 14px;
+    display: none; /* Ocultar el pie de página */
 }
-
-.footer a {
-    color: #6a11cb;
-    text-decoration: none;
-}
-
-.footer a:hover {
-    text-decoration: underline;
-}
-
