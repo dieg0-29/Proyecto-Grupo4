@@ -70,15 +70,21 @@ async function guardarRuta(id, button) {
     const row = button.parentNode.parentNode; // Obtener la fila
     const cells = row.getElementsByTagName("td"); // Cambiar a "td"
 
+    // Crear el objeto updatedData
     const updatedData = {
-        Id_ruta: id,
-        Nombre: cells[1].getElementsByTagName("input")[0].value,
-        Origen: cells[2].getElementsByTagName("input")[0].value,
-        Destino: cells[3].getElementsByTagName("input")[0].value,
-        Distancia: cells[4].getElementsByTagName("input")[0].value
+        idRuta: id, // Cambia 'Id_ruta' a 'idRuta'
+        
+        origen: cells[2].getElementsByTagName("input")[0].value, // Cambia 'Origen' a 'origen'
+        destino: cells[3].getElementsByTagName("input")[0].value, // Cambia 'Destino' a 'destino'
+        distancia: parseFloat(cells[4].getElementsByTagName("input")[0].value), // Cambia 'Distancia' a 'distancia'
+        nombre: cells[1].getElementsByTagName("input")[0].value, // Cambia 'Nombre' a 'nombre'
     };
-
-    console.log("Datos a enviar:", updatedData); // Agregar este log
+    if (updatedData.nombre === '' || updatedData.origen === '' || updatedData.destino === '' || isNaN(updatedData.distancia) || updatedData.distancia <= 0) {
+        alert("Por favor, completa todos los campos correctamente.");
+        return;
+    }
+    console.log(updatedData);
+    console.log("Datos a enviar:", updatedData); // Log de los datos a enviar
 
     try {
         const response = await fetch(`http://localhost:8080/api/ruta/modificar/${id}`, {
@@ -89,21 +95,24 @@ async function guardarRuta(id, button) {
             body: JSON.stringify(updatedData)
         });
 
-        console.log("Respuesta del servidor:", response); // Agregar este log
+        console.log("Respuesta del servidor:", response); // Log de la respuesta del servidor
 
         if (!response.ok) {
             const errorText = await response.text(); // Leer el cuerpo de la respuesta
+            console.error("Error en la respuesta del servidor:", errorText); // Log del error del servidor
             throw new Error(`Error en la actualización: ${response.status} ${response.statusText} - ${errorText}`);
         }
 
         // Actualiza la tabla con los nuevos datos
+        console.log("Actualizando la tabla con los nuevos datos:", updatedData); // Log antes de actualizar la tabla
         mostrarDatos([updatedData]);
 
         // Cambiar el botón de vuelta a "Editar"
         button.innerHTML = "Editar";
         button.setAttribute("onclick", `editarRuta(${id}, this)`);
+        console.log("El botón ha sido cambiado de vuelta a 'Editar'."); // Log de cambio de botón
     } catch (error) {
-        console.error('Hubo un problema con la actualización:', error);
+        console.error('Hubo un problema con la actualización:', error); // Log del error en la actualización
         alert('Error al actualizar la ruta.');
     }
 }

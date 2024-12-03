@@ -36,7 +36,7 @@ public class RutaService {
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void modificarRuta(int id, RutaDto datosModificados) {
-        validarNombreRutaModificacion(datosModificados.getNombre());
+        //validarNombreRutaModificacion(datosModificados.getNombre());
 
         if (datosModificados.getOrigen().equals(datosModificados.getDestino())) {
             throw new IllegalArgumentException("El origen y el destino no pueden ser iguales.");
@@ -51,7 +51,7 @@ public class RutaService {
                 SET origen = ?, destino = ?, distancia_km = ?, nombre_ruta= ?
                 WHERE id_ruta = ?
                 """;
-
+        
         Object[] params = {
             datosModificados.getOrigen(),
             datosModificados.getDestino(),

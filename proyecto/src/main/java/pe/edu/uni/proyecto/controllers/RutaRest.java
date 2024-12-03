@@ -34,7 +34,10 @@ public class RutaRest {
     }
 
     @PutMapping("/modificar/{id}")
-    public ResponseEntity<ResponseMessage> modificarRuta(@RequestParam int id, @RequestBody RutaDto datosModificados) {
+    public ResponseEntity<ResponseMessage> modificarRuta(@PathVariable int id, @RequestBody RutaDto datosModificados) {
+        if (datosModificados == null) {
+            return new ResponseEntity<>(new ResponseMessage("Error: datosModificados no puede ser nulo."), HttpStatus.BAD_REQUEST);
+        }
         try {
             rutaService.modificarRuta(id, datosModificados);
             return ResponseEntity.ok(new ResponseMessage("Ruta modificada exitosamente."));
