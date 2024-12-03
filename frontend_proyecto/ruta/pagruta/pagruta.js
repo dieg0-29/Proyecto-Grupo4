@@ -36,8 +36,8 @@ function mostrarDatos(datos) {
             <td>${item.Origen}</td>
             <td>${item.Destino}</td>
             <td>${item.Distancia}</td>
-            <td><button class="button" onclick="editarRuta(${item.Id_ruta})">Editar</button></td>
-            <td><button class="button" onclick="eliminarRuta(${item.Id_ruta})">Eliminar</button></td>
+            <td><button class="button" onclick="editarRuta(${item.Id_ruta}, this)">Editar</button></td>
+            <td><button class="button" onclick="eliminarRuta(${item.Id_ruta}, this)">Eliminar</button></td>
         `;
 
         tablaBody.appendChild(fila);
@@ -68,7 +68,7 @@ async function editarRuta(id, button) {
 
 async function guardarRuta(id, button) {
     const row = button.parentNode.parentNode; // Obtener la fila
-    const cells = row.getElementsByTagName("td");
+    const cells = row.getElementsByTagName("td"); // Cambiar a "td"
 
     const updatedData = {
         Id_ruta: id,
@@ -78,8 +78,10 @@ async function guardarRuta(id, button) {
         Distancia: cells[4].getElementsByTagName("input")[0].value
     };
 
+    console.log("Datos a enviar:", updatedData); // Agregar este log
+
     try {
-        const response = await fetch(`http://localhost:8080/api/ruta/editar/${Nombre}`, {
+        const response = await fetch(`http://localhost:8080/api/ruta/modificar/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -87,8 +89,11 @@ async function guardarRuta(id, button) {
             body: JSON.stringify(updatedData)
         });
 
+        console.log("Respuesta del servidor:", response); // Agregar este log
+
         if (!response.ok) {
-            throw new Error(`Error en la actualización: ${response.status} ${response.statusText}`);
+            const errorText = await response.text(); // Leer el cuerpo de la respuesta
+            throw new Error(`Error en la actualización: ${response.status} ${response.statusText} - ${errorText}`);
         }
 
         // Actualiza la tabla con los nuevos datos

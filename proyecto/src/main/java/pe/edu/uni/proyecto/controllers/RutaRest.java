@@ -33,10 +33,10 @@ public class RutaRest {
         }
     }
 
-    @PutMapping("/modificar")
-    public ResponseEntity<ResponseMessage> modificarRuta(@RequestParam String nombreRuta, @RequestBody RutaDto datosModificados) {
+    @PutMapping("/modificar/{id}")
+    public ResponseEntity<ResponseMessage> modificarRuta(@RequestParam int id, @RequestBody RutaDto datosModificados) {
         try {
-            rutaService.modificarRuta(nombreRuta, datosModificados);
+            rutaService.modificarRuta(id, datosModificados);
             return ResponseEntity.ok(new ResponseMessage("Ruta modificada exitosamente."));
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(new ResponseMessage("Error: " + e.getMessage()), HttpStatus.BAD_REQUEST);
