@@ -145,6 +145,7 @@ public class RutaService {
         }
     }
 
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     private void validarDistancia(double distancia) {
         if (distancia <= 0 || distancia > 999.99) {
             throw new IllegalArgumentException("La distancia debe ser mayor a 0 y no mayor a 999.99.");
