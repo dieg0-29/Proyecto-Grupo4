@@ -41,7 +41,7 @@ public class ConsultaIncidenteFrec {
 	        
 	        // Verificar si el conteo es nulo o diferente de 1
 	        if (cont == null || cont != 1) {
-	            throw new IllegalArgumentException("El id_tipo no es correcto o no existe.");
+	            throw new IllegalArgumentException("El tipo de incidente no es correcto o no existe.");
 	        }
 	    } catch (DataAccessException e) {
 	        // Manejo de excepciones relacionadas con la base de datos

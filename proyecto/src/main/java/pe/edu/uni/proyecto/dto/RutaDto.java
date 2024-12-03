@@ -11,18 +11,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class RutaDto {
 
-    @JsonProperty("Id_ruta")
+    @JsonProperty("idRuta")
     private int idRuta;
 
-    @JsonProperty("Nombre")
+    @JsonProperty("nombre")
     private String nombre;
 
-    @JsonProperty("Origen")
+    @JsonProperty("origen")
     private String origen;
 
-    @JsonProperty("Destino")
+    @JsonProperty("destino")
     private String destino;
 
-    @JsonProperty("Distancia")
+    @JsonProperty("distancia")
     private double distancia;
 }
