@@ -23,7 +23,8 @@ public class ProgramacionService {
 	public List<Map<String, Object>> obtenerSinFechaFinReal() {
 		String sql = """
 				    SELECT id_programacion, id_carro, id_empleado, id_conductor, id_ruta,
-				    fecha_asignacion, fecha_fin_programada 
+				    CONVERT(VARCHAR, fecha_asignacion, 103) as fecha_asignacion, 
+					CONVERT(VARCHAR, fecha_fin_programada, 103) as fecha_fin_programada 
 				    FROM Programacion
 				    WHERE fecha_fin_real IS NULL
 				""";
@@ -35,7 +36,9 @@ public class ProgramacionService {
 	public List<Map<String, Object>> obtenerConFechaFinReal() {
 		String sql = """
 				    SELECT id_programacion, id_carro, id_empleado, id_conductor, id_ruta,
-				    fecha_asignacion, fecha_fin_programada, fecha_fin_real
+				    CONVERT(VARCHAR, fecha_asignacion, 103) as fecha_asignacion, 
+					CONVERT(VARCHAR, fecha_fin_programada, 103) as fecha_fin_programada , 
+					CONVERT(VARCHAR, fecha_fin_real, 103) as fecha_fin_real
 				    FROM Programacion
 				    WHERE fecha_fin_real IS NOT NULL
 				""";
@@ -51,11 +54,10 @@ public class ProgramacionService {
 		validarCarro(bean.getIdCarro());
 		validarEstadoCarro(bean.getIdCarro());
 		validarConductor(bean.getIdConductor());
-		validarEstadoConductor(bean.getIdConductor());
 		validarRuta(bean.getIdRuta());
-		bean.setFechaAsignacion(convertirFecha(bean.getFechaAsignacion()));
+		bean.setFechaAsignacion(bean.getFechaAsignacion());
 		validarFechaPartida(bean.getIdConductor(), bean.getFechaAsignacion());
-		bean.setFechaFinProgramada(convertirFecha(bean.getFechaFinProgramada()));
+		bean.setFechaFinProgramada(bean.getFechaFinProgramada());
 		validarFechaFin(bean.getFechaFinProgramada(), bean.getFechaAsignacion());
 		//Registrar Programacion
 		registrarProgamacion(bean);		
@@ -97,16 +99,7 @@ public class ProgramacionService {
 			throw new RuntimeException("Conductor " + idConductor  + " no existe");
 		}
 	}
-	
-	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
-	private void validarEstadoConductor(int idConductor) {
-		String sql = "select id_estado estado from CONDUCTOR where id_conductor = ?";
-		int estado = jdbcTemplate.queryForObject(sql, Integer.class, idConductor);
-		if(estado != 1) {
-			throw new RuntimeException("Conductor " + idConductor  + " no disponible");
-		}
-	}
-	
+		
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
 	private void validarRuta(int idRuta) {
 		String sql = "select count(1) cont from RUTA where id_ruta = ?";
@@ -139,6 +132,7 @@ public class ProgramacionService {
 		sql += "where id_conductor = ? order by fecha_fin_programada desc";
 		String fecha = jdbcTemplate.queryForObject(sql, String.class, idConductor);
 		sql = "select DATEDIFF(DAY,'" + fecha + "','" + fechaPartida + "')";
+		@SuppressWarnings("null")
 		int dif = jdbcTemplate.queryForObject(sql, Integer.class);
 		if(dif<0) {
 			throw new RuntimeException("Fecha de partida " + fechaPartida  + " no valida");
@@ -150,6 +144,7 @@ public class ProgramacionService {
 		fechaPartida = "'" + fechaPartida + "'";
 		fechaFin = "'" + fechaFin + "'";
 		String sql = "select DATEDIFF(DAY," + fechaPartida + "," + fechaFin + ")";
+		@SuppressWarnings("null")
 		int dif = jdbcTemplate.queryForObject(sql, Integer.class);
 		if(dif<=0) {
 			throw new RuntimeException("Fecha final " + fechaFin  + " no valida");
@@ -163,8 +158,7 @@ public class ProgramacionService {
 				bean.getIdRuta(),bean.getFechaAsignacion(),bean.getFechaFinProgramada());
 		sql = "update carro set id_estado = 5 where id_carro = ?";
 		jdbcTemplate.update(sql,bean.getIdCarro());
-		sql = "update conductor set id_estado = 2 where id_conductor = ?";
-		jdbcTemplate.update(sql,bean.getIdConductor());
+		
 	}
 	
 }

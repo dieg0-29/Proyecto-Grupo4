@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "acda64f9-4da4-47cc-b1a9-19236dded46e",
+		"_postman_id": "6f67bc4f-30f6-4c1d-95f3-40a23b3bb05f",
 		"name": "PROYECTO - TRANSPORTE",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "34898503"
+		"_exporter_id": "34967537",
+		"_collection_link": "https://crimson-crater-437291.postman.co/workspace/UNI-FIIS_2024-1_WS_POO_SEC-V~d1f8eb87-1c03-4832-892c-da5f248983a3/collection/34967537-6f67bc4f-30f6-4c1d-95f3-40a23b3bb05f?action=share&source=collection_link&creator=34967537"
 	},
 	"item": [
 		{
@@ -509,7 +510,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/registrar/conductor",
+							"raw": "http://localhost:8080/api/conductor/registrar",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -517,8 +518,8 @@
 							"port": "8080",
 							"path": [
 								"api",
-								"registrar",
-								"conductor"
+								"conductor",
+								"registrar"
 							]
 						}
 					},
@@ -1012,15 +1013,15 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/registrar/incidente",
+							"raw": "localhost:8080/api/incidente/registrar",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"api",
-								"registrar",
-								"incidente"
+								"incidente",
+								"registrar"
 							]
 						}
 					},
@@ -1068,7 +1069,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id_empleado\": 1,\r\n    \"id_taller\": 2,\r\n    \"id_carro\": 3,\r\n    \"calificacion\": 4.5,\r\n    \"fecha_inicio\": \"2024-11-20\",\r\n    \"fecha_salida_programada\": \"2024-11-25\",\r\n    \"costo\": 1200.50,\r\n    \"detalle\": \"Cambio de frenos y mantenimiento general\"\r\n}",
+							"raw": "{\r\n    \"id_empleado\": 2,\r\n    \"id_taller\": 2,\r\n    \"id_carro\": 3,\r\n    \"calificacion\": 4.5,\r\n    \"fecha_inicio\": \"2024-11-20\",\r\n    \"fecha_salida_programada\": \"2024-11-25\",\r\n    \"costo\": 1200.50,\r\n    \"detalle\": \"Cambio de frenos y mantenimiento general\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1076,7 +1077,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/registrar/mantenimiento",
+							"raw": "http://localhost:8080/api/mantenimiento/registrar",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1084,8 +1085,8 @@
 							"port": "8080",
 							"path": [
 								"api",
-								"registrar",
-								"mantenimiento"
+								"mantenimiento",
+								"registrar"
 							]
 						}
 					},
@@ -2073,6 +2074,83 @@
 								"carro",
 								"eliminar",
 								"MNO345"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "LISTA MANTENIMIENTO",
+			"item": [
+				{
+					"name": "LISTA MANTENIMIENTOS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/mantenimiento/lista",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"mantenimiento",
+								"lista"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "LISTA CONDUCTOR",
+			"item": [
+				{
+					"name": "LISTA CONDUCTORES",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/conductor/lista",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"conductor",
+								"lista"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "LISTA INCIDENTE",
+			"item": [
+				{
+					"name": "LISTA INCIDENTES",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/incidente/lista",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"incidente",
+								"lista"
 							]
 						}
 					},

@@ -52,6 +52,7 @@ public class FinalizarService {
        }
 	}
 	
+	@SuppressWarnings("null")
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
 	private void validarFechaReal(int idProg, String fecha) {
 		String sql = "select fecha_asignacion from PROGRAMACION where id_programacion = ?";

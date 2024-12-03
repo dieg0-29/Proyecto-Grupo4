@@ -44,7 +44,7 @@ public class IncidenteRutaService {
 	
 	private static class IncidenteRutaDtoRowMapper implements RowMapper<IncidenteRutaDto> {
         @Override
-        public IncidenteRutaDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+        public IncidenteRutaDto mapRow(@SuppressWarnings("null") ResultSet rs, int rowNum) throws SQLException {
             IncidenteRutaDto bean = new IncidenteRutaDto();
             bean.setNombreRuta(rs.getString("nombre_ruta"));
             bean.setTotalIncidentes(rs.getInt("total_incidentes"));

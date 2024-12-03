@@ -1,5 +1,7 @@
 package pe.edu.uni.proyecto.service;
 
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,16 @@ public class ConductorService {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	public List<Map<String, Object>> obtenerListaConductores() {
+		String sql = "SELECT id_conductor Id_conductor,id_estado Estado, "
+				+ "nombre Nombre,apellido Apellido,dni DNI, "
+				+ "correo Correo,telefono Telefono "
+				+ "FROM CONDUCTOR "
+				+ "ORDER BY 1";
+		return jdbcTemplate.queryForList(sql);
+	}
+
 	
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
 	private void validarTelefono(String telefono) {

@@ -33,7 +33,7 @@ document.getElementById('rutaButton').onclick = function() {
     window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/ruta/pagruta/pagruta.html';
 };
 // Mostrar el nombre de usuario si está guardado en localStorage
-const username = localStorage.getItem('username');
+const username = localStorage.getItem('name');
 if (username) {
     document.getElementById('welcomeMessage').innerText = `Bienvenido, ${username}!`; // Mensaje de bienvenida
 }

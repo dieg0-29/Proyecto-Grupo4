@@ -56,9 +56,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-/* Función para mostrar mensajes
+// Función para mostrar mensajes
 function mostrarMensaje(mensaje) {
     const mensajeElement = document.getElementById('mensaje');
-    mensajeElement.innerText = mensaje; Establece el mensaje
-    mensajeElement.style.display = 'block'; Asegúrate de que el mensaje sea visible
-}*/
+    mensajeElement.innerText = mensaje; //Establece el mensaje
+    mensajeElement.style.display = 'block'; //Asegúrate de que el mensaje sea visible
+}

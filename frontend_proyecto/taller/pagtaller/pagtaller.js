@@ -126,7 +126,7 @@ document.getElementById('cerrarSesionButton').onclick = function() {
 document.getElementById('nuevoRegistroButton').onclick = function() {
     window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/taller/taller.html';
 };
-const username = localStorage.getItem('username');
+const username = localStorage.getItem('name');
 if (username) {
     document.getElementById('welcomeMessage').innerText = `Bienvenido, ${username}!`; // Mensaje de bienvenida
 }

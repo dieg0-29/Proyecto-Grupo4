@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
         event.preventDefault();
 
         // Captura los valores de los campos del formulario
-        const idEmpleado = document.getElementById('id_empleado').value.trim();
+        const idEmpleado = id;
         const idCarro = document.getElementById('id_carro').value.trim();
         const idTaller = document.getElementById('id_taller').value.trim();
         const calificacion = document.getElementById('calificacion').value.trim();

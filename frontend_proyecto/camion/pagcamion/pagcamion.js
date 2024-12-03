@@ -36,6 +36,7 @@ function mostrarDatos(datos) {
             <td>${item.estado}</td>
             <td>${item.placa}</td>
             <td>${item.prox_mant}</td>
+            <td><button class="button" onclick="registrar_mant(${item.idCarro})">Registrar Mantenimiento</button></td>
             <td><button class="button" onclick="editarRuta(${item.idCarro})">Editar</button></td>
             <td><button class="button" onclick="eliminarRuta(${item.idCarro})">Eliminar</button></td>
         `;
@@ -44,7 +45,7 @@ function mostrarDatos(datos) {
     });
 }
 
-async function editarRuta(id, button) {
+async function editar(id, button) {
     const row = button.parentNode.parentNode; // Obtener la fila
     const cells = row.getElementsByTagName("td");
 
@@ -63,10 +64,10 @@ async function editarRuta(id, button) {
 
     // Cambiar el botón a "Guardar"
     button.innerHTML = "Guardar";
-    button.setAttribute("onclick", `guardarRuta(${id}, this)`);
+    button.setAttribute("onclick", `guardar(${id}, this)`);
 }
 
-async function guardarRuta(id, button) {
+async function guardar(id, button) {
     const row = button.parentNode.parentNode; // Obtener la fila
     const cells = row.getElementsByTagName("td");
 
@@ -79,7 +80,7 @@ async function guardarRuta(id, button) {
     };
 
     try {
-        const response = await fetch(`http://localhost:8080/api/ruta/editar/${Nombre}`, {
+        const response = await fetch(`http://localhost:8080/api/editar/editar/${Nombre}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -102,10 +103,10 @@ async function guardarRuta(id, button) {
         alert('Error al actualizar la ruta.');
     }
 }
-function eliminarRuta(id) {
+/*function eliminarRuta(id) {
     // Lógica para eliminar la ruta
     console.log(`Eliminar ruta con ID: ${id}`);
-}
+}*/
 
 // Llamada a la función para obtener y mostrar los datos
 obtenerDatos();
@@ -125,7 +126,7 @@ document.getElementById('cerrarSesionButton').onclick = function() {
 document.getElementById('nuevoRegistroButton').onclick = function() {
     window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/camion/camion.html';
 };
-const username = localStorage.getItem('username');
+const username = localStorage.getItem('name');
 if (username) {
     document.getElementById('welcomeMessage').innerText = `Bienvenido, ${username}!`; // Mensaje de bienvenida
 }

@@ -22,8 +22,8 @@ public class CarroService {
 	
 	public List<Map<String, Object>> obtenerCarrosConDescripcionEstado() {
 		String sql = """
-				SELECT t1.id_carro, t2.descripcion AS estado, t1.placa, t1.prox_mant
-				FROM CARRO t1 INNER JOIN EST_CARRO t2 ON t1.id_estado = t2.id_estado
+				SELECT t1.id_carro, t2.descripcion AS estado, t1.placa, CONVERT(VARCHAR, t1.prox_mant, 103) AS prox_mant
+                FROM CARRO t1 INNER JOIN EST_CARRO t2 ON t1.id_estado = t2.id_estado
 					    """;
 		return jdbcTemplate.queryForList(sql);
 	}
@@ -31,8 +31,7 @@ public class CarroService {
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
 	public void registrarCarro(CarroDto bean) {
 		Validarcarro(bean.getPlaca());
-		validarEstado(bean.getIdEstado());
-		bean.setProxMant(convertirFecha(bean.getProxMant()));
+		bean.setProxMant(bean.getProxMant());
 		//Registrar carro
 		String sql="""
 				insert into carro(id_estado, placa, prox_mant) values(?,?,?)
@@ -56,12 +55,12 @@ public class CarroService {
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
     public void editarCarro(CarroDto bean) {
         validarCarroNoExiste(bean.getPlaca());
-        validarEstado(bean.getIdEstado());
-        bean.setProxMant(convertirFecha(bean.getProxMant()));
+       bean.getIdEstado();
+        bean.setProxMant(bean.getProxMant());
         String sql = """
             UPDATE carro SET id_estado = ?, prox_mant = ? WHERE placa = ?
         """;
-        Object[] datos = { bean.getIdEstado(), bean.getProxMant(), bean.getPlaca() };
+        Object[] datos = { 1, bean.getProxMant(), bean.getPlaca() };
         jdbcTemplate.update(sql, datos);
         System.out.println("Carro con placa " + bean.getPlaca() + " actualizado correctamente.");
     }
