@@ -56,12 +56,12 @@ public class CarroService {
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
     public void editarCarro(CarroDto bean) {
         validarCarroNoExiste(bean.getPlaca());
-       bean.getIdEstado();
-        bean.setProxMant(bean.getProxMant());
+        validarEstado(bean.getIdEstado());
+        bean.setProxMant(convertirFecha(bean.getProxMant()));
         String sql = """
             UPDATE carro SET id_estado = ?, prox_mant = ? WHERE placa = ?
         """;
-        Object[] datos = { 1, bean.getProxMant(), bean.getPlaca() };
+        Object[] datos = { bean.getIdEstado(), bean.getProxMant(), bean.getPlaca() };
         jdbcTemplate.update(sql, datos);
         System.out.println("Carro con placa " + bean.getPlaca() + " actualizado correctamente.");
     }
