@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "6f67bc4f-30f6-4c1d-95f3-40a23b3bb05f",
+		"_postman_id": "55741c0f-6396-4e83-b538-9ed7ec9ef9d2",
 		"name": "PROYECTO - TRANSPORTE",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "34967537",
-		"_collection_link": "https://crimson-crater-437291.postman.co/workspace/UNI-FIIS_2024-1_WS_POO_SEC-V~d1f8eb87-1c03-4832-892c-da5f248983a3/collection/34967537-6f67bc4f-30f6-4c1d-95f3-40a23b3bb05f?action=share&source=collection_link&creator=34967537"
+		"_exporter_id": "39400177",
+		"_collection_link": "https://proyecto-transporte.postman.co/workspace/Proyecto---Transporte-Workspace~dbd70176-8779-486c-b5a8-afb2102285a5/collection/39367313-55741c0f-6396-4e83-b538-9ed7ec9ef9d2?action=share&source=collection_link&creator=39400177"
 	},
 	"item": [
 		{
@@ -898,6 +898,90 @@
 								"api",
 								"registrar",
 								"ruta"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "modificarRuta",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"Origen\": \"Lima\",\r\n  \"Destino\": \"Arequipa\",\r\n  \"Distancia\": 100.50\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/ruta/modificar?nombreRuta=Ruta 2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"ruta",
+								"modificar"
+							],
+							"query": [
+								{
+									"key": "nombreRuta",
+									"value": "Ruta 2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "borrarRuta",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/ruta/borrar?nombreRuta=Ruta 1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"ruta",
+								"borrar"
+							],
+							"query": [
+								{
+									"key": "nombreRuta",
+									"value": "Ruta 1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListaRuta",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/ruta/listar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"ruta",
+								"listar"
 							]
 						}
 					},

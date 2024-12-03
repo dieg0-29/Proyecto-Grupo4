@@ -94,7 +94,7 @@ public class MantenimientoService {
 		String sql = "select count(1) cont from Taller where id_taller = ?";
 		int cont = jdbcTemplate.queryForObject(sql, Integer.class, id_taller);
 		if(cont != 1) {
-			throw new RuntimeException("Empleado " + id_taller  + " no existe");
+			throw new RuntimeException("Taller " + id_taller  + " no existe");
 		}
 		
 	}

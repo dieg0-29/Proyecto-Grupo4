@@ -31,6 +31,7 @@ public class CarroService {
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
 	public void registrarCarro(CarroDto bean) {
 		Validarcarro(bean.getPlaca());
+		validarEstado(bean.getIdEstado());
 		bean.setProxMant(bean.getProxMant());
 		//Registrar carro
 		String sql="""

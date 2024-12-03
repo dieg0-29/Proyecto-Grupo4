@@ -55,7 +55,7 @@ public class ConductorService {
 		try {
 		String sql = """
 			insert into CONDUCTOR
-			values(?,?,?,?,?)				
+			values(1,?,?,?,?,?)				
 		""";
 		
 		jdbcTemplate.update(sql, bean.getNombre(), bean.getApellido(), bean.getDni(), bean.getCorreo(), bean.getTelefono());

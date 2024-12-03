@@ -31,13 +31,13 @@ INSERT INTO EST_CONDUCTOR (descripcion) VALUES
 ('En Ruta');
 go
 INSERT INTO CONDUCTOR (id_estado, nombre, apellido, dni, correo, telefono) VALUES 
-(1, 'Juan', 'Pérez', '12345678', 'jperez@gmail.com', '987654321'),
-(1, 'María', 'Gómez', '23456789', 'mgomez@gmail.com', '987654322'),
+(2, 'Juan', 'Pérez', '12345678', 'jperez@gmail.com', '987654321'),
+(2, 'María', 'Gómez', '23456789', 'mgomez@gmail.com', '987654322'),
 (1, 'Carlos', 'Sánchez', '34567890', 'csanchez@gmail.comm', '987654323'),
-(1, 'Ana', 'Martínez', '45678901', 'amartinez@gmail.com', '987654324'),
+(2, 'Ana', 'Martínez', '45678901', 'amartinez@gmail.com', '987654324'),
 (1, 'Luis', 'Torres', '56789012', 'ltorres@gmail.com', '987654325'),
 (1, 'Martin', 'Feliciano', '27831920', 'mfeliciano@gmail.com', '983439011'),
-(1, 'Luz', 'Rodriguez', '45629102', 'lrodriguez@gmail.com', '982390121'),
+(2, 'Luz', 'Rodriguez', '45629102', 'lrodriguez@gmail.com', '982390121'),
 (1, 'Karina', 'Hernandez', '28730021', 'khernandez@gmail.com', '94392300'),
 (1, 'Leandro', 'Torres', '23789012', 'ltorres@gmail.com', '900234598'),
 (1, 'Mauricio', 'Guerrero', '43189054', 'mguerrero@gmail.com', '943223441');
