@@ -19,11 +19,12 @@ public class RutaService {
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void registrarRuta(RutaDto bean) {
         validarNombreRuta(bean.getNombre());
+        validarNombre(bean);
         validarRuta(bean.getOrigen(), bean.getDestino());
+        validarDistancia(bean.getDistancia());
         if (bean.getOrigen().equals(bean.getDestino())) {
             throw new IllegalArgumentException("El origen y el destino no pueden ser iguales.");
         }
-        validarDistancia(bean.getDistancia());
 
         String sql = """
                 INSERT INTO ruta (nombre_ruta, origen, destino, distancia_km)
@@ -122,6 +123,13 @@ public class RutaService {
 
         if (count > 0) {
             throw new RuntimeException("El nombre de la ruta ya está registrado en el sistema.");
+        }
+    }
+    
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    private void validarNombre(RutaDto bean) {
+    	if (bean.getOrigen().equals(bean.getDestino())) {
+            throw new IllegalArgumentException("El origen y el destino no pueden ser iguales.");
         }
     }
 

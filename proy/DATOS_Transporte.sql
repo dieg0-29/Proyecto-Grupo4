@@ -95,7 +95,7 @@ INSERT INTO PROGRAMACION (id_carro, id_empleado, id_conductor, id_ruta, fecha_as
 (5, 1, 1, 3, '2024-11-02', '2024-12-05', NULL);
 go
 INSERT INTO INCIDENTE (id_empleado, id_programacion, id_tipo, fecha_incidente, detalle) VALUES 
-(2, 1, 1, '2024-11-23', 'Ocurrió 30 minutos después de partir. No hubo heridos'),
+(2, 1, 1, '2024-10-24', 'Ocurrió 30 minutos después de partir. No hubo heridos'),
 (3, 2, 2, '2024-11-11', 'Fallo en el motor. No hubo heridos'),
 (1, 4, 4, '2024-11-12', 'La puerta no cerraba correctamente'),
 (1, 5, 5, '2024-11-13', 'Cinco adolescentes intervenidos. No hubo heridos');
