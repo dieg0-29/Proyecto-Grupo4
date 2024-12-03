@@ -4,10 +4,11 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('incidenteForm').addEventListener('submit', function(event) {
         // Previene el comportamiento por defecto del formulario
         event.preventDefault();
-        
+        const id = localStorage.getItem('id');
+        const id_p = localStorage.getItem('id_p');
         // Captura los valores de los campos del formulario
-        const empleado = document.getElementById('empleado').value.trim();
-        const programacion = document.getElementById('programacion').value.trim();
+        const empleado = id;
+        const programacion = id_p;
         const tipo_incidente = document.getElementById('tipo_incidente').value.trim();
         const fecha = document.getElementById('fecha').value.trim();
         const detalle = document.getElementById('detalle').value.trim();
@@ -33,7 +34,7 @@ function validarCampos(...campos) {
 
 // Función para enviar datos al servidor
 function enviarDatos(data) {
-    fetch('http://localhost:8080/api/registrar/incidente', {
+    fetch('http://localhost:8080/api/incidente/registrar', {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
