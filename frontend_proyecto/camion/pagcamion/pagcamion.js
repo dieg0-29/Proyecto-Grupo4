@@ -45,7 +45,7 @@ function mostrarDatos(datos) {
     });
 }
 
-async function editarRuta(id, button) {
+async function editar(id, button) {
     const row = button.parentNode.parentNode; // Obtener la fila
     const cells = row.getElementsByTagName("td");
 
@@ -64,10 +64,10 @@ async function editarRuta(id, button) {
 
     // Cambiar el botón a "Guardar"
     button.innerHTML = "Guardar";
-    button.setAttribute("onclick", `guardarRuta(${id}, this)`);
+    button.setAttribute("onclick", `guardar(${id}, this)`);
 }
 
-async function guardarRuta(id, button) {
+async function guardar(id, button) {
     const row = button.parentNode.parentNode; // Obtener la fila
     const cells = row.getElementsByTagName("td");
 
@@ -80,7 +80,7 @@ async function guardarRuta(id, button) {
     };
 
     try {
-        const response = await fetch(`http://localhost:8080/api/ruta/editar/${Nombre}`, {
+        const response = await fetch(`http://localhost:8080/api/editar/editar/${Nombre}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -103,10 +103,10 @@ async function guardarRuta(id, button) {
         alert('Error al actualizar la ruta.');
     }
 }
-function eliminarRuta(id) {
+/*function eliminarRuta(id) {
     // Lógica para eliminar la ruta
     console.log(`Eliminar ruta con ID: ${id}`);
-}
+}*/
 
 // Llamada a la función para obtener y mostrar los datos
 obtenerDatos();

@@ -34,8 +34,8 @@ public class RutaService {
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public void modificarRuta(String nombreRuta, RutaDto datosModificados) {
-        validarNombreRutaModificacion(nombreRuta);
+    public void modificarRuta(int id, RutaDto datosModificados) {
+        //validarNombreRutaModificacion(datosModificados.getNombre());
 
         if (datosModificados.getOrigen().equals(datosModificados.getDestino())) {
             throw new IllegalArgumentException("El origen y el destino no pueden ser iguales.");
@@ -47,15 +47,16 @@ public class RutaService {
 
         String sql = """
                 UPDATE ruta 
-                SET origen = ?, destino = ?, distancia_km = ? 
-                WHERE nombre_ruta = ?
+                SET origen = ?, destino = ?, distancia_km = ?, nombre_ruta= ?
+                WHERE id_ruta = ?
                 """;
-
+        
         Object[] params = {
             datosModificados.getOrigen(),
             datosModificados.getDestino(),
             datosModificados.getDistancia(),
-            nombreRuta
+            datosModificados.getNombre(),
+            id
         };
 
         int rowsAffected = jdbcTemplate.update(sql, params);
@@ -144,6 +145,7 @@ public class RutaService {
         }
     }
 
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     private void validarDistancia(double distancia) {
         if (distancia <= 0 || distancia > 999.99) {
             throw new IllegalArgumentException("La distancia debe ser mayor a 0 y no mayor a 999.99.");

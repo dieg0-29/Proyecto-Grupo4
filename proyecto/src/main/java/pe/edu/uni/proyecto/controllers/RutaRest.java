@@ -33,10 +33,13 @@ public class RutaRest {
         }
     }
 
-    @PutMapping("/modificar")
-    public ResponseEntity<ResponseMessage> modificarRuta(@RequestParam String nombreRuta, @RequestBody RutaDto datosModificados) {
+    @PutMapping("/modificar/{id}")
+    public ResponseEntity<ResponseMessage> modificarRuta(@PathVariable int id, @RequestBody RutaDto datosModificados) {
+        if (datosModificados == null) {
+            return new ResponseEntity<>(new ResponseMessage("Error: datosModificados no puede ser nulo."), HttpStatus.BAD_REQUEST);
+        }
         try {
-            rutaService.modificarRuta(nombreRuta, datosModificados);
+            rutaService.modificarRuta(id, datosModificados);
             return ResponseEntity.ok(new ResponseMessage("Ruta modificada exitosamente."));
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(new ResponseMessage("Error: " + e.getMessage()), HttpStatus.BAD_REQUEST);
