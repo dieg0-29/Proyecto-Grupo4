@@ -4,8 +4,10 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('mantenimientoForm').addEventListener('submit', function(event) {
         // Previene el comportamiento por defecto del formulario
         event.preventDefault();
+
         const id = localStorage.getItem('id');
         const id_carro = localStorage.getItem('id_carro');
+        console.log(id,id_carro);
         // Captura los valores de los campos del formulario
         const idEmpleado = id;
         const idCarro = id_carro;
@@ -27,18 +29,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Crea un objeto con los datos a enviar
         const data = {
-            id_empleado: idEmpleado,
-            id_carro: idCarro,
-            id_taller: idTaller,
+            idEmpleado: idEmpleado,
+            idCarro: idCarro,
+            idTaller: idTaller,
             calificacion: calificacion,
-            fecha_inicio: fecha_inicio,
-            fecha_salida_programada: fecha_salida,
+            fechaInicio: fecha_inicio,
+            fechaSalidaProgramada: fecha_salida,
             costo: costo,
             detalle: detalle,
         };
 
         // Envía los datos al servidor usando fetch
-        fetch('http://localhost:8080/api/registrar/mantenimiento', {
+        fetch('http://localhost:8080/api/mantenimiento/registrar', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"

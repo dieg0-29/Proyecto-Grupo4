@@ -72,6 +72,7 @@ async function editarCarro(id, button) {
 async function guardarCarro(id, button) {
     const row = button.parentNode.parentNode; // Obtener la fila
     const cells = row.getElementsByTagName("td"); // Obtener todas las celdas de la fila
+    const est = cells[1].innerText;
 
     // Crear el objeto updatedData
     const updatedData = {
@@ -79,6 +80,11 @@ async function guardarCarro(id, button) {
         placa: cells[2].innerText, // Obtener el valor de la celda directamente
         proxMant: cells[3].getElementsByTagName("input")[0].value, // Obtener el valor del input
     };
+    if((est != 4 && est != 1) || ( est != updatedData.idEstado )){
+        alert("idEstado no modificable")
+        return
+    }
+
 
     // Validar idEstado
     if (updatedData.idEstado != 4 && updatedData.idEstado != 1) {

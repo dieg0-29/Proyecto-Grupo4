@@ -70,20 +70,19 @@ async function editarTaller(id, button) {
 async function guardarTaller(id, button) {
     const row = button.parentNode.parentNode; // Obtener la fila
     const cells = row.getElementsByTagName("td"); // Cambiar a "td"
-
     // Crear el objeto updatedData
     const updatedData = {
         idTaller: id,
-        nombre: cells[1].getElementsByTagName("input")[0].value, // Nombre
-        direccion: cells[2].getElementsByTagName("input")[0].value, // Dirección
-        telefono: cells[3].getElementsByTagName("input")[0].value, // Teléfono
-    };
+        nombre: cells[1].getElementsByTagName("input")[0].value, // Cambia 'Nombre' a 'nombre'
+        direccion: cells[2].getElementsByTagName("input")[0].value, // Cambia 'Origen' a 'origen'
+        telefono: cells[3].getElementsByTagName("input")[0].value, // Cambia 'Destino' a 'destino'
 
+        
+    };
     if (updatedData.nombre === '' || updatedData.direccion === '' || updatedData.telefono === '') {
         alert("Por favor, completa todos los campos correctamente.");
         return;
     }
-
     console.log(updatedData);
     console.log("Datos a enviar:", updatedData); // Log de los datos a enviar
 
@@ -114,7 +113,7 @@ async function guardarTaller(id, button) {
         console.log("El botón ha sido cambiado de vuelta a 'Editar'."); // Log de cambio de botón
     } catch (error) {
         console.error('Hubo un problema con la actualización:', error); // Log del error en la actualización
-        alert('Error al actualizar el taller.');
+        alert('Error al actualizar la taller.');
     }
 }
 async function eliminarTaller(id) {

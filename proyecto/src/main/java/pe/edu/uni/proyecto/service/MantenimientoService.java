@@ -114,6 +114,11 @@ public class MantenimientoService {
 		if(cont != 1) {
 			throw new IllegalArgumentException("Carro " + idCarro  + " no existe");
 		}
+		String sqla = "select id_estado from CARRO where id_carro = ?";
+		int conta = jdbcTemplate.queryForObject(sqla, Integer.class, idCarro);
+		if(conta != 1) {
+			throw new IllegalArgumentException("Carro con id: " + idCarro  + " no disponible");
+		}
 	}
 	
 	private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");

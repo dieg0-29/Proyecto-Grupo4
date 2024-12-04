@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
             placa: placa,
             proxMant: mantenimiento,
         };
-
+        
         // Envía los datos al servidor usando fetch
         fetch('http://localhost:8080/api/carro/registrar', {
             method: 'POST',

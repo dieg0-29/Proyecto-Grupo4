@@ -89,10 +89,8 @@ document.getElementById('inicioButton').onclick = function() {
 document.getElementById('cerrarSesionButton').onclick = function() {
     window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/login/login.html';
 };
-document.getElementById('nuevoRegistroButton').onclick = function() {
-    window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/mantenimiento/mantenimiento.html';
-};
-const username = localStorage.getItem('name');
+const username = localStorage.getItem('id');
 if (username) {
     document.getElementById('welcomeMessage').innerText = `Bienvenido, ${username}!`; // Mensaje de bienvenida
 }
+const id = localStorage.getItem('id');

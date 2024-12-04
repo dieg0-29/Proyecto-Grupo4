@@ -22,10 +22,21 @@ public class FinalizarService {
 	public FinalizarDto finalizarProgramacion(FinalizarDto bean) {
 		validarProgramacion(bean.getIdProgramacion());
 		validarFechaReal(bean.getIdProgramacion(), bean.getFechaFinReal());
-		actualizarEstado(bean.getIdCarro(),bean.getIdConductor());
+		actualizarEstado(bean.getIdProgramacion());
+		insertarfin(bean.getIdProgramacion(),bean.getFechaFinReal());
 		return bean;
 	}
 	
+	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
+	private void insertarfin(int idProg, String fecfin) {
+		String sql = """
+					UPDATE PROGRAMACION
+					SET fecha_fin_real = ?
+					WHERE id_programacion = ?
+						""";
+		jdbcTemplate.update(sql,fecfin ,idProg);
+	}
+
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
 	private void validarProgramacion(int idProg) {
 		String sql = "select count(1) cont from PROGRAMACION where id_programacion = ?";
@@ -57,29 +68,32 @@ public class FinalizarService {
 	private void validarFechaReal(int idProg, String fecha) {
 		String sql = "select fecha_asignacion from PROGRAMACION where id_programacion = ?";
 		String fechaPartida = jdbcTemplate.queryForObject(sql, String.class, idProg);
-		fechaPartida = convertirFecha(fechaPartida);
-		fecha = convertirFecha(fecha);
+		//fechaPartida = convertirFecha(fechaPartida);
+		//fecha = convertirFecha(fecha);
 		sql = "select datediff(day,'" + fecha + "','" + fechaPartida + "')";
 		int cont = jdbcTemplate.queryForObject(sql, Integer.class);
 		if(cont<0) {
 			throw new RuntimeException("La fecha real de llegada no puede ser menor a la de partida");
 		}
-		sql = "select fecha_fin_programada from PROGRAMACION where id_programacion = ?";
-		String fechaFin = jdbcTemplate.queryForObject(sql, String.class, idProg);
-		fechaFin = convertirFecha(fechaFin);
-		sql = "select datediff(day,'" + fecha + "','" + fechaFin + "')";
+		//sql = "select fecha_fin_programada from PROGRAMACION where id_programacion = ?";
+		//String fechaFin = jdbcTemplate.queryForObject(sql, String.class, idProg);
+		//fechaFin = convertirFecha(fechaFin);
+		/*sql = "select datediff(day,'" + fecha + "','" + fechaFin + "')";
 		cont = jdbcTemplate.queryForObject(sql, Integer.class);
 		if(cont<-3 || cont>3) {
 			throw new RuntimeException("La fecha real de llegada no puede tener una diferencia mayor"
 					+ " a tres días de la fecha programada");
-		}
+		}*/
 	}
 	
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
-	private void actualizarEstado(int idCarro, int idConductor) {
-		String sql = "update carro set id_estado = 1 where id_carro = ?";
-		jdbcTemplate.update(sql,idCarro);
-		sql = "update conductor set id_estado = 1 where id_conductor = ?";
-		jdbcTemplate.update(sql,idConductor);
+	private void actualizarEstado(int idProgramacion) {
+    	// Actualizar el estado del carro
+    	String sqlCarro = "UPDATE carro SET id_estado = 1 WHERE id_carro = (SELECT id_carro FROM programacion WHERE id_programacion = ?)";
+    	jdbcTemplate.update(sqlCarro, idProgramacion);
+    
+    	// Actualizar el estado del conductor
+    	String sqlConductor = "UPDATE conductor SET id_estado = 1 WHERE id_conductor = (SELECT id_conductor FROM programacion WHERE id_programacion = ?)";
+    	jdbcTemplate.update(sqlConductor, idProgramacion);
 	}
-}	
+}
