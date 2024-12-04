@@ -1,96 +1,154 @@
-
-// Datos de ejemplo para llenar la tabla
-const datos = [
-    ["Camión 1", "Conductor 1", "Ruta A", "10:00", "20 km", "Editar", "Eliminar"],
-    ["Camión 2", "Conductor 2", "Ruta B", "11:00", "15 km", "Editar", "Eliminar"],
-    ["Camión 3", "Conductor 3", "Ruta C", "12:00", "25 km", "Editar", "Eliminar"],
-    ["Camión 4", "Conductor 4", "Ruta D", "13:00", "30 km", "Editar", "Eliminar"],
-    ["Camión 5", "Conductor 5", "Ruta E", "14:00", "10 km", "Editar", "Eliminar"],
-];
-
-// Obtener la referencia a la tabla
-const tabla = document.getElementById('tablaDatos').getElementsByTagName('tbody')[0];
-
-// Llenar la tabla con los datos
-datos.forEach((fila) => {
-    const newRow = tabla.insertRow();
-    
-    fila.forEach((dato) => {
-        const newCell = newRow.insertCell();
-        newCell.textContent = dato;
-    });
-    
-    // Agregar botones de acción
-    const editarCell = newRow.insertCell();
-    const eliminarCell = newRow.insertCell();
-    
-    const editarButton = document.createElement('button');
-    editarButton.textContent = 'Editar';
-    editarButton.className = 'button';
-    editarButton.onclick = () => {
-        alert('Funcionalidad de editar no implementada.');
-    };
-    
-    const eliminarButton = document.createElement('button');
-    eliminarButton.textContent = 'Eliminar';
-    eliminarButton.className = 'button';
-    eliminarButton.onclick = () => {
-        if (confirm('¿Estás seguro de que deseas eliminar esta fila?')) {
-            tabla.deleteRow(newRow.rowIndex - 1); // Eliminar la fila
+async function obtenerDatos(url, tablaBody, isSecundaria = false) {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Error en la red: ${response.status} ${response.statusText}`);
         }
-    };
+        const data = await response.json();
+        mostrarDatos(data, tablaBody, isSecundaria);
+    } catch (error) {
+        console.error('Hubo un problema con la petición Fetch:', error);
+        alert('Error al cargar los datos.');
+    }
+}
+
+function mostrarDatos(datos, tablaBody, isSecundaria) {
+    tablaBody.innerHTML = ''; // Limpiar la tabla antes de agregar nuevos datos
+
+    datos.forEach(item => {
+        const fila = document.createElement('tr');
+        if (isSecundaria) {
+            // Llenar la tabla secundaria con la columna adicional "Fecha Fin Real"
+            fila.innerHTML = `
+                <td>${item.id_mantenimiento}</td>
+                <td>${item.id_carro}</td>
+                <td>${item.id_empleado}</td>
+                <td>${item.id_taller}</td>
+                <td>${item.fecha_inicio}</td>
+                <td>${item.fecha_salida_programada}</td>
+                <td>${item.fecha_salida_real}</td> <!-- Columna adicional -->
+            `;
+        } else {
+            // Llenar la tabla principal
+            fila.innerHTML = `
+                <td>${item.id_mantenimiento}</td>
+                <td>${item.id_carro}</td>
+                <td>${item.id_empleado}</td>
+                <td>${item.id_taller}</td>
+                <td>${item.fecha_inicio}</td>
+                <td>${item.fecha_salida_programada}</td>
+                <td><button class="button" onclick="FinalizarMantenimiento(${item.id_mantenimiento},this)">Finalizar</button></td>
+                `;
+        }
+        tablaBody.appendChild(fila);
+    });
+}
+async function FinalizarMantenimiento(id, button) {
+    const row = button.parentNode.parentNode; // Obtener la fila
+    const cells = row.getElementsByTagName("td");
+
+    // Cambiar cada celda (excepto la de ID y los botones) a un input
+    for (let i = 5; i < cells.length - 1; i++) { // Excluye la primera celda (ID) y las últimas dos (Editar y Eliminar)
+        const cell = cells[i];
+        const currentValue = cell.innerHTML;
+
+        const input = document.createElement("input");
+        input.type = "text";
+        input.value = currentValue;
+
+        cell.innerHTML = ""; // Limpiar el contenido de la celda
+        cell.appendChild(input); // Agregar el input
+    }
+
+    // Cambiar el botón a "Guardar"
+    button.innerHTML = "Guardar";
+    button.setAttribute("onclick", `guardar(${id}, this)`);
+}
+async function guardar(id, button) {
+    const row = button.parentNode.parentNode; // Obtener la fila
+    const cells = row.getElementsByTagName("td"); // Cambiar a "td"
     
-    editarCell.appendChild(editarButton);
-    eliminarCell.appendChild(eliminarButton);
-});
+    // Crear el objeto updatedData
+    const updatedData = {
+        idMant: id,
+        fechaFinReal: cells[5].getElementsByTagName("input")[0].value, // Cambia 'Nombre' a 'nombre'   
+    };
+
+    if (updatedData.fechaFinReal === '') {
+        alert("Por favor, completa todos los campos correctamente.");
+        return;
+    }
+
+    console.log("Datos a enviar:", updatedData); // Log de los datos a enviar
+
+    try {
+        const response = await fetch(`http://localhost:8080/api/finalizar/mantenimiento`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedData)
+        });
+
+        console.log("Respuesta del servidor:", response); // Log de la respuesta del servidor
+
+        if (!response.ok) {
+            const errorText = await response.text(); // Leer el cuerpo de la respuesta
+            console.error("Error en la respuesta del servidor:", errorText); // Log del error del servidor
+            throw new Error(`Error en la actualización: ${response.status} ${response.statusText} - ${errorText}`);
+        }
+
+        // Actualiza la tabla con los nuevos datos
+        console.log("Actualizando la tabla con los nuevos datos:", updatedData); // Log antes de actualizar la tabla
+        mostrarDatos([updatedData], document.querySelector('#tablaDatos tbody'), false); // Actualiza la tabla principal
+
+        // Cambiar el botón de vuelta a "Finalizar"
+        button.innerHTML = "Finalizar";
+        button.setAttribute("onclick", `FinalizarMantenimiento(${id}, this)`);
+        console.log("El botón ha sido cambiado de vuelta a 'Finalizar'."); // Log de cambio de botón
+    } catch (error) {
+        console.error('Hubo un problema con la actualización:', error); // Log del error en la actualización
+        alert('Error al finalizar mantenimiento.');
+    }
+}
+// Evento para mostrar/ocultar la tabla secundaria
 document.getElementById('mostrarTablaButton').addEventListener('click', function() {
     const tablaSecundaria = document.getElementById('tablaSecundaria');
-    const tbody = tablaSecundaria.querySelector('tbody');
+    const tablaBody = document.querySelector('#tablaSecundaria tbody');
+    const url = 'http://localhost:8080/api/mantenimiento/lista-con-fecha-fin-real';
 
-    // Limpiar el contenido previo de la tabla
-    tbody.innerHTML = '';
-
-    // Agregar datos a la tabla
-    const datos = [
-        ['Dato A1', 'Dato B1', 'Dato C1', 'Dato D1', 'Dato E1'],
-        ['Dato A2', 'Dato B2', 'Dato C2', 'Dato D2', 'Dato E2'],
-        ['Dato A3', 'Dato B3', 'Dato C3', 'Dato D3', 'Dato E3']
-    ];
-
-    datos.forEach(fila => {
-        const tr = document.createElement('tr');
-        fila.forEach(dato => {
-            const td = document.createElement('td');
-            td.textContent = dato;
-            tr.appendChild(td);
-        });
-        tbody.appendChild(tr);
-    });
-
-    // Mostrar la tabla
-    if (tablaSecundaria.classList.contains('table-hidden')) {
-        tablaSecundaria.classList.remove('table-hidden');
-        tablaSecundaria.classList.add('table-visible');
+    // Alternar la visibilidad de la tabla secundaria
+    if (tablaSecundaria.style.display === 'table') {
+        tablaSecundaria.style.display = 'none'; // Ocultar la tabla
     } else {
-        tablaSecundaria.classList.remove('table-visible');
-        tablaSecundaria.classList.add('table-hidden');
+        tablaSecundaria.style.display = 'table'; // Mostrar la tabla
+        obtenerDatos(url, tablaBody, true); // Cargar datos para la tabla secundaria
     }
 });
 
-
+// Navegación a otras páginas
 document.getElementById('inicioButton').onclick = function() {
     window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/paginaprincipal/index.html';
 };
 
-//document.getElementById('serviciosButton').onclick = function() {
-    //window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/Paginaprincipal/servicios.html';
-//};
+document.getElementById('serviciosButton').onclick = function() {
+    window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/Paginaprincipal/servicios.html';
+};
 
 document.getElementById('cerrarSesionButton').onclick = function() {
     window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/login/login.html';
 };
-const username = localStorage.getItem('id');
+
+
+// Mostrar mensaje de bienvenida
+const username = localStorage.getItem('name');
 if (username) {
-    document.getElementById('welcomeMessage').innerText = `Bienvenido, ${username}!`; // Mensaje de bienvenida
+    document.getElementById('welcomeMessage').innerText = `Bienvenido, ${username}!`;
 }
-const id = localStorage.getItem('id');
+
+// Obtener datos iniciales al cargar la página
+document.addEventListener('DOMContentLoaded', function() {
+    const url = 'http://localhost:8080/api/mantenimiento/lista-sin-fecha-fin-real';
+    const tablaBody = document.querySelector('#tablaDatos tbody');
+    obtenerDatos(url, tablaBody); // Cargar datos para la tabla principal
+});

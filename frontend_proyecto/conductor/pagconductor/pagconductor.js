@@ -144,12 +144,12 @@ const username = localStorage.getItem('name');
 if (username) {
     document.getElementById('welcomeMessage').innerText = `Bienvenido, ${username}!`; // Mensaje de bienvenida
 }
-async function eliminarCarro(placa) {
+async function eliminarConductor(dni) {
     const mensajeError = document.getElementById('mensaje-error'); // Obtén el elemento para mostrar el mensaje
     mensajeError.textContent = ''; // Limpia cualquier mensaje anterior
 
     try {
-        const response = await fetch(`http://localhost:8080/api/carro/eliminar/${placa}`, { // Corregido aquí
+        const response = await fetch(`http://localhost:8080/api/conductor/eliminar/${dni}`, { // Corregido aquí
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -160,13 +160,13 @@ async function eliminarCarro(placa) {
         if (!response.ok) {
             // Intenta obtener el mensaje de error del cuerpo de la respuesta
             const errorData = await response.json();
-            throw new Error(`Error al eliminar el carro: ${errorData.message || response.statusText}`);
+            throw new Error(`Error al eliminar el conductor: ${errorData.message || response.statusText}`);
         }
 
         // Si la eliminación fue exitosa, puedes manejar la respuesta aquí
         const data = await response.json();
-        console.log('Carro eliminado exitosamente:', data);
-        mensajeError.textContent = 'Carro eliminado exitosamente.'; // Muestra un mensaje de éxito
+        console.log('Conductor eliminado exitosamente:', data);
+        mensajeError.textContent = 'Conductor eliminado exitosamente.'; // Muestra un mensaje de éxito
     } catch (error) {
         // Muestra el mensaje de error específico en la página
         mensajeError.textContent = error.message; // Muestra el mensaje de error en el elemento
