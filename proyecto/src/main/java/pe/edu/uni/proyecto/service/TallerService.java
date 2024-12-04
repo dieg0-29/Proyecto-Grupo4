@@ -37,21 +37,22 @@ public class TallerService {
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public void modificarTaller(String nombreTaller, TallerDto datosModificados) {
-        validarNombreTallerModificacion(nombreTaller);
+    public void modificarTaller(int id, TallerDto datosModificados) {
+        //validarNombreTallerModificacion(datosModificados.getNombre());
         validarNumero(datosModificados.getTelefono());
 
         String sql = """
                 UPDATE taller 
-                SET direccion = ?, telefono = ?, calificacion = ? 
-                WHERE nombre_taller = ?
+                SET direccion = ?, telefono = ?,nombre_taller = ?
+                WHERE id_taller = ?
                 """;
 
         Object[] params = {
+            
             datosModificados.getDireccion(),
             datosModificados.getTelefono(),
-            datosModificados.getCalificacion(),
-            nombreTaller
+            datosModificados.getNombre(),
+            id
         };
 
         int rowsAffected = jdbcTemplate.update(sql, params);
@@ -62,29 +63,36 @@ public class TallerService {
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public void borrarTaller(String nombreTaller) {
-        validarNombreTallerModificacion(nombreTaller);
+    public void borrarTaller(int id) {
+        
 
         // Eliminar dependencias en REPARACION
         String deleteReparacionSql = """
-                DELETE FROM reparacion 
-                WHERE id_taller = (SELECT id_taller FROM taller WHERE nombre_taller = ?)
+                Select count(*) FROM reparacion 
+                WHERE id_taller = ?
                 """;
-        jdbcTemplate.update(deleteReparacionSql, nombreTaller);
-
+        int c = jdbcTemplate.queryForObject(deleteReparacionSql,Integer.class ,id);
+        String ReparacionSql = """
+                Select count(*) FROM mantenimiento 
+                WHERE id_taller = ?
+                """;
+        int w =c+ jdbcTemplate.queryForObject(ReparacionSql,Integer.class ,id);
+        if(w != 0) {
+        	throw new RuntimeException(" Taller usado.");
+        }
         // Eliminar dependencias en MANTENIMIENTO
         String deleteMantenimientoSql = """
                 DELETE FROM mantenimiento 
-                WHERE id_taller = (SELECT id_taller FROM taller WHERE nombre_taller = ?)
+                WHERE id_taller = ?
                 """;
-        jdbcTemplate.update(deleteMantenimientoSql, nombreTaller);
+        jdbcTemplate.update(deleteMantenimientoSql, id);
 
         // Finalmente, eliminar el taller
         String deleteTallerSql = """
                 DELETE FROM taller 
-                WHERE nombre_taller = ?
+                WHERE id_taller = ?
                 """;
-        int rowsAffected = jdbcTemplate.update(deleteTallerSql, nombreTaller);
+        int rowsAffected = jdbcTemplate.update(deleteTallerSql, id);
 
         if (rowsAffected == 0) {
             throw new RuntimeException("No se encontró el taller para eliminar.");

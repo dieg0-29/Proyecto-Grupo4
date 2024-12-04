@@ -17,38 +17,38 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Crea un objeto con los datos a enviar
         const data = {
-            Nombre : nombre,
-            Direccion : direccion,
-            Telefono : telefono,
+            nombre : nombre,
+            direccion : direccion,
+            telefono : telefono,
         };
 
         // Envía los datos al servidor usando fetch
         fetch('http://localhost:8080/api/taller/registrar', {
-            method: 'POST', // Método de la solicitud
+            method: 'POST',
             headers: {
-                "Content-Type": "application/json" // Tipo de contenido
+                "Content-Type": "application/json"
             },
-            body: JSON.stringify(data) // Convierte el objeto a JSON
+            body: JSON.stringify(data)
         })
         .then(response => {
-            // Verifica si la respuesta fue exitosa
             if (!response.ok) {
-                // Si la respuesta no es exitosa, lanza un error
-                return response.text().then(text => {
-                    throw new Error(text || 'Error en la solicitud');
+                return response.json().then(errorData => {
+                    throw new Error(errorData.message || 'Error en la solicitud');
                 });
             }
-            return response.json(); // Devuelve la respuesta en formato JSON
+            return response.json();
         })
         .then(data => {
-            // Muestra un mensaje de éxito
             mostrarMensaje('Registro exitoso: ' + (data.message || 'Taller registrado.'));
-            // Resetea el formulario
-            document.getElementById('rutaForm').reset();
+            document.getElementById('tallerForm').reset(); // Asegúrate de que el ID sea correcto
         })
         .catch(error => {
-            // Maneja errores y muestra un mensaje
             mostrarMensaje('Error: ' + error.message);
         });
     });
 });
+function mostrarMensaje(mensaje) {
+    const mensajeElement = document.getElementById('mensaje');
+    mensajeElement.innerText = mensaje; // Establece el mensaje
+    mensajeElement.style.display = 'block'; // Asegúrate de que el mensaje sea visible
+}

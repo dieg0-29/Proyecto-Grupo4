@@ -48,10 +48,10 @@ public class RutaRest {
         }
     }
 
-    @DeleteMapping("/borrar")
-    public ResponseEntity<ResponseMessage> borrarRuta(@RequestParam String nombreRuta) {
+    @DeleteMapping("/borrar/{id}")
+    public ResponseEntity<ResponseMessage> borrarRuta(@PathVariable int id) {
         try {
-            rutaService.borrarRuta(nombreRuta);
+            rutaService.borrarRuta(id);
             return ResponseEntity.ok(new ResponseMessage("Ruta eliminada exitosamente."));
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(new ResponseMessage("Error: " + e.getMessage()), HttpStatus.BAD_REQUEST);

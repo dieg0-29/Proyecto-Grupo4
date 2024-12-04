@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -45,10 +46,10 @@ public class TallerRest {
         }
     }
 
-    @PutMapping("/modificar")
-    public ResponseEntity<ResponseMessage> modificarTaller(@RequestParam String nombreTaller, @RequestBody TallerDto datosModificados) {
+    @PutMapping("/modificar/{id}")
+    public ResponseEntity<ResponseMessage> modificarTaller(@PathVariable int id, @RequestBody TallerDto datosModificados) {
         try {
-            tallerService.modificarTaller(nombreTaller, datosModificados);
+            tallerService.modificarTaller(id, datosModificados);
             return ResponseEntity.ok(new ResponseMessage("Taller modificado correctamente."));
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(new ResponseMessage("Error: " + e.getMessage()), HttpStatus.BAD_REQUEST);
@@ -57,10 +58,10 @@ public class TallerRest {
         }
     }
 
-    @DeleteMapping("/borrar")
-    public ResponseEntity<ResponseMessage> borrarTaller(@RequestParam String nombreTaller) {
+    @DeleteMapping("/borrar/{id}")
+    public ResponseEntity<ResponseMessage> borrarTaller(@PathVariable int id) {
         try {
-            tallerService.borrarTaller(nombreTaller);
+            tallerService.borrarTaller(id);
             return ResponseEntity.ok(new ResponseMessage("Taller eliminado correctamente."));
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(new ResponseMessage("Error: " + e.getMessage()), HttpStatus.BAD_REQUEST);

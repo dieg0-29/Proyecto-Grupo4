@@ -31,19 +31,19 @@ function mostrarDatos(datos) {
 
         // Crear celdas para cada propiedad del objeto
         fila.innerHTML = `
-            <td>${item.Id_ruta}</td>
-            <td>${item.Nombre}</td>
-            <td>${item.Origen}</td>
-            <td>${item.Destino}</td>
-            <td>${item.Distancia}</td>
-            <td><button class="button" onclick="editarRuta(${item.Id_ruta}, this)">Editar</button></td>
-            <td><button class="button" onclick="eliminarRuta(${item.Id_ruta}, this)">Eliminar</button></td>
+            <td>${item.idRuta}</td>
+            <td>${item.nombre}</td>
+            <td>${item.origen}</td>
+            <td>${item.destino}</td>
+            <td>${item.distancia}</td>
+            <td><button class="button" onclick="editarRuta(${item.idRuta}, this)">Editar</button></td>
+            <td><button class="button" onclick="eliminarRuta(${item.idRuta})">Eliminar</button></td>
         `;
 
         tablaBody.appendChild(fila);
     });
 }
-
+obtenerDatos();
 async function editarRuta(id, button) {
     const row = button.parentNode.parentNode; // Obtener la fila
     const cells = row.getElementsByTagName("td");
@@ -72,14 +72,14 @@ async function guardarRuta(id, button) {
 
     // Crear el objeto updatedData
     const updatedData = {
-        IdRuta: id,
-        Nombre: cells[1].getElementsByTagName("input")[0].value, // Cambia 'Nombre' a 'nombre'
-        Origen: cells[2].getElementsByTagName("input")[0].value, // Cambia 'Origen' a 'origen'
-        Destino: cells[3].getElementsByTagName("input")[0].value, // Cambia 'Destino' a 'destino'
-        Distancia: parseFloat(cells[4].getElementsByTagName("input")[0].value), // Cambia 'Distancia' a 'distancia'
+        idRuta: id,
+        nombre: cells[1].getElementsByTagName("input")[0].value, // Cambia 'Nombre' a 'nombre'
+        origen: cells[2].getElementsByTagName("input")[0].value, // Cambia 'Origen' a 'origen'
+        destino: cells[3].getElementsByTagName("input")[0].value, // Cambia 'Destino' a 'destino'
+        distancia: parseFloat(cells[4].getElementsByTagName("input")[0].value), // Cambia 'Distancia' a 'distancia'
         
     };
-    if (updatedData.Nombre === '' || updatedData.Origen === '' || updatedData.Destino === '' || isNaN(updatedData.Distancia) || updatedData.Distancia <= 0) {
+    if (updatedData.nombre === '' || updatedData.origen === '' || updatedData.destino === '' || isNaN(updatedData.distancia) || updatedData.distancia <= 0) {
         alert("Por favor, completa todos los campos correctamente.");
         return;
     }
@@ -116,13 +116,10 @@ async function guardarRuta(id, button) {
         alert('Error al actualizar la ruta.');
     }
 }
-function eliminarRuta(id) {
-    // Lógica para eliminar la ruta
-    console.log(`Eliminar ruta con ID: ${id}`);
-}
+
 
 // Llamada a la función para obtener y mostrar los datos
-obtenerDatos();
+
 
 document.getElementById('inicioButton').addEventListener('click', () => {
     window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/paginaprincipal/index.html';
@@ -139,4 +136,33 @@ document.getElementById('nuevoRegistroButton').onclick = function() {
 const username = localStorage.getItem('name');
 if (username) {
     document.getElementById('welcomeMessage').innerText = `Bienvenido, ${username}!`; // Mensaje de bienvenida
+}
+async function eliminarRuta(id) {
+    const mensajeError = document.getElementById('mensaje-error'); // Obtén el elemento para mostrar el mensaje
+    mensajeError.textContent = ''; // Limpia cualquier mensaje anterior
+
+    try {
+        const response = await fetch(`http://localhost:8080/api/ruta/borrar/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        // Verifica si la respuesta no es exitosa
+        if (!response.ok) {
+            // Intenta obtener el mensaje de error del cuerpo de la respuesta
+            const errorData = await response.json();
+            throw new Error(`Error al eliminar la ruta: ${errorData.message || response.statusText}`);
+        }
+
+        // Si la eliminación fue exitosa, puedes manejar la respuesta aquí
+        const data = await response.json();
+        console.log('Ruta eliminada exitosamente:', data);
+        mensajeError.textContent = 'Ruta eliminada exitosamente.'; // Muestra un mensaje de éxito
+    } catch (error) {
+        // Muestra el mensaje de error específico en la página
+        mensajeError.textContent = error.message; // Muestra el mensaje de error en el elemento
+        console.error('Hubo un problema con la eliminación:', error.message);
+    }
 }

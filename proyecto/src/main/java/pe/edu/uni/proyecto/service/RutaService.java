@@ -19,12 +19,11 @@ public class RutaService {
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void registrarRuta(RutaDto bean) {
         validarNombreRuta(bean.getNombre());
-        validarNombre(bean);
         validarRuta(bean.getOrigen(), bean.getDestino());
-        validarDistancia(bean.getDistancia());
         if (bean.getOrigen().equals(bean.getDestino())) {
             throw new IllegalArgumentException("El origen y el destino no pueden ser iguales.");
         }
+        validarDistancia(bean.getDistancia());
 
         String sql = """
                 INSERT INTO ruta (nombre_ruta, origen, destino, distancia_km)
@@ -51,7 +50,6 @@ public class RutaService {
                 SET origen = ?, destino = ?, distancia_km = ?, nombre_ruta= ?
                 WHERE id_ruta = ?
                 """;
-
         int rowsAffected = jdbcTemplate.update(sql, datosModificados.getOrigen(),datosModificados.getDestino(),datosModificados.getDistancia(),datosModificados.getNombre(),id);
 
         if (rowsAffected == 0) {
@@ -60,50 +58,22 @@ public class RutaService {
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public void borrarRuta(String nombreRuta) {
-        validarNombreRutaModificacion(nombreRuta);
-
-        // Eliminar dependencias en REPARACION
-        String deleteReparacionSql = """
-                DELETE FROM reparacion 
-                WHERE id_incidente IN (
-                    SELECT id_incidente 
-                    FROM incidente 
-                    WHERE id_programacion IN (
-                        SELECT id_programacion 
-                        FROM programacion 
-                        WHERE id_ruta = (SELECT id_ruta FROM ruta WHERE nombre_ruta = ?)
-                    )
-                )
+    public void borrarRuta(int id) {
+    	String RutaSql = """
+                select count(*) FROM programacion wHERE id_ruta = ?
                 """;
-        jdbcTemplate.update(deleteReparacionSql, nombreRuta);
-    
-        // Eliminar dependencias en INCIDENTE
-        String deleteIncidenteSql = """
-                DELETE FROM incidente 
-                WHERE id_programacion IN (
-                    SELECT id_programacion 
-                    FROM programacion 
-                    WHERE id_ruta = (SELECT id_ruta FROM ruta WHERE nombre_ruta = ?)
-                )
-                """;
-        jdbcTemplate.update(deleteIncidenteSql, nombreRuta);
-    
-        // Eliminar dependencias en PROGRAMACION
-        String deleteProgramacionSql = """
-                DELETE FROM programacion 
-                WHERE id_ruta = (SELECT id_ruta FROM ruta WHERE nombre_ruta = ?)
-                """;
-        jdbcTemplate.update(deleteProgramacionSql, nombreRuta);
-    
+        int rowsAffected = jdbcTemplate.queryForObject(RutaSql,Integer.class,id);
+        if(rowsAffected != 0) {
+        	throw new RuntimeException(" Ruta usada.");
+        }
         // Finalmente, eliminar la ruta
         String deleteRutaSql = """
                 DELETE FROM ruta 
-                WHERE nombre_ruta = ?
+                WHERE id_ruta = ?
                 """;
-        int rowsAffected = jdbcTemplate.update(deleteRutaSql, nombreRuta);
+        int Affected = jdbcTemplate.update(deleteRutaSql,id);
 
-        if (rowsAffected == 0) {
+        if (Affected == 0) {
             throw new RuntimeException("No se encontró ninguna ruta con el nombre proporcionado.");
         }
     }
@@ -115,13 +85,6 @@ public class RutaService {
 
         if (count > 0) {
             throw new RuntimeException("El nombre de la ruta ya está registrado en el sistema.");
-        }
-    }
-    
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    private void validarNombre(RutaDto bean) {
-    	if (bean.getOrigen().equals(bean.getDestino())) {
-            throw new IllegalArgumentException("El origen y el destino no pueden ser iguales.");
         }
     }
 
