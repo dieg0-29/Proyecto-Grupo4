@@ -18,6 +18,10 @@ document.getElementById('MantenimientoButton').onclick = function() {
     window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/mantenimiento/pagmante/pagmant.html';
 };
 
+document.getElementById('ReparacionButton').onclick = function() {
+    window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/incidente/pagincidente/pagincidente.html';
+};
+
 document.getElementById('camionesButton').onclick = function() {
     window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/camion/pagcamion/pagcamion.html';
 };

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pantalla Principal de Transporte</title>
+    <p id="welcomeMessage"></p> <!-- Mensaje de bienvenida -->
+    <link rel="stylesheet" href="pagincidente.css">
+</head>
+<body>
+
+<header>
+    <div class="header-container">
+        <h1>Transporte</h1>
+        <nav>
+            <button class="button header-button" id="inicioButton">Inicio</button>
+            <button class="button header-button" id="serviciosButton">Servicios</button>
+            <button class="button header-button" id="cerrarSesionButton">Cerrar Sesión</button>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <h2>Datos de Programacion</h2>
+    <div class="tabla-container">
+        <table id="tablaDatos">
+            <thead>
+                <tr>
+                    <th>Id_Programacion</th>
+                    <th>Id_Carro</th>
+                    <th>Id_Empleado</th>
+                    <th>Id_Conductor</th>
+                    <th>Id_Ruta</th>
+                    <th>Fecha de asignacion</th>
+                    <th>Fecha Fin Programada </th>
+                    <th>Reportar incidente</th>
+                    <th>Finalizar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Las filas se llenarán desde JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <div class="button-container">
+        <button class="button" id="nuevoRegistroButton">Nuevo Registro</button>
+        <button class="button" id="mostrarTablaButton">Historial</button>
+    </div>
+
+    <!-- Tabla adicional que se mostrará al presionar el botón -->
+    <div class="tabla-container">
+        <table id="tablaSecundaria" class="table-hidden">
+            <thead>
+                <tr>
+                    <th>Id_Programacion</th>
+                    <th>Id_Carro</th>
+                    <th>Id_Empleado</th>
+                    <th>Id_Conductor</th>
+                    <th>Id_Ruta</th>
+                    <th>Fecha de asignacion</th>
+                    <th>Fecha Fin Programada </th>
+                    <th>Fecha Fin Real</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Las filas se llenarán desde JavaScript -->
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<script src="pagincidente.js"></script>
+</body>
+</html>
