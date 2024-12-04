@@ -32,6 +32,7 @@ public class IncidenteService {
 		// Validaciones
 		validarEmpleado(bean.getEmpleado());
 		validarProgramacion(bean.getProgramacion());
+		validarTipo(bean.getTipoIncidente());
 		//convertirFecha(bean.getFecha());
 		//validarFecha(bean.getProgramacion(),bean.getFecha());
 		
@@ -52,6 +53,14 @@ public class IncidenteService {
 			int cont = jdbcTemplate.queryForObject(sql, Integer.class, empleado);
 			if (cont == 0) {
 				throw new RuntimeException("El empleado no existe.");
+			}
+		}
+		@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
+		private void validarTipo(int id) {
+			String sql = "SELECT COUNT(1) cont FROM Tipo_incidente where id_tipo = ?";
+			int cont = jdbcTemplate.queryForObject(sql, Integer.class, id);
+			if (cont == 0) {
+				throw new RuntimeException("El tipo ingresado no existe.");
 			}
 		}
 		// validar que la programación exista

@@ -9,18 +9,18 @@ document.addEventListener('DOMContentLoaded', function() {
         // Captura los valores de los campos del formulario
         const empleado = id;
         const programacion = id_p;
-        const tipo_incidente = document.getElementById('tipo_incidente').value.trim();
+        const tipoIncidente = document.getElementById('tipo_incidente').value.trim();
         const fecha = document.getElementById('fecha').value.trim();
         const detalle = document.getElementById('detalle').value.trim();
 
         // Validación de datos
-        if (!validarCampos(empleado, programacion, tipo_incidente, fecha, detalle)) {
+        if (!validarCampos(empleado, programacion, tipoIncidente, fecha, detalle)) {
             mostrarMensaje('Por favor, complete todos los campos obligatorios.', 'error');
             return;
         }
 
         // Crea un objeto con los datos a enviar
-        const data = { empleado, programacion, tipo_incidente, fecha, detalle };
+        const data = { empleado, programacion, tipoIncidente, fecha, detalle };
 
         // Envía los datos al servidor
         enviarDatos(data);

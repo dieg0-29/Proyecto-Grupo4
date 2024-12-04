@@ -4,10 +4,11 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('mantenimientoForm').addEventListener('submit', function(event) {
         // Previene el comportamiento por defecto del formulario
         event.preventDefault();
-
+        const id = localStorage.getItem('id');
+        const id_carro = localStorage.getItem('id_carro');
         // Captura los valores de los campos del formulario
         const idEmpleado = id;
-        const idCarro = document.getElementById('id_carro').value.trim();
+        const idCarro = id_carro;
         const idTaller = document.getElementById('id_taller').value.trim();
         const calificacion = document.getElementById('calificacion').value.trim();
         const fecha_inicio = document.getElementById('fecha_inicio').value.trim();

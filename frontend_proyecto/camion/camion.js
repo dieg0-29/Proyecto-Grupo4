@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Crea un objeto con los datos a enviar
         const data = {
+            idEstado: 1,
             placa: placa,
             proxMant: mantenimiento,
         };
