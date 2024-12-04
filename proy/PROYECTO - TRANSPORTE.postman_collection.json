@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "e55fc246-3cf8-44d4-a59a-32577b6fd390",
+		"_postman_id": "bfa6fd5c-0904-4845-8947-fb11939ebcbb",
 		"name": "PROYECTO - TRANSPORTE",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "34898503"
+		"_exporter_id": "39400177",
+		"_collection_link": "https://proyecto-transporte.postman.co/workspace/Proyecto---Transporte-Workspace~dbd70176-8779-486c-b5a8-afb2102285a5/collection/39400177-bfa6fd5c-0904-4845-8947-fb11939ebcbb?action=share&source=collection_link&creator=39400177"
 	},
 	"item": [
 		{
@@ -1414,19 +1415,22 @@
 			"name": "INCIDENTES EN RUTA",
 			"item": [
 				{
-					"name": "Rutas con mas incidentes",
+					"name": "Cantidad de Incidentes",
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/rutas/mas-incidentes",
+							"raw": "http://localhost:8080/api/frecuencia/incidente/1",
+							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"rutas",
-								"mas-incidentes"
+								"api",
+								"frecuencia",
+								"incidente",
+								"1"
 							]
 						}
 					},
@@ -2442,6 +2446,76 @@
 								"api",
 								"incidente",
 								"lista"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "FINALIZAR PROGRAMACION",
+			"item": [
+				{
+					"name": "PROGRAMACION FINALIZADA",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idProgramacion\": 6,\r\n    \"fechaFinReal\": \"06/12/2024\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/finalizar/programacion",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"finalizar",
+								"programacion"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "FINALIZAR MANTENIMIENTO",
+			"item": [
+				{
+					"name": "FINALIZAR MANTENIMIENTO",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idMant\":7,\r\n    \"fechaFinReal\":\"03/10/2024\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/finalizar/mantenimiento",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"finalizar",
+								"mantenimiento"
 							]
 						}
 					},

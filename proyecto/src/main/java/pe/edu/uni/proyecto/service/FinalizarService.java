@@ -21,20 +21,22 @@ public class FinalizarService {
 	@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
 	public FinalizarDto finalizarProgramacion(FinalizarDto bean) {
 		validarProgramacion(bean.getIdProgramacion());
+		LocalDate fechaFinReal = convertirFecha(bean.getFechaFinReal());
 		validarFechaReal(bean.getIdProgramacion(), bean.getFechaFinReal());
 		actualizarEstado(bean.getIdProgramacion());
-		insertarfin(bean.getIdProgramacion(),bean.getFechaFinReal());
+		insertarfin(bean.getIdProgramacion(),fechaFinReal);
 		return bean;
 	}
 	
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
-	private void insertarfin(int idProg, String fecfin) {
+	private void insertarfin(int idProg, LocalDate fecfin) {
 		String sql = """
 					UPDATE PROGRAMACION
 					SET fecha_fin_real = ?
 					WHERE id_programacion = ?
 						""";
-		jdbcTemplate.update(sql,fecfin ,idProg);
+		String fechaFormateada = fecfin.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		jdbcTemplate.update(sql,fechaFormateada ,idProg);
 	}
 
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
@@ -46,44 +48,25 @@ public class FinalizarService {
 		}
 	}
 	
-	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
-	private String convertirFecha(String fecha) {
-		try {
-			// Definir los formatos: de entrada (dd/MM/yyyy) y de salida (yyyy-MM-dd)
-		    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		    DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-		    // Parsear la fecha de entrada y formatearla al nuevo formato
-		    LocalDate date = LocalDate.parse(fecha, inputFormatter);
-		    return date.format(outputFormatter);
-		} catch (DateTimeParseException e) {
-			throw new RuntimeException("Formato de fecha inválido. Asegúrese de usar el formato dd/MM/yyyy");
-		} catch (NullPointerException e) {
-       	 throw new RuntimeException("Las fechas no pueden ser nulas.");
-       }
-	}
+	private LocalDate convertirFecha(String fecha) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        try {
+            return LocalDate.parse(fecha, formatter);
+        } catch (DateTimeParseException e) {
+            throw new RuntimeException("Formato de fecha inválido. Debe ser dd/MM/yyyy");
+        }
+    }
 	
 	@SuppressWarnings("null")
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
 	private void validarFechaReal(int idProg, String fecha) {
 		String sql = "select fecha_asignacion from PROGRAMACION where id_programacion = ?";
 		String fechaPartida = jdbcTemplate.queryForObject(sql, String.class, idProg);
-		//fechaPartida = convertirFecha(fechaPartida);
-		//fecha = convertirFecha(fecha);
 		sql = "select datediff(day,'" + fecha + "','" + fechaPartida + "')";
 		int cont = jdbcTemplate.queryForObject(sql, Integer.class);
 		if(cont<0) {
 			throw new RuntimeException("La fecha real de llegada no puede ser menor a la de partida");
 		}
-		//sql = "select fecha_fin_programada from PROGRAMACION where id_programacion = ?";
-		//String fechaFin = jdbcTemplate.queryForObject(sql, String.class, idProg);
-		//fechaFin = convertirFecha(fechaFin);
-		/*sql = "select datediff(day,'" + fecha + "','" + fechaFin + "')";
-		cont = jdbcTemplate.queryForObject(sql, Integer.class);
-		if(cont<-3 || cont>3) {
-			throw new RuntimeException("La fecha real de llegada no puede tener una diferencia mayor"
-					+ " a tres días de la fecha programada");
-		}*/
 	}
 	
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)

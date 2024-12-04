@@ -7,13 +7,13 @@ INSERT INTO EST_CARRO (descripcion) VALUES
 ('En Ruta');
 go
 INSERT INTO CARRO (id_estado, placa, prox_mant) VALUES 
-(5, 'ABC123', '2024-11-15'),
+(1, 'ABC123', '2024-11-15'),
 (5, 'DEF456', '2024-12-20'),
-(1, 'GHI789', '2025-01-10'),
+(2, 'GHI789', '2025-01-10'),
 (1, 'JKL012', '2025-02-05'),
 (5, 'MNO345', '2024-12-30'),
 (1, 'PQR678', '2024-12-15'),
-(1, 'STU901', '2025-01-22'),
+(2, 'STU901', '2025-01-22'),
 (5, 'VXY234', '2025-01-14'),
 (1, 'ZAB567', '2025-02-13'),
 (1, 'CDE890', '2024-12-29'),
@@ -28,7 +28,8 @@ INSERT INTO EST_MANTENIMIENTO (descripcion) VALUES
 go
 INSERT INTO EST_CONDUCTOR (descripcion) VALUES 
 ('Disponible'),
-('En Ruta');
+('En Ruta'),
+('Fuera de servicio');
 go
 INSERT INTO CONDUCTOR (id_estado, nombre, apellido, dni, correo, telefono) VALUES 
 (2, 'Juan', 'Pérez', '12345678', 'jperez@gmail.com', '987654321'),
@@ -71,7 +72,9 @@ INSERT INTO MANTENIMIENTO (id_taller, id_empleado , id_est_mant, id_carro, calif
 (2, 2, 2, 2, 3,'2024-02-01', '2024-02-20', '2024-02-19', 600.00, 'Se inflaron las llantas'),
 (3, 3, 1, 3, 4,'2024-03-01', '2024-03-10', '2024-03-09', 450.00, 'Se realizó cambio de aceite'),
 (4, 4, 3, 4, 5,'2024-04-01', '2024-04-05', '2024-04-04', 700.00, 'Carro en buen estado'),
-(5, 5, 2, 5, 1,'2024-05-01', '2024-05-30', '2024-05-29', 550.00, 'Carro en buen estado, no se encontraron fallas');
+(5, 5, 2, 5, 1,'2024-05-01', '2024-05-30', '2024-05-29', 550.00, 'Carro en buen estado, no se encontraron fallas'),
+(4, 4, 3, 3, 5,'2024-04-01', '2024-04-05', NULL, 700.00, 'Cambio de frenos y mantenimiento general'),
+(5, 5, 2, 7, 1,'2024-05-01', '2024-05-30', NULL, 550.00, 'Cambio de aceite');
 go
 INSERT INTO TIPO_INCIDENTE (descripcion) VALUES 
 ('Accidente en carretera'),
