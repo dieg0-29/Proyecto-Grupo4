@@ -20,14 +20,13 @@ function mostrarDatos(datos, tablaBody, isSecundaria) {
         if (isSecundaria) {
             // Llenar la tabla secundaria con la columna adicional "Fecha Fin Real"
             fila.innerHTML = `
-                <td>${item.id_programacion}</td>
-                <td>${item.id_carro}</td>
                 <td>${item.id_empleado}</td>
-                <td>${item.id_conductor}</td>
-                <td>${item.id_ruta}</td>
-                <td>${item.fecha_asignacion}</td>
-                <td>${item.fecha_fin_programada}</td>
-                <td>${item.fecha_fin_real}</td> <!-- Columna adicional -->
+                <td>${item.id_incidente}</td>
+                <td>${item.id_taller}</td>
+                <td>${item.fecha_reaparacion}</td>
+                <td>${item.calificacion}</td>
+                <td>${item.costo}</td>
+                <td>${item.detalle}</td>
             `;
         } else {
             // Llenar la tabla principal
@@ -39,6 +38,7 @@ function mostrarDatos(datos, tablaBody, isSecundaria) {
                 <td>${item.id_ruta}</td>
                 <td>${item.fecha_asignacion}</td>
                 <td>${item.fecha_fin_programada}</td>
+                <td>${item.fecha_fin_real}</td>
                 <td><button class="button" onclick="ReportarIncidente(${item.id_programacion})">Incidente</button></td>
                 <td><button class="button" onclick="FinalizarProgramacion(${item.id_programacion},this)">Finalizar</button></td>
                 `;
