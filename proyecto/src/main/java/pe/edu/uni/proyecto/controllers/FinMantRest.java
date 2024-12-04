@@ -9,21 +9,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import pe.edu.uni.proyecto.dto.FinalizarDto;
-import pe.edu.uni.proyecto.service.FinalizarService;
+import pe.edu.uni.proyecto.dto.FinMantDto;
+import pe.edu.uni.proyecto.service.FinMantService;
 
 @RestController
 @CrossOrigin(origins = {"http://localhost:5500", "http://127.0.0.1:5500"})
-@RequestMapping("/api/finalizar/programacion")
-public class FinalizarRest {
+@RequestMapping("/api/finalizar/mantenimiento")
+public class FinMantRest {
 	
 	@Autowired
-	private FinalizarService finalizarService;
+	private FinMantService finMantService;
 	
 	@PostMapping()
-	public ResponseEntity<?> finProg(@RequestBody FinalizarDto bean) {
+	public ResponseEntity<?> finalizarMantenimiento(@RequestBody FinMantDto bean) {
 		try {
-			bean = finalizarService.finalizarProgramacion(bean);
+			bean = finMantService.finalizarMantenimiento(bean);
 			return ResponseEntity.status(HttpStatus.CREATED).body(bean);
 		} catch (Exception e) {
 			// Manejo de excepción y respuesta con error 500
