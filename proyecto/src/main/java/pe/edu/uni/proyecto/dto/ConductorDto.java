@@ -11,6 +11,9 @@ public class ConductorDto {
 	
 	@JsonProperty("idConductor")
 	private int idConductor;
+
+	@JsonProperty("idEstado")
+	private int idEstado;
 	
 	@JsonProperty("nombre")
 	private String nombre;

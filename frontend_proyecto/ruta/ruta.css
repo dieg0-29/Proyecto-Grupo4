@@ -1,48 +1,85 @@
+@font-face {
+    font-family: 'RiotSquad';
+    src: url('path/to/RiotSquad.ttf') format('truetype'); /* Asegúrate de que la ruta sea correcta */
+}
+
+@font-face {
+    font-family: 'Modern No. 20';
+    src: url('path/to/ModernNo20.ttf') format('truetype'); /* Asegúrate de que la ruta sea correcta */
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Roboto', Arial, sans-serif; /* Usar la fuente Roboto */
+    background: linear-gradient(135deg, #6a11cb, #2575fc); /* Fondo similar a la página principal */
     margin: 0;
-    padding: 20px;
+    padding: 0; /* Quitar padding */
+    display: flex; /* Usar flexbox para centrar contenido */
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    height: 100vh; /* Altura completa del viewport */
+    color: #ffffff; /* Texto blanco */
 }
 
 .container {
-    max-width: 600px;
-    margin: auto;
-    background: white;
+    width: 100%; /* Ancho completo */
+    max-width: 400px; /* Ajustar el ancho máximo para una apariencia más cuadrada */
+    margin: 0 auto; /* Centrar horizontalmente */
+    background: linear-gradient(145deg, #e6e6e6, #ffffff); /* Fondo gris metálico */
     padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px; /* Aumentar el borde redondeado para una apariencia más cuadrada */
+    box-shadow: 5px 5px 10px #bebebe, -5px -5px 10px #ffffff; /* Sombra para efecto metálico */
+    display: flex; /* Usar flexbox para centrar contenido dentro del contenedor */
+    flex-direction: column;
+    align-items: flex-start; /* Alinear contenido a la izquierda */
 }
 
 h1 {
-    text-align: center;
+    font-family: 'RiotSquad', sans-serif; /* Fuente RiotSquad */
+    width: 100%; /* Ancho completo */
+    text-align: center; /* Centrar texto */
+    margin-bottom: 20px;
+    font-size: 2.5em; /* Tamaño más grande */
+    color: #8A2BE2; /* Color morado */
 }
 
 label {
+    font-family: 'Modern No. 20', serif; /* Fuente Modern No. 20 */
     display: block;
     margin: 10px 0 5px;
+    width: 100%; /* Ancho completo */
+    text-align: left; /* Alinear texto a la izquierda */
+    color: #8A2BE2; /* Color morado */
 }
 
 input, textarea {
-    width: 100%;
+    width: 100%; /* Ancho completo */
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    background: rgba(255, 255, 255, 0.8); /* Fondo de los inputs con transparencia */
+    color: blue; /* Color del texto ingresado */
 }
 
 button {
-    width: 100%;
-    padding: 10px;
-    background-color: #28a745;
+    width: 100%; /* Ancho completo */
+    padding: 15px;
+    background-color: #da16d0; /* Color de botón similar */
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 15px; /* Añadir margen superior para desplazar hacia abajo */
 }
 
 button:hover {
-    background-color: #218838;
+    background-color: #009933; /* Color más oscuro al pasar el ratón */
+    transform: scale(1.05); /* Efecto al pasar el ratón */
+}
+
+button:active {
+    transform: scale(0.95); /* Efecto al hacer clic */
 }
 
 #mensaje {
@@ -50,25 +87,24 @@ button:hover {
     text-align: center;
     font-weight: bold;
 }
-.regresar-btn {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-}
 
 .regresar-btn {
-    background-color: blue;
+    padding: 15px;
+    background-color: #6a11cb; /* Color de fondo similar */
     color: white;
-    padding: 10px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    width: 100%; /* Ancho completo */
+    margin-top: 15px; /* Añadir margen superior para desplazar hacia abajo */
 }
+
 .regresar-btn:hover {
-    background-color: #0056b3;
+    background-color: #2575fc; /* Color más oscuro al pasar el ratón */
+    transform: scale(1.05); /* Efecto al pasar el ratón */
+}
+
+.regresar-btn:active {
+    transform: scale(0.95); /* Efecto al hacer clic */
 }

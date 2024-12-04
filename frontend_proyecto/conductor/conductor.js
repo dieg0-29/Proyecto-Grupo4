@@ -1,7 +1,4 @@
-const username = localStorage.getItem('username');
-if (username) {
-    document.getElementById('welcomeMessage').innerText = `Bienvenido, ${username}!`; // Mensaje de bienvenida
-}
+
 // Espera a que el DOM esté completamente cargado
 document.addEventListener('DOMContentLoaded', function() {
     // Agrega un listener para el evento de envío del formulario
@@ -10,38 +7,30 @@ document.addEventListener('DOMContentLoaded', function() {
         event.preventDefault();
 
         // Captura los valores de los campos del formulario
-        const idEmpleado = document.getElementById('id_empleado').value.trim();
-        const idCarro = document.getElementById('id_carro').value.trim();
-        const idTaller = document.getElementById('id_taller').value.trim();
-        const calificacion = document.getElementById('calificacion').value.trim();
-        const fecha_inicio = document.getElementById('fecha_inicio').value.trim();
-        const fecha_salida = document.getElementById('fecha_salida_programada').value.trim();
-        const costo = document.getElementById('costo').value.trim();
-        const detalle = document.getElementById('detalle').value.trim();
+        const Nombre = document.getElementById('nombre').value.trim();
+        const Apellido = document.getElementById('apellido').value.trim();
+        const Dni = document.getElementById('dni').value.trim();
+        const Correo = document.getElementById('correo').value.trim();
+        const Telefono = document.getElementById('telefono').value.trim();
         
         // Validación de datos
-        if (idEmpleado === '' || idCarro === '' || idTaller === '' || 
-            calificacion === '' || fecha_inicio === '' || 
-            fecha_salida === '' || costo === '' || 
-            detalle === '') {
+        if (Nombre === '' || Apellido === '' || Dni === '' || 
+            Correo === '' || Telefono === '') {
             mostrarMensaje('Por favor, complete todos los campos obligatorios.', 'error');
             return;
         }
 
         // Crea un objeto con los datos a enviar
         const data = {
-            id_empleado: idEmpleado,
-            id_carro: idCarro,
-            id_taller: idTaller,
-            calificacion: calificacion,
-            fecha_inicio: fecha_inicio,
-            fecha_salida_programada: fecha_salida,
-            costo: costo,
-            detalle: detalle,
+            nombre: Nombre,
+            apellido: Apellido,
+            dni: Dni,
+            correo: Correo,
+            telefono: Telefono,
         };
 
         // Envía los datos al servidor usando fetch
-        fetch('http://localhost:8080/api/registrar/carro', {
+        fetch('http://localhost:8080/api/conductor/registrar', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
@@ -57,8 +46,8 @@ document.addEventListener('DOMContentLoaded', function() {
             return response.json();
         })
         .then(data => {
-            mostrarMensaje(data.message || 'Mantenimiento registrado exitosamente.', 'success');
-            document.getElementById('mantenimientoForm').reset();
+            mostrarMensaje(data.message || 'Conductor registrado exitosamente.', 'success');
+            document.getElementById('conductorForm').reset();
         })
         .catch(error => {
             mostrarMensaje(error.message, 'error');

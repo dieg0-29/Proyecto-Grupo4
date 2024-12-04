@@ -10,7 +10,6 @@
     <div class="container">
         <h1>Registrar Ruta</h1>
         <form id="rutaForm">
-
             <label for="nombre">Nombre de la Ruta:</label>
             <input type="text" id="nombre" required>
 
@@ -24,12 +23,10 @@
             <input type="text" id="distancia" required>
 
             <button type="submit" id="btnRegistrar" class="formbold-btn">Registrar</button>
+            <button type="button" class="regresar-btn" onclick="window.location.href='http://127.0.0.1:5500/frontend_proyecto/ruta/pagRuta/pagRuta.html'">Regresar</button>
         </form>
-        <div id="error-message" style="display: none;"></div>
-        <div id="success-message" style="display: none;"></div>
-        <p></p>
-        <button class="regresar-btn" onclick="window.location.href='http://127.0.0.1:5500/frontend_proyecto/ruta/pagruta/pagruta.html'">Regresar</button>
-    </div>   
+        <div id="mensaje" style="display: none;"></div>
+    </div>
     <script src="ruta.js"></script>
 </body>
 </html>

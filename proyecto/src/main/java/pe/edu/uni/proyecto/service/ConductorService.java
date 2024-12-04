@@ -19,10 +19,20 @@ public class ConductorService {
 	private JdbcTemplate jdbcTemplate;
 	
 	public List<Map<String, Object>> obtenerListaConductores() {
-		String sql = "SELECT id_conductor Id_conductor, "
-				+ "nombre Nombre,apellido Apellido,dni DNI, "
-				+ "correo Correo,telefono Telefono "
-				+ "FROM CONDUCTOR ";
+		String sql = """
+				SELECT 
+    			C.id_conductor,
+    			C.nombre,
+    			C.apellido,
+    			C.dni,
+    			C.correo,
+    			C.telefono,
+    			E.descripcion AS estado_conductor
+				FROM 
+    			CONDUCTOR C
+				JOIN 
+    			EST_CONDUCTOR E ON C.id_estado = E.id_estado;
+				""";
 		return jdbcTemplate.queryForList(sql);
 	}
 	
@@ -33,10 +43,11 @@ public class ConductorService {
 		validarCorreo(bean.getCorreo());
 		validarTelefono(bean.getTelefono());
 		String sql = """
-			insert into CONDUCTOR(nombre,apellido,dni,correo,telefono)
-			values(?,?,?,?,?)				
+			insert into CONDUCTOR(id_estado,nombre,apellido,dni,correo,telefono)
+			values(?,?,?,?,?,?)
 		""";
-		jdbcTemplate.update(sql, bean.getNombre(), bean.getApellido(), bean.getDni(), bean.getCorreo(), bean.getTelefono());	 
+		int a = 1;
+		jdbcTemplate.update(sql,a,bean.getNombre(), bean.getApellido(), bean.getDni(), bean.getCorreo(), bean.getTelefono());	 
 	}
 	
 	@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
@@ -67,10 +78,11 @@ public class ConductorService {
         validarDniNoExiste(bean.getDni());
         validarCorreo(bean.getCorreo());
         validarTelefono(bean.getTelefono());
+		validarestado(bean.getIdEstado());
         String sql = """
-            UPDATE CONDUCTOR SET correo = ?, telefono = ? WHERE dni = ?
+            UPDATE CONDUCTOR SET id_estado=?, correo = ?, telefono = ? WHERE dni = ?
         """;
-        Object[] datos = { bean.getCorreo(), bean.getTelefono() , bean.getDni()};
+        Object[] datos = { bean.getIdEstado(),bean.getCorreo(), bean.getTelefono() , bean.getDni()};
         jdbcTemplate.update(sql, datos);
         System.out.println("Los datos del conductor se han actualizado correctamente.");
     }
@@ -87,6 +99,17 @@ public class ConductorService {
 	    }
 
 	
+	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
+	private void validarestado(int est) {
+        String sql = """
+	            SELECT COUNT(*) FROM est_conductor WHERE id_estado = ?
+	        """;
+	        int cont = jdbcTemplate.queryForObject(sql, Integer.class, est);
+	        if (cont == 0) {
+	            throw new RuntimeException("El estado " + est + " no existe.");
+	        }
+    }
+
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
 	private void validarTelefono(String telefono) {
         if (!Pattern.matches("^[9][0-9]{8}$", telefono)) {

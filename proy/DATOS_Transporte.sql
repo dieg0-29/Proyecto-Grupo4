@@ -28,7 +28,8 @@ INSERT INTO EST_MANTENIMIENTO (descripcion) VALUES
 go
 INSERT INTO EST_CONDUCTOR (descripcion) VALUES 
 ('Disponible'),
-('En Ruta');
+('En Ruta'),
+('Fuera de servicio');
 go
 INSERT INTO CONDUCTOR (id_estado, nombre, apellido, dni, correo, telefono) VALUES 
 (2, 'Juan', 'Pérez', '12345678', 'jperez@gmail.com', '987654321'),
@@ -118,3 +119,5 @@ select * From TIPO_INCIDENTE;
 select * From EST_CARRO;
 select * From TALLER;
 go
+
+
