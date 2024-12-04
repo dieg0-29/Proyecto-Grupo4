@@ -1,10 +1,9 @@
 {
 	"info": {
-		"_postman_id": "76b96eff-f795-4d01-9956-fd4f560e359f",
+		"_postman_id": "e55fc246-3cf8-44d4-a59a-32577b6fd390",
 		"name": "PROYECTO - TRANSPORTE",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "39400177",
-		"_collection_link": "https://proyecto-transporte.postman.co/workspace/Proyecto---Transporte-Workspace~dbd70176-8779-486c-b5a8-afb2102285a5/collection/39367313-76b96eff-f795-4d01-9956-fd4f560e359f?action=share&source=collection_link&creator=39400177"
+		"_exporter_id": "34898503"
 	},
 	"item": [
 		{
@@ -376,13 +375,103 @@
 					"response": []
 				},
 				{
+					"name": "CONDUCTOR EXISTENTE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Genaro\",\r\n    \"apellido\": \"Flores\",\r\n    \"dni\": \"18928021\",\r\n    \"correo\": \"gflores@gmail.com\",\r\n    \"telefono\": \"907834990\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/conductor/registrar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"conductor",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DNI YA EXISTE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Genaro\",\r\n    \"apellido\": \"Flores\",\r\n    \"dni\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/conductor/registrar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"conductor",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DIRECCION DE CORREO NO VALIDA",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Genaro\",\r\n    \"apellido\": \"Flores\",\r\n    \"dni\": \"12345699\",\r\n    \"correo\":\"genaro.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/conductor/registrar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"conductor",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "TELEFONO CON UNA LETRA",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"Luna\",\r\n    \"apellido\": \"Flores\",\r\n    \"dni\": \"18928021\",\r\n    \"correo\": \"lflores@gmail.com\",\r\n    \"telefono\": \"90783k990\"\r\n}",
+							"raw": "{\r\n    \"nombre\": \"Genaro\",\r\n    \"apellido\": \"Flores\",\r\n    \"dni\": \"18928021\",\r\n    \"correo\": \"gflores@gmail.com\",\r\n    \"telefono\": \"90783k990\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -466,43 +555,13 @@
 					"response": []
 				},
 				{
-					"name": "CONDUCTOR EXISTENTE",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"Genaro\",\r\n    \"apellido\": \"Flores\",\r\n    \"dni\": \"18928021\",\r\n    \"correo\": \"gflores@gmail.com\",\r\n    \"telefono\": \"907834990\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/conductor/registrar",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"conductor",
-								"registrar"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "DATOS OK",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"Julian\",\r\n    \"apellido\": \"Pazos\",\r\n    \"dni\": \"23729121\",\r\n    \"correo\": \"juan.perez@gmail.com\",\r\n    \"telefono\": \"987654321\"\r\n}",
+							"raw": "{\r\n    \"nombre\": \"Genaro\",\r\n    \"apellido\": \"Flores\",\r\n    \"dni\": \"18928021\",\r\n    \"correo\": \"gflores@gmail.com\",\r\n    \"telefono\": \"907834990\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1948,6 +2007,254 @@
 			]
 		},
 		{
+			"name": "EDITAR CONDUCTOR",
+			"item": [
+				{
+					"name": "DNI INCORRECTO",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dni\": \"A56789033\",\r\n    \"correo\": \"luis.torres@example.com\",\r\n    \"telefono\": \"123456733\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/conductor/editar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"conductor",
+								"editar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DNI NO EXISTE",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dni\": \"15678903\",\r\n    \"correo\": \"luis.torres@example.com\",\r\n    \"telefono\": \"123456733\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/conductor/editar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"conductor",
+								"editar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CORREO FORMATO INVALIDO",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dni\": \"56789012\",\r\n    \"correo\": \"luist.torresexample.com\",\r\n    \"telefono\": \"123456733\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/conductor/editar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"conductor",
+								"editar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TELEFONO INVALIDO",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dni\": \"56789012\",\r\n    \"correo\": \"luist.torres@example.com\",\r\n    \"telefono\": \"123456733\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/conductor/editar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"conductor",
+								"editar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TODO OK",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dni\": \"56789012\",\r\n    \"correo\": \"luist.torres@example.com\",\r\n    \"telefono\": \"923456734\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/conductor/editar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"conductor",
+								"editar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ELIMINAR CONDUCTOR",
+			"item": [
+				{
+					"name": "DNI INCORRECTO",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/conductor/eliminar/12345633dad",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"conductor",
+								"eliminar",
+								"12345633dad"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CONDUCTOR NO EXISTE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/conductor/eliminar/12345633",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"conductor",
+								"eliminar",
+								"12345633"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EL CONDUCTOR YA TIENE UN REGISTRO",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/conductor/eliminar/12345678",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"conductor",
+								"eliminar",
+								"12345678"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ELIMINACION CORRECTA",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/conductor/eliminar/12345633",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"conductor",
+								"eliminar",
+								"12345633"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "ELIMINAR CARRO",
 			"item": [
 				{
@@ -2048,12 +2355,12 @@
 			"name": "LISTA MANTENIMIENTO",
 			"item": [
 				{
-					"name": "LISTA MANTENIMIENTOS",
+					"name": "LISTA-CON-FECHA-REAL",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/mantenimiento/lista",
+							"raw": "http://localhost:8080/api/mantenimiento/lista-con-fecha-fin-real",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -2062,7 +2369,28 @@
 							"path": [
 								"api",
 								"mantenimiento",
-								"lista"
+								"lista-con-fecha-fin-real"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LISTA-SIN-FECHA-REAL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/mantenimiento/lista-sin-fecha-fin-real",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"mantenimiento",
+								"lista-sin-fecha-fin-real"
 							]
 						}
 					},

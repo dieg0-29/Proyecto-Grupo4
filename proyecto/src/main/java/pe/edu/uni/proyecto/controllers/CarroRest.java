@@ -28,7 +28,6 @@ public class CarroRest {
     private CarroService carroService;
 
     @PostMapping("/registrar")
-        
     public ResponseEntity<ResponseMessage> registrarCarro(@RequestBody CarroDto carroDto) {
         try {
             carroService.registrarCarro(carroDto);

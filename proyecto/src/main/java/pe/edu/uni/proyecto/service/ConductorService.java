@@ -19,13 +19,72 @@ public class ConductorService {
 	private JdbcTemplate jdbcTemplate;
 	
 	public List<Map<String, Object>> obtenerListaConductores() {
-		String sql = "SELECT id_conductor Id_conductor,id_estado Estado, "
+		String sql = "SELECT id_conductor Id_conductor, "
 				+ "nombre Nombre,apellido Apellido,dni DNI, "
 				+ "correo Correo,telefono Telefono "
-				+ "FROM CONDUCTOR "
-				+ "ORDER BY 1";
+				+ "FROM CONDUCTOR ";
 		return jdbcTemplate.queryForList(sql);
 	}
+	
+	@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
+	public void registrarConductor(ConductorDto bean) {
+		validarDniCorrecto(bean.getDni());
+		validarDni(bean.getDni());
+		validarCorreo(bean.getCorreo());
+		validarTelefono(bean.getTelefono());
+		String sql = """
+			insert into CONDUCTOR(nombre,apellido,dni,correo,telefono)
+			values(?,?,?,?,?)				
+		""";
+		jdbcTemplate.update(sql, bean.getNombre(), bean.getApellido(), bean.getDni(), bean.getCorreo(), bean.getTelefono());	 
+	}
+	
+	@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
+    public void eliminarConductor(String dni) {
+		validarDniCorrecto(dni);
+        validarDniNoExiste(dni);
+        
+        
+		String sql1 = """
+				 select COUNT(*) from PROGRAMACION t1 inner join CONDUCTOR t2 on t1.id_conductor = t2.id_conductor
+				where t2.dni = ?
+				            """;
+		int cont1 = jdbcTemplate.queryForObject(sql1, Integer.class, dni);
+		if (cont1 >= 1) {
+			throw new RuntimeException("El CONDUCTOR NO PUEDE SER ELIMINADO");
+		}
+        String sql = """
+            DELETE FROM CONDUCTOR WHERE dni = ?
+        """;
+        jdbcTemplate.update(sql, dni);
+        System.out.println("Conductor con " + dni + " eliminado correctamente.");
+    }
+	
+	
+	@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
+    public void editarConductor(ConductorDto bean) {
+		validarDniCorrecto(bean.getDni());
+        validarDniNoExiste(bean.getDni());
+        validarCorreo(bean.getCorreo());
+        validarTelefono(bean.getTelefono());
+        String sql = """
+            UPDATE CONDUCTOR SET correo = ?, telefono = ? WHERE dni = ?
+        """;
+        Object[] datos = { bean.getCorreo(), bean.getTelefono() , bean.getDni()};
+        jdbcTemplate.update(sql, datos);
+        System.out.println("Los datos del conductor se han actualizado correctamente.");
+    }
+	
+	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
+	private void validarDniNoExiste(String dni) {
+	        String sql = """
+	            SELECT COUNT(*) FROM CONDUCTOR WHERE dni = ?
+	        """;
+	        int cont = jdbcTemplate.queryForObject(sql, Integer.class, dni);
+	        if (cont == 0) {
+	            throw new RuntimeException("El conductor con DNI " + dni + " no existe.");
+	        }
+	    }
 
 	
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
@@ -36,10 +95,21 @@ public class ConductorService {
     }
 
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
-    private void validarDni(String dni) {
+    private void validarDniCorrecto(String dni) {
         if (!Pattern.matches("^[0-9]{8}$", dni)) {
             throw new IllegalArgumentException("El DNI debe tener 8 dígitos numéricos.");
         }
+    }
+	
+	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
+	private void validarCorreo(String correo) {
+	    if (!Pattern.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", correo)) {
+	        throw new IllegalArgumentException("El correo debe ser una dirección válida.");
+	    }
+	}
+	
+	
+	private void validarDni(String dni) {
         String sql = """
         		select count(*) from Conductor where dni = ?
         		""";
@@ -48,21 +118,5 @@ public class ConductorService {
         	throw new RuntimeException("el conductor ya existe.");
         }
     }
-	@Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
-	public boolean registrarConductor(ConductorDto bean) {
-		validarDni(bean.getDni());
-		validarTelefono(bean.getTelefono());
-		try {
-		String sql = """
-			insert into CONDUCTOR
-			values(1,?,?,?,?,?)				
-		""";
-		
-		jdbcTemplate.update(sql, bean.getNombre(), bean.getApellido(), bean.getDni(), bean.getCorreo(), bean.getTelefono());
-		return true;
-		} catch (Exception err){
-			err.printStackTrace();
-			return false;
-		}
-	}
+	
 }

@@ -18,15 +18,32 @@ public class MantenimientoService {
     @Autowired
     JdbcTemplate jdbcTemplate;
     
-    public List<Map<String, Object>> obtenerListaMantenimiento() {
-    	String sql = "SELECT id_mantenimiento id, id_empleado empleado, "
-    			+ "id_taller taller, id_est_mant estado, id_carro carro, "
-    			+ "calificacion, fecha_inicio inicio, fecha_salida_programada salida, "
-    			+ "fecha_salida_real fin, costo, detalle "
-    			+ "FROM MANTENIMIENTO "
-    			+ "ORDER BY 1";
-    	return jdbcTemplate.queryForList(sql);
-    }
+    public List<Map<String, Object>> obtenerSinFechaFinReal() {
+		String sql = """
+				    SELECT id_mantenimiento, id_carro, id_empleado, id_empleado, id_taller,
+				    CONVERT(VARCHAR, fecha_inicio, 103) as fecha_inicio, 
+					CONVERT(VARCHAR, fecha_salida_programada, 103) as fecha_salida_programada
+				    FROM MANTENIMIENTO
+				    WHERE fecha_salida_real IS NULL
+				""";
+		List<Map<String, Object>> lista;
+		lista = jdbcTemplate.queryForList(sql);
+		return lista;
+	}
+
+	public List<Map<String, Object>> obtenerConFechaFinReal() {
+		String sql = """
+				    SELECT id_mantenimiento, id_carro, id_empleado, id_empleado, id_taller,
+				    CONVERT(VARCHAR, fecha_inicio, 103) as fecha_inicio, 
+					CONVERT(VARCHAR, fecha_salida_programada, 103) as fecha_salida_programada,
+					CONVERT(VARCHAR, fecha_salida_real, 103) as fecha_salida_real
+				    FROM MANTENIMIENTO
+				    WHERE fecha_salida_real IS NOT NULL
+				""";
+		List<Map<String, Object>> lista;
+		lista = jdbcTemplate.queryForList(sql); 
+		return lista;
+	}
 
     
     public void registroMantenimiento(MantenimientoDto bean) {

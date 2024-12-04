@@ -40,15 +40,26 @@ public class MantenimientoRest {
         }
     }
     
-    @GetMapping("/lista")
-    public ResponseEntity<?> obtenerListaDeMantenimiento() {
-    	try {
-			List<Map<String, Object>> lista = mantenimientoService.obtenerListaMantenimiento();
-			return ResponseEntity.ok(lista);
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Error al obtener los mantenimientos: " + e.getMessage());
-		}
+    @GetMapping("/lista-sin-fecha-fin-real")
+    public ResponseEntity<?> obtenerSinFechaFinReal() {
+        try {
+            List<Map<String, Object>> lista = mantenimientoService.obtenerSinFechaFinReal();
+            return ResponseEntity.ok(lista); 
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error al obtener la lista de las programaciones: " + e.getMessage());
+        }
+    }
+	
+	@GetMapping("/lista-con-fecha-fin-real")
+    public ResponseEntity<?> obtenerConFechaFinReal() {
+        try {
+            List<Map<String, Object>> lista = mantenimientoService.obtenerConFechaFinReal();
+            return ResponseEntity.ok(lista); 
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error al obtener la lista de las programaciones: " + e.getMessage());
+        }
     }
 
 }
