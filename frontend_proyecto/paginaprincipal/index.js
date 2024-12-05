@@ -2,9 +2,6 @@ document.getElementById('inicioButton').onclick = function() {
     window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/paginaprincipal/index.html';
 };
 
-document.getElementById('serviciosButton').onclick = function() {
-    // Acción para el botón de servicios
-};
 
 document.getElementById('cerrarSesionButton').onclick = function() {
     window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/login/login.html';

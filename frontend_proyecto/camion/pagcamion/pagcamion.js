@@ -130,9 +130,6 @@ document.getElementById('inicioButton').addEventListener('click', () => {
     window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/paginaprincipal/index.html';
 });
 
-//document.getElementById('servicioButton').onclick = function() {
-    //window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/Paginaprincipal/servicios.html';
-//};
 
 document.getElementById('cerrarSesionButton').onclick = function() {
     window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/login/login.html';
