@@ -4,10 +4,11 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('reparacionForm').addEventListener('submit', function(event) {
         // Previene el comportamiento por defecto del formulario
         event.preventDefault();
-
+        const id = localStorage.get('id');
+        const id_i= localStorage.get('id_i');
         // Captura los valores de los campos del formulario
-        const idempleado = document.getElementById('id_empleado').value;
-        const idincidente = document.getElementById('id_incidente').value;
+        const idempleado = id;
+        const idincidente = id_i;
         const idtaller = document.getElementById('id_taller').value;
         const fechareparacion = document.getElementById('fecha_reparacion').value;
         const calificacion = document.getElementById('calificacion').value;

@@ -20,6 +20,7 @@ function mostrarDatos(datos, tablaBody, isSecundaria) {
         if (isSecundaria) {
             // Llenar la tabla secundaria con la columna adicional "Fecha Fin Real"
             fila.innerHTML = `
+                <td>${item.id_reparacion}</td>
                 <td>${item.id_empleado}</td>
                 <td>${item.id_incidente}</td>
                 <td>${item.id_taller}</td>
