@@ -30,7 +30,7 @@ body {
 
 .login-header h2 {
     font-size: 52px; /* Tamaño de letra ajustado */
-    font-family: 'RiotSquad', sans-serif; /* Usar la fuente RiotSquad */
+    font-family: 'Times New Roman', sans-serif; /* Usar la fuente RiotSquad */
     color: #6a11cb;
     margin-top: 20px; /* Aumentar espacio superior */
     font-weight: normal; /* Quitar negrita */
