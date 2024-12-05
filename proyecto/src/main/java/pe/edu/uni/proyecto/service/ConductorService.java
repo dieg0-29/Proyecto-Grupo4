@@ -80,9 +80,9 @@ public class ConductorService {
         validarTelefono(bean.getTelefono());
 		validarestado(bean.getIdEstado());
         String sql = """
-            UPDATE CONDUCTOR SET id_estado=?, correo = ?, telefono = ? WHERE dni = ?
+            UPDATE CONDUCTOR SET id_estado=?, nombre=?, apellido=? , correo = ?, telefono = ? WHERE dni = ?
         """;
-        Object[] datos = { bean.getIdEstado(),bean.getCorreo(), bean.getTelefono() , bean.getDni()};
+        Object[] datos = { bean.getIdEstado(),bean.getNombre(),bean.getApellido(),bean.getCorreo(), bean.getTelefono() , bean.getDni()};
         jdbcTemplate.update(sql, datos);
         System.out.println("Los datos del conductor se han actualizado correctamente.");
     }
