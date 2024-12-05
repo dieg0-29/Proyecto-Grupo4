@@ -71,16 +71,18 @@ main {
 }
 
 h2 {
+    background-color: #fcfcfc;
     margin: 40px 0 50px; /* Aumentar margen inferior */
-    color: #ffffff; /* Color blanco */
+    color: #000000; /* Color blanco */
     font-size: 48px; /* Tamaño de letra ajustado */
     font-family: 'RiotSquad', sans-serif; /* Usar la fuente RiotSquad */
     font-weight: normal; /* Quitar negrita */
 }
 
 h3 {
+    background-color: #f9f9f9;
     margin: 60px 0 30px; /* Aumentar margen superior e inferior */
-    color: #ffffff; /* Color blanco */
+    color: #000000; /* Color blanco */
     font-size: 48px; /* Tamaño de letra ajustado */
     font-family: 'RiotSquad', sans-serif; /* Usar la fuente RiotSquad */
     font-weight: normal; /* Quitar negrita */
@@ -94,8 +96,8 @@ h3 {
 }
 
 .button {
-    background-color: #da16d0; /* Cambiar color de fondo a #00B050 */
-    color: white;
+    background-color: #2426bc; /* Cambiar color de fondo a #00B050 */
+    color: rgb(238, 228, 228);
     border: none;
     border-radius: 5px;
     padding: 15px 25px; /* Botones más grandes */

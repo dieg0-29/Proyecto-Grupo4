@@ -76,7 +76,7 @@ CREATE TABLE RUTA (
     nombre_ruta VARCHAR(100) NOT NULL,
     origen VARCHAR(100) NOT NULL,
     destino VARCHAR(100) NOT NULL,
-    distancia_km DECIMAL(5,2) NOT NULL
+    distancia_km DECIMAL(10,2) NOT NULL
 );
 go
 -- Tabla de Taller

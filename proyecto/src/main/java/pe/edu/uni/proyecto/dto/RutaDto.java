@@ -24,5 +24,5 @@ public class RutaDto {
     private String destino;
 
     @JsonProperty("distancia")
-    private double distancia;
+    private long distancia;
 }

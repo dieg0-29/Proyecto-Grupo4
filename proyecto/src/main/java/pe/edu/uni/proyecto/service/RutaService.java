@@ -23,7 +23,6 @@ public class RutaService {
         if (bean.getOrigen().equals(bean.getDestino())) {
             throw new IllegalArgumentException("El origen y el destino no pueden ser iguales.");
         }
-        validarDistancia(bean.getDistancia());
 
         String sql = """
                 INSERT INTO ruta (nombre_ruta, origen, destino, distancia_km)
@@ -108,12 +107,12 @@ public class RutaService {
         }
     }
 
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    /*@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     private void validarDistancia(double distancia) {
         if (distancia <= 0 || distancia > 999.99) {
             throw new IllegalArgumentException("La distancia debe ser mayor a 0 y no mayor a 999.99.");
         }
-    }
+    }*/
 
     @Transactional(readOnly = true)
     public List<RutaDto> listarRutas() {
@@ -126,7 +125,7 @@ public class RutaService {
                 rs.getString("Nombre"),
                 rs.getString("Origen"),
                 rs.getString("Destino"),
-                rs.getDouble("Distancia")
+                rs.getLong("Distancia")
         ));
     }
 }
