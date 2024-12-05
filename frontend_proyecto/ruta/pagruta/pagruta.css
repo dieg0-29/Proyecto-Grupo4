@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: 'Roboto', Arial, sans-serif;
+    font-family: 'Modern No. 20', Arial, sans-serif; /* Usar la fuente Modern No. 20 */
     background: linear-gradient(135deg, #6a11cb, #2575fc); /* Fondo similar a la página principal */
     color: #ffffff; /* Texto blanco */
     display: flex;
@@ -42,7 +42,6 @@ nav {
     transition: background-color 0.3s, transform 0.2s;
     font-size: 16px;
     color: white;
-    font-family: 'Roboto', Arial, sans-serif; /* Usar la fuente Roboto */
 }
 
 .header-button:hover {
@@ -61,10 +60,10 @@ main {
 }
 
 h2 {
+    font-family: 'Times New Roman', Times, serif; /* Usar la fuente Times New Roman */
     margin: 40px 0 50px; /* Aumentar margen inferior */
     color: #ffffff; /* Color blanco */
-    font-size: 48px; /* Tamaño de letra ajustado */
-    font-family: 'RiotSquad', sans-serif; /* Usar la fuente RiotSquad */
+    font-size: 96px; /* Tamaño de letra ajustado al doble */
     font-weight: normal; /* Quitar negrita */
 }
 
@@ -80,7 +79,7 @@ table {
     margin: 0 auto; /* Centrar la tabla */
     border-radius: 8px; /* Bordes redondeados */
     overflow: hidden; /* Esconder bordes */
-    background-color: #2e8b57; /* Fondo de la tabla verde */
+    background-color: #0bacf7; /* Fondo de la tabla verde */
     color: #ffffff; /* Color del texto */
 }
 
@@ -88,10 +87,11 @@ th, td {
     border: 1px solid #666; /* Bordes de la tabla */
     padding: 15px; /* Espaciado interno */
     text-align: center; /* Centrar texto */
+    font-size: 30px; /* Tamaño de letra ajustado */
 }
 
 th {
-    background-color: #3cb371; /* Fondo de encabezado verde */
+    background-color: #230bf7; /* Fondo de encabezado verde */
 }
 
 .button-container {
@@ -111,7 +111,6 @@ th {
     cursor: pointer; /* Cambiar cursor al pasar sobre el botón */
     transition: background-color 0.3s, transform 0.2s;
     font-size: 30px; /* Tamaño de letra ajustado a 30px */
-    font-family: 'Modern No. 20', sans-serif; /* Usar la fuente Modern No. 20 */
 }
 
 .button:hover {
@@ -131,5 +130,5 @@ th {
     position: relative;
     bottom: 0;
     width: 100%;
-    font-family: 'Roboto', Arial, sans-serif; /* Usar la fuente Roboto */
 }
+

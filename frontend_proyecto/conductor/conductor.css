@@ -1,48 +1,96 @@
+@font-face {
+    font-family: 'RiotSquad';
+    src: url('path/to/RiotSquad.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Modern No. 20';
+    src: url('path/to/ModernNo20.ttf') format('truetype');
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Roboto', Arial, sans-serif;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #ffffff;
 }
 
 .container {
-    max-width: 600px;
-    margin: auto;
-    background: white;
+    width: 90%;
+    max-width: 350px;
     padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
+    background: #ffffff;
+    color: #333333;
+    border-radius: 10px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
 }
 
+h1 {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 32px;
+    color: #6a11cb;
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: normal;
+}
+
 label {
+    font-family: 'Times New Roman', Times, serif;
     display: block;
     margin: 10px 0 5px;
+    color: #333333;
+    width: 100%;
+    text-align: left; /* Cambiar a alineado a la izquierda */
 }
 
 input, textarea {
-    width: 100%;
+    width: 95%;
     padding: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #0000ff;
+    background: none;
+    text-align: left;
+}
+
+input::placeholder, textarea::placeholder {
+    color: #0000ff;
 }
 
 button {
     width: 100%;
     padding: 10px;
-    background-color: #28a745;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
+    font-size: 18px;
     cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 15px;
+    text-align: center;
+    align-self: center;
 }
 
 button:hover {
-    background-color: #218838;
+    background: linear-gradient(135deg, #2575fc, #6a11cb);
+    transform: scale(1.05);
+}
+
+button:active {
+    transform: scale(0.95);
 }
 
 #mensaje {
@@ -50,25 +98,19 @@ button:hover {
     text-align: center;
     font-weight: bold;
 }
-.regresar-btn {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-}
 
 .regresar-btn {
-    background-color: blue;
+    width: 100%;
+    padding: 10px;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
     color: white;
-    padding: 10px 20px;
     border: none;
     border-radius: 5px;
+    font-size: 18px;
     cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 15px;
+    text-align: center;
+    align-self: center;
 }
-.regresar-btn:hover {
-    background-color: #0056b3;
-}
+
