@@ -31,7 +31,7 @@ public class ReparacionRest {
     public ResponseEntity<ResponseMessage> registrarReparacion(@RequestBody ReparacionDto bean) throws DateTimeParseException {
         try {
             reparacionService.reparacion(bean);
-            return new ResponseEntity<>(new ResponseMessage("Incidente registrado exitosamente."), HttpStatus.CREATED);
+            return new ResponseEntity<>(new ResponseMessage("Reparacion registrada exitosamente."), HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(new ResponseMessage("Error: " + e.getMessage()), HttpStatus.BAD_REQUEST);
         } catch (RuntimeException e) {

@@ -35,11 +35,10 @@ public class ReparacionService {
 	public void reparacion(ReparacionDto bean) {
 			// validaciones
 			validarIncidente(bean.getIdIncidente());
-			validarEstadoAuto(bean.getIdIncidente());
 			validarEmpleado(bean.getIdEmpleado());
 			validarTaller(bean.getIdTaller());
 			validarCalificacion(bean.getCalificacion());
-			bean.setFechaReparacion(convertirFecha(bean.getFechaReparacion()));
+			bean.setFechaReparacion(bean.getFechaReparacion());
 			validarIngresoFecha(bean.getIdIncidente(), bean.getFechaReparacion());
 			validarCosto(bean.getCosto());
 			// registro
@@ -160,23 +159,6 @@ public class ReparacionService {
 		}
 	}
 
-	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
-	private void validarEstadoAuto(int idincidente) {
-		String sql = """
-				SELECT t3.id_estado FROM INCIDENTE t1
-				INNER JOIN  PROGRAMACION t2 ON t1.id_programacion = t2.id_programacion
-				INNER JOIN CARRO t3 ON t2.id_carro = t3.id_carro
-				where t1.id_incidente = ?
-				   """;
-		int estado = jdbcTemplate.queryForObject(sql, Integer.class, idincidente);
-		if (estado != 3) {
-			throw new RuntimeException("El carro no se encuentra en reparacion.");
-		}
-
-	}
-	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
-    
-	
 	private void validarCalificacion(double calificacion) {
         if (calificacion < 0 || calificacion > 5) {
             throw new IllegalArgumentException("La calificación debe estar entre 0 y 5.");

@@ -14,26 +14,19 @@ document.addEventListener('DOMContentLoaded', function() {
         const costo = document.getElementById('costo').value;
         const detalle = document.getElementById('detalle').value;
 
-        // Validación de datos (ejemplo)
-        if (idempleado === '' || idincidente === '' || idtaller === '' || 
-            fechareparacion === '' || calificacion === '' || costo === '' || detalle === '') {
-            mostrarMensaje('Por favor, complete todos los campos obligatorios.');
-            return;
-        }
-
         // Crea un objeto con los datos a enviar
         const data = {
-            idempleado: idempleado,
-            idincidente: idincidente,
-            idtaller: idtaller,
-            fechareparacion: fechareparacion,
+            idEmpleado: idempleado, // Asegúrate de que las claves coincidan con lo que espera tu API
+            idIncidente: idincidente,
+            idTaller: idtaller,
+            fechaReparacion: fechareparacion,
             calificacion: calificacion,
             costo: costo,
             detalle: detalle,
         };
 
         // Envía los datos al servidor usando fetch
-        fetch('http://localhost:8080/api/registrar/reparacion', {
+        fetch('http://localhost:8080/api/reparacion/registrar', {
             method: 'POST', // Método de la solicitud
             headers: {
                 "Content-Type": "application/json" // Tipo de contenido
@@ -67,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Función para mostrar mensajes
 function mostrarMensaje(mensaje) {
-    const mensajeElement = document.getElementById('mensaje');
+    const mensajeElement = document.getElementById('message'); // Asegúrate de que el ID sea correcto
     mensajeElement.innerText = mensaje; // Establece el mensaje
     mensajeElement.style.display = 'block'; // Asegúrate de que el mensaje sea visible
 }

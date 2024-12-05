@@ -40,7 +40,7 @@ public class IncidenteService {
 		// Proceso
 		registrarIncidente(bean.getEmpleado(), bean.getProgramacion(),
 				bean.getTipoIncidente(), bean.getFecha(), bean.getDetalle());
-		actualizarEstadoCarro(bean.getProgramacion());
+		
 		// Reporte final
 		System.out.println("Proceso ok.");		
 
@@ -83,10 +83,5 @@ public class IncidenteService {
 
 		
 
-		@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
-		private void actualizarEstadoCarro(int programacion) {
-			String sql = "update carro set id_estado = 3 where id_carro "
-					+ "= (select id_carro from programacion where id_programacion = ?)";
-			jdbcTemplate.update(sql, programacion);
-		}
+		
 }

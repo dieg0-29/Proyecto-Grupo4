@@ -21,20 +21,18 @@
 </header>
 
 <main>
-    <h2>Datos de Programacion</h2>
+    <h2>Datos de Incidentes</h2>
     <div class="tabla-container">
         <table id="tablaDatos">
             <thead>
                 <tr>
+                    <th>Id Incidente</th>
+                    <th>Id Empleado</th>
                     <th>Id_Programacion</th>
-                    <th>Id_Carro</th>
-                    <th>Id_Empleado</th>
-                    <th>Id_Conductor</th>
-                    <th>Id_Ruta</th>
-                    <th>Fecha de asignacion</th>
-                    <th>Fecha Fin Programada </th>
-                    <th>Reportar incidente</th>
-                    <th>Finalizar</th>
+                    <th>Tipo</th>
+                    <th>Fecha</th>
+                    <th>Detalle </th>
+                    <th>Reportar Reparaciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -44,8 +42,7 @@
     </div>
 
     <div class="button-container">
-        <button class="button" id="nuevoRegistroButton">Nuevo Registro</button>
-        <button class="button" id="mostrarTablaButton">Historial</button>
+        <button class="button" id="mostrarTablaButton">Mostrar Reparaciones</button>
     </div>
 
     <!-- Tabla adicional que se mostrará al presionar el botón -->
@@ -53,14 +50,13 @@
         <table id="tablaSecundaria" class="table-hidden">
             <thead>
                 <tr>
-                    <th>Id_Programacion</th>
-                    <th>Id_Carro</th>
-                    <th>Id_Empleado</th>
-                    <th>Id_Conductor</th>
-                    <th>Id_Ruta</th>
-                    <th>Fecha de asignacion</th>
-                    <th>Fecha Fin Programada </th>
-                    <th>Fecha Fin Real</th>
+                    <th>Id Empleado</th>
+                    <th>Id Incidente</th>
+                    <th>Id Taller</th>
+                    <th>Fecha</th>
+                    <th>Calificacion</th>
+                    <th>Costo</th>
+                    <th>Detalle </th>
                 </tr>
             </thead>
             <tbody>
