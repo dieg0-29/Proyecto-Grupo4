@@ -19,10 +19,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Crea un objeto con los datos a enviar
         const data = {
-            Nombre : nombre,
-            Origen : origen,
-            Destino : destino,
-            Distancia : distancia
+            nombre : nombre,
+            origen : origen,
+            destino : destino,
+            distancia : distancia
         };
 
         // Envía los datos al servidor usando fetch
