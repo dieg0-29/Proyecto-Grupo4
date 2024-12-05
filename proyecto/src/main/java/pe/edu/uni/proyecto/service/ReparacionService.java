@@ -61,8 +61,7 @@ public class ReparacionService {
 		int cont = jdbcTemplate.queryForObject(sql, Integer.class, idtaller);
 		if (cont == 0) {
 			throw new RuntimeException("El taller no se encuentra registrado");
-		}
-		
+		}	
 	}
 
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
@@ -164,7 +163,6 @@ public class ReparacionService {
             throw new IllegalArgumentException("La calificación debe estar entre 0 y 5.");
         }
     }
-	
 
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
 	public String convertirFecha(String fecha) {

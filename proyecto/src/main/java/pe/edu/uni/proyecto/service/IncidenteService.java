@@ -1,5 +1,8 @@
 package pe.edu.uni.proyecto.service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -33,14 +36,15 @@ public class IncidenteService {
 		validarEmpleado(bean.getEmpleado());
 		validarProgramacion(bean.getProgramacion());
 		validarTipo(bean.getTipoIncidente());
+		LocalDate fecha = convertirFecha(bean.getFecha());
 		//convertirFecha(bean.getFecha());
 		//validarFecha(bean.getProgramacion(),bean.getFecha());
 		
 		
 		// Proceso
 		registrarIncidente(bean.getEmpleado(), bean.getProgramacion(),
-				bean.getTipoIncidente(), bean.getFecha(), bean.getDetalle());
-		
+				bean.getTipoIncidente(), fecha, bean.getDetalle());
+		//actualizarEstadoCarro(bean.getProgramacion());
 		// Reporte final
 		System.out.println("Proceso ok.");		
 
@@ -55,11 +59,23 @@ public class IncidenteService {
 				throw new RuntimeException("El empleado no existe.");
 			}
 		}
+		
+		private LocalDate convertirFecha(String fecha) {
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	        try {
+	            return LocalDate.parse(fecha, formatter);
+	        } catch (DateTimeParseException e) {
+	            throw new RuntimeException("Formato de fecha inválido. Debe ser dd/MM/yyyy");
+	        } catch (NullPointerException e) {
+				throw new RuntimeException("Las fechas no pueden ser nulas.");
+			}
+	    }
+		
 		@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
 		private void validarTipo(int id) {
 			String sql = "SELECT COUNT(1) cont FROM Tipo_incidente where id_tipo = ?";
 			int cont = jdbcTemplate.queryForObject(sql, Integer.class, id);
-			if (cont == 0) {
+			if (cont != 1) {
 				throw new RuntimeException("El tipo ingresado no existe.");
 			}
 		}
@@ -74,11 +90,12 @@ public class IncidenteService {
 		}
 		// registrar el incidente
 		@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
-		private void registrarIncidente(int empleado, int programacion, int tipo_incidente, String fecha, String detalle) {
+		private void registrarIncidente(int empleado, int programacion, int tipo_incidente, LocalDate fecha, String detalle) {
 			String sql = "INSERT INTO INCIDENTE(id_empleado, "
 					+ "id_programacion,id_tipo,fecha_incidente, "
 					+ "detalle) VALUES(?,?,?,?,?)";
-			jdbcTemplate.update(sql, empleado, programacion, tipo_incidente, fecha, detalle);
+			String fechaFormateada = fecha.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+			jdbcTemplate.update(sql, empleado, programacion, tipo_incidente, fechaFormateada, detalle);
 		}
 
 		

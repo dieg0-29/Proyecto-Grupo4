@@ -52,16 +52,15 @@ public class MantenimientoService {
         	validarCarro( bean.getIdCarro());
         	validarTaller(bean.getIdTaller());
         	bean.setId_est_mant(1);
-        	validarFechas(bean.getFechaInicio(),bean.getFechaSalidaProgramada());
-        	//actualizar estado carro
-        	carroMantenimiento(bean.getIdCarro());
         	validarCalificacion(bean.getCalificacion());
+        	validarFechas(bean.getFechaInicio(),bean.getFechaSalidaProgramada());
             String sql = "INSERT INTO MANTENIMIENTO (id_empleado, id_taller, id_est_mant, id_carro, calificacion, fecha_inicio, fecha_salida_programada, fecha_salida_real, costo, detalle) VALUES (?, ?, ?, ?, ?, ?, ?, NULL, ?, ?)";
            
             jdbcTemplate.update(sql, bean.getIdEmpleado(), bean.getIdTaller(),1, 
             		bean.getIdCarro(), bean.getCalificacion(), bean.getFechaInicio(), 
             		bean.getFechaSalidaProgramada(), bean.getCosto(), bean.getDetalle());
-           
+          //actualizar estado carro
+        	carroMantenimiento(bean.getIdCarro());
             double calificacionfinal = obtenerCalificacionTaller(bean.getIdTaller());
     		actualizarpromediotaller(bean.getIdTaller(),calificacionfinal);
             
