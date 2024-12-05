@@ -1,10 +1,9 @@
 {
 	"info": {
-		"_postman_id": "bfa6fd5c-0904-4845-8947-fb11939ebcbb",
+		"_postman_id": "8a3b165b-7d02-4e29-9e1c-2b8718c579ac",
 		"name": "PROYECTO - TRANSPORTE",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "39400177",
-		"_collection_link": "https://proyecto-transporte.postman.co/workspace/Proyecto---Transporte-Workspace~dbd70176-8779-486c-b5a8-afb2102285a5/collection/39400177-bfa6fd5c-0904-4845-8947-fb11939ebcbb?action=share&source=collection_link&creator=39400177"
+		"_exporter_id": "34898503"
 	},
 	"item": [
 		{
@@ -1184,36 +1183,6 @@
 			"name": "REGISTRAR MANTENIMIENTO",
 			"item": [
 				{
-					"name": "CALIFICACION INCORRECTA",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"idEmpleado\": 1,\r\n    \"idTaller\": 1,\r\n    \"idCarro\": 1,\r\n    \"calificacion\": 6, // Fuera del rango válido\r\n    \"fechaInicio\": \"2023-10-01\",\r\n    \"fechaSalidaProgramada\": \"2023-10-02\",\r\n    \"costo\": 100.0,\r\n    \"detalle\": \"Cambio de aceite\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/mantenimiento/registrar",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"mantenimiento",
-								"registrar"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "EMPLEADO INCORRECTO",
 					"request": {
 						"method": "POST",
@@ -1281,6 +1250,36 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"idEmpleado\": 1,\r\n    \"idTaller\": 14, //taller incorrecto\r\n    \"idCarro\": 1,\r\n    \"calificacion\": 5, \r\n    \"fechaInicio\": \"2023-10-01\",\r\n    \"fechaSalidaProgramada\": \"2023-10-02\",\r\n    \"costo\": 100.0,\r\n    \"detalle\": \"Cambio de aceite\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/mantenimiento/registrar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"mantenimiento",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CALIFICACION INCORRECTA",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idEmpleado\": 1,\r\n    \"idTaller\": 1,\r\n    \"idCarro\": 1,\r\n    \"calificacion\": 6, // Fuera del rango válido\r\n    \"fechaInicio\": \"2023-10-01\",\r\n    \"fechaSalidaProgramada\": \"2023-10-02\",\r\n    \"costo\": 100.0,\r\n    \"detalle\": \"Cambio de aceite\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
