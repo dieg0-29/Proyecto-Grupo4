@@ -34,7 +34,9 @@ public class FinMantService {
             return LocalDate.parse(fecha, formatter);
         } catch (DateTimeParseException e) {
             throw new RuntimeException("Formato de fecha inválido. Debe ser dd/MM/yyyy");
-        }
+        } catch (NullPointerException e) {
+			throw new RuntimeException("Las fechas no pueden ser nulas.");
+		}
     }
 	
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
@@ -75,8 +77,10 @@ public class FinMantService {
     	// Actualizar el estado del carro
     	String sql = "UPDATE carro SET id_estado = 1 WHERE id_carro = (SELECT id_carro FROM MANTENIMIENTO WHERE id_mantenimiento = ?)";
     	jdbcTemplate.update(sql, idMant);
-    	sql = "update CARRO set prox_mant = ? where id_carro = (select id_carro from MANTENIMIENTO where id_mantenimiento = ?)";
+    	sql = "select id_carro from mantenimiento where id_mantenimiento = ?";
+    	int carro = jdbcTemplate.queryForObject(sql, Integer.class, idMant);
     	String fechaFormateada = fecha.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    	jdbcTemplate.update(sql, fechaFormateada, idMant);
+    	sql = "update CARRO set prox_mant = (SELECT DATEADD(MONTH, 6, '" + fechaFormateada + "')) where id_carro = ?";
+    	jdbcTemplate.update(sql,carro);
 	}
 }

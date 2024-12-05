@@ -75,6 +75,18 @@ public class ReparacionService {
 			throw new RuntimeException("El incidente no se encuentra registrado");
 		}	
 	}
+	
+	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
+	private void validarTipoIncidente(int idincidente) {
+		String sql = """
+				select id_tipo tipo from INCIDENTE where id_incidente = ? 
+				""";
+		int tipo = jdbcTemplate.queryForObject(sql, Integer.class, idincidente);
+		if (tipo == 6 || tipo == 7 || tipo == 8) {
+			throw new RuntimeException("El incidente no se encuentra registrado");
+		}	
+	}
+
 
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
 	private void validarEmpleado(int idempleado) {
@@ -159,6 +171,27 @@ public class ReparacionService {
 		}
 	}
 
+<<<<<<< HEAD
+	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
+	private void validarEstadoAuto(int idincidente) {
+		String sql = """
+				SELECT t3.id_estado FROM INCIDENTE t1
+				INNER JOIN  PROGRAMACION t2 ON t1.id_programacion = t2.id_programacion
+				INNER JOIN CARRO t3 ON t2.id_carro = t3.id_carro
+				where t1.id_incidente = ?
+				   """;
+		Integer estado = jdbcTemplate.queryForObject(sql, Integer.class, idincidente);
+		if (estado == 3) {
+			throw new RuntimeException("El carro ya se encuentra en reparacion.");
+		}
+		
+
+	}
+	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
+    
+	
+=======
+>>>>>>> c084c0402e70d1b97fb5e087bbcc34fe1818f615
 	private void validarCalificacion(double calificacion) {
         if (calificacion < 0 || calificacion > 5) {
             throw new IllegalArgumentException("La calificación debe estar entre 0 y 5.");
