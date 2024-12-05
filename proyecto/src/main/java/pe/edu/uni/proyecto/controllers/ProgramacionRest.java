@@ -28,10 +28,10 @@ public class ProgramacionRest {
 	private ProgramacionService programacionService;
 
 	@PostMapping("/registrar")
-    public ResponseEntity<ResponseMessage> registrarMantenimiento(@RequestBody ProgramacionDto bean) throws DateTimeParseException {
+    public ResponseEntity<ResponseMessage> registrarProgramacion(@RequestBody ProgramacionDto bean) throws DateTimeParseException {
         try {
         	programacionService.registrarProg(bean);
-            return new ResponseEntity<>(new ResponseMessage("Mantenimiento registrado exitosamente."), HttpStatus.CREATED);
+            return new ResponseEntity<>(new ResponseMessage("Programacion registrada exitosamente."), HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(new ResponseMessage("Error: " + e.getMessage()), HttpStatus.BAD_REQUEST);
         } catch (RuntimeException e) {

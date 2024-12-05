@@ -143,7 +143,6 @@ public class ProgramacionService {
 		String sql = "select top 1 cast(fecha_fin_programada as date) ult_fecha from PROGRAMACION ";
 		sql += "where id_conductor = ? order by fecha_fin_programada desc";
 		String fecha = jdbcTemplate.queryForObject(sql, String.class, idConductor);
-		fechaPartida = convertirFecha(fechaPartida);
 		sql = "select DATEDIFF(DAY,'" + fecha + "','" + fechaPartida + "')";
 		@SuppressWarnings("null")
 		int dif = jdbcTemplate.queryForObject(sql, Integer.class);
@@ -154,8 +153,7 @@ public class ProgramacionService {
 	
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
 	private void validarFechaFin(String fechaFin, String fechaPartida) {
-		fechaFin = convertirFecha(fechaFin);
-		fechaPartida = convertirFecha(fechaPartida);
+
 		String sql = "select DATEDIFF(DAY,'" + fechaPartida + "','" + fechaFin + "')";
 		@SuppressWarnings("null")
 		int dif = jdbcTemplate.queryForObject(sql, Integer.class);
@@ -166,7 +164,7 @@ public class ProgramacionService {
 	
 	@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
 	private void registrarProgamacion(ProgramacionDto bean) {
-		String sql = "insert into PROGRAMACION values(?,?,?,?,?,?,NULL)";
+		String sql = "insert into PROGRAMACION values(?,?,?,?,CONVERT(VARCHAR, ?, 103),CONVERT(VARCHAR, ?, 103),NULL)";
 		jdbcTemplate.update(sql,bean.getIdCarro(),bean.getIdEmpleado(),bean.getIdConductor(),
 				bean.getIdRuta(),bean.getFechaAsignacion(),bean.getFechaFinProgramada());
 		sql = "update carro set id_estado = 5 where id_carro = ?";

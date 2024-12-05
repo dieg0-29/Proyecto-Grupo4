@@ -36,14 +36,14 @@ public class IncidenteService {
 		validarEmpleado(bean.getEmpleado());
 		validarProgramacion(bean.getProgramacion());
 		validarTipo(bean.getTipoIncidente());
-		LocalDate fecha = convertirFecha(bean.getFecha());
+
 		//convertirFecha(bean.getFecha());
 		//validarFecha(bean.getProgramacion(),bean.getFecha());
 		
 		
 		// Proceso
 		registrarIncidente(bean.getEmpleado(), bean.getProgramacion(),
-				bean.getTipoIncidente(), fecha, bean.getDetalle());
+				bean.getTipoIncidente(), bean.getFecha(), bean.getDetalle());
 		//actualizarEstadoCarro(bean.getProgramacion());
 		// Reporte final
 		System.out.println("Proceso ok.");		
@@ -90,12 +90,12 @@ public class IncidenteService {
 		}
 		// registrar el incidente
 		@Transactional(propagation = Propagation.MANDATORY, rollbackFor = Exception.class)
-		private void registrarIncidente(int empleado, int programacion, int tipo_incidente, LocalDate fecha, String detalle) {
+		private void registrarIncidente(int empleado, int programacion, int tipo_incidente,String fecha, String detalle) {
 			String sql = "INSERT INTO INCIDENTE(id_empleado, "
 					+ "id_programacion,id_tipo,fecha_incidente, "
 					+ "detalle) VALUES(?,?,?,?,?)";
-			String fechaFormateada = fecha.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-			jdbcTemplate.update(sql, empleado, programacion, tipo_incidente, fechaFormateada, detalle);
+			//String fechaFormateada = fecha.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+			jdbcTemplate.update(sql, empleado, programacion, tipo_incidente, fecha, detalle);
 		}
 
 		

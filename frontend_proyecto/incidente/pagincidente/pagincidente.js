@@ -38,7 +38,7 @@ function mostrarDatos(datos, tablaBody, isSecundaria) {
                 <td>${item.Tipo}</td>
                 <td>${item.Fecha}</td>
                 <td>${item.Detalle}</td>
-                <td><button class="button" onclick="ReportarReparacion(${item.id_incidente})">Reparacion</button></td>
+                <td><button class="button" onclick="ReportarReparacion(${item.Id_incidente})">Reparacion</button></td>
                 `;
         }
         tablaBody.appendChild(fila);
@@ -73,10 +73,12 @@ document.getElementById('cerrarSesionButton').onclick = function() {
     window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/login/login.html';
 };
 
-async function ReportarReparacion(id_incidente) {
-    console.log("ReportarReparacion llamado con id_incidente:", id_incidente); // Verifica que se llame correctamente
+async function ReportarReparacion(id_i) {
+    console.log("ReportarReparacion llamado con id_incidente:", id_i); // Verifica que se llame correctamente
+    
     // Guardar el id_programacion en localStorage
-    localStorage.setItem('id_i', id_incidente);
+    localStorage.setItem('id_i', id_i);
+    
     // Redirigir a la página de incidente
     window.location.href = 'http://127.0.0.1:5500/frontend_proyecto/incidente/reparacion/reparacion.html';
 }

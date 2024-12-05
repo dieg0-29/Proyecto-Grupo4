@@ -6,6 +6,12 @@ document.addEventListener('DOMContentLoaded', function() {
         event.preventDefault();
         const id = localStorage.getItem('id');
         const id_p = localStorage.getItem('id_p');
+
+        if (id !== null && id_p !== null) {
+            console.log(`User  ID: ${id}, Parent ID: ${id_p}`);
+        } else {
+            console.log('ID or Parent ID not found in local storage.');
+        }   
         // Captura los valores de los campos del formulario
         const empleado = id;
         const programacion = id_p;

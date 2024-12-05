@@ -5,12 +5,9 @@
 }
 
 body {
-    font-family: 'Modern No. 20', Arial, sans-serif; /* Usar la fuente Modern No. 20 */
-    background: linear-gradient(135deg, #6a11cb, #2575fc); /* Fondo similar a la página principal */
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #1a1a1a, #0d0d0d); /* Fondo oscuro con gradiente */
     color: #ffffff; /* Texto blanco */
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
 }
 
 .header-container {
@@ -20,52 +17,37 @@ body {
     padding: 20px;
     background-color: rgba(30, 30, 30, 0.9); /* Fondo del encabezado con transparencia */
     border-bottom: 2px solid #444; /* Línea inferior */
-    color: #ffffff;
 }
 
 h1 {
-    font-size: 24px;
-    margin: 0;
+    font-size: 28px; /* Aumentar tamaño del título */
 }
 
 nav {
     display: flex;
 }
-
-/* Estilo para los botones de la parte superior derecha */
 .header-button {
     margin-left: 15px;
     background-color: #6a11cb; /* Color similar al botón de login */
     border: none;
     border-radius: 5px;
-    padding: 5px 10px; /* Tamaño de los botones más pequeño */
+    padding: 10px 20px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
-    font-size: 12px; /* Tamaño de letra más pequeño */
+    font-size: 16px;
     color: white;
-}
-
-.header-button:hover {
-    background-color: #2575fc; /* Color más oscuro al pasar el ratón */
-    transform: scale(1.05); /* Aumentar ligeramente el tamaño */
-}
-
-.header-button:active {
-    transform: scale(0.95); /* Reducir ligeramente el tamaño al hacer clic */
+    font-family: 'Roboto', Arial, sans-serif; /* Usar la fuente Roboto */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Sombra para los botones */
 }
 
 main {
-    padding: 40px 20px; /* Aumentar el padding */
-    text-align: center;
-    flex: 1;
+    padding: 20px;
+    text-align: center; /* Centrar texto */
 }
 
 h2 {
-    font-family: 'Times New Roman', Times, serif; /* Usar la fuente Times New Roman */
-    margin: 40px 0 50px; /* Aumentar margen inferior */
-    color: #ffffff; /* Color blanco */
-    font-size: 96px; /* Tamaño de letra ajustado al doble */
-    font-weight: normal; /* Quitar negrita */
+    margin: 20px 0;
+    font-size: 24px; /* Aumentar tamaño de subtítulos */
 }
 
 .tabla-container {
@@ -80,23 +62,16 @@ table {
     margin: 0 auto; /* Centrar la tabla */
     border-radius: 8px; /* Bordes redondeados */
     overflow: hidden; /* Esconder bordes */
-    background-color: #0bacf7; /* Fondo de la tabla verde */
-    color: #ffffff; /* Color del texto */
 }
 
 th, td {
     border: 1px solid #666; /* Bordes de la tabla */
     padding: 15px; /* Espaciado interno */
     text-align: center; /* Centrar texto */
-    font-size: 20px; /* Reducir tamaño de letra general */
-}
-
-td.edit-cell {
-    font-size: 18px; /* Tamaño de letra ajustado solo para "Editar" y "Eliminar" */
 }
 
 th {
-    background-color: #230bf7; /* Fondo de encabezado verde */
+    background-color: #444; /* Fondo de encabezado */
 }
 
 .button-container {
@@ -106,40 +81,26 @@ th {
     margin: 20px 0; /* Espaciado superior e inferior */
 }
 
-/* Estilo para los botones principales */
 .button {
-    background-color: #da16d0; /* Color de fondo de los botones */
+    background-color: #007BFF; /* Color azul */
     color: white;
     border: none;
     border-radius: 5px; /* Bordes redondeados para los botones */
-    padding: 15px 25px; /* Botones más grandes */
-    margin: 15px; /* Aumentar margen entre botones */
+    padding: 10px 20px; /* Espaciado interno de los botones */
+    margin: 0 10px; /* Espaciado entre botones */
     cursor: pointer; /* Cambiar cursor al pasar sobre el botón */
-    transition: background-color 0.3s, transform 0.2s;
-    font-size: 30px; /* Tamaño de letra ajustado a 30px */
+    transition: background-color 0.3s; /* Transición suave para el color de fondo */
 }
 
 .button:hover {
-    background-color: #009933; /* Color más oscuro al pasar el ratón */
-    transform: scale(1.05); /* Aumentar ligeramente el tamaño */
+    background-color: #0056b3; /* Color más oscuro al pasar el mouse */
 }
 
-.button:active {
-    transform: scale(0.95); /* Reducir ligeramente el tamaño al hacer clic */
+.table-hidden {
+    display: none; /* Ocultar la tabla por defecto */
 }
 
-.footer {
-    text-align: center;
-    padding: 20px;
-    background-color: rgba(30, 30, 30, 0.9); /* Fondo del pie de página con transparencia */
-    color: #ffffff;
-    position: relative;
-    bottom: 0;
-    width: 100%;
+.table-visible {
+    display: table; /* Mostrar la tabla cuando se activa */
 }
-
-
-
-
-
 

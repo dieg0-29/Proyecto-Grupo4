@@ -80,10 +80,6 @@ async function guardarCarro(id, button) {
         placa: cells[2].innerText, // Obtener el valor de la celda directamente
         proxMant: cells[3].getElementsByTagName("input")[0].value, // Obtener el valor del input
     };
-    if((est != 4 && est != 1) || ( est != updatedData.idEstado )){
-        alert("idEstado no modificable")
-        return
-    }
 
 
     // Validar idEstado
